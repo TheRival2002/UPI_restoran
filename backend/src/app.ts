@@ -10,7 +10,7 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 const express = require('express');
 const app: Express = express();
 const cors = require('cors');
-const pool = require('./db');
+const pool = require('./database/db');
 
 app.use(express.json());
 app.use(cors());

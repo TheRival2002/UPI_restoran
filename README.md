@@ -28,7 +28,11 @@ Ili pokrenite sve odjednom iz root-a projekta:
 - ```npm run dev```
 
 ## Izrada baze podataka
-- instalirat postgresql sa njihove stranice, verzija 16.6
+- instalirat postgresql s njihove stranice, verzija 16.6
+- koristeći pgAdmin(verzija 8.14) ručno kreirati bazu podataka s nazivom ```upi_restaurant``` te pokrenuti query s naredbama iz database_schema.sql datoteke od linije 10 do kraja
+
+ILI
+
 - unutar terminala pokrenuti postgresql
   - Linux: ```sudo service postgresql start```
   - Mac: ```brew services start postgresql```
@@ -40,7 +44,5 @@ Ili pokrenite sve odjednom iz root-a projekta:
     - omogućiti privilegije korisniku ```GRANT ALL PRIVILEGES ON DATABASE your_database_name TO your_new_username;```
     - izaći iz postgresql-a i spojiti se kao novi korisnik ```psql postgres```
     - izvršiti naredbe iz ```database_schema.sql``` datoteke
-
-ILI koristeći pgAdmin(verzija 8.14)
 
 NAPOMENA: morate u .env datoteci postavit točne podatke za bazu podataka, također morate izraditi sve .env datokeke po uzore na njihove .example datoteke (npr. u frontend folder-u postoji .env.local.example, morate napravit .env.local datoteku)

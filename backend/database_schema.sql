@@ -27,7 +27,7 @@ CREATE TABLE users (
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
-CREATE TABLE mealCategory (
+CREATE TABLE meal_categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
@@ -39,7 +39,7 @@ CREATE TABLE meals (
     price DOUBLE PRECISION NOT NULL,
     image VARCHAR(255),
     meal_category_id INTEGER NOT NULL,
-    FOREIGN KEY (meal_category_id) REFERENCES mealCategory(id)
+    FOREIGN KEY (meal_category_id) REFERENCES meal_categories(id)
 );
 
 CREATE TABLE orders (
