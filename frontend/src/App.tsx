@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react'
+import axiosInstance from './utils/axios.ts';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -10,7 +10,7 @@ function App() {
     useEffect(() => {
 
         (async function makeApiRequest() {
-            const response = await axios.get('http://localhost:3000/test');
+            const response = await axiosInstance.get('/test');
             console.log(response.data);
         })();
 
