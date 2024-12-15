@@ -43,4 +43,4 @@ Ili pokrenite sve odjednom iz root-a projekta:
 
 ILI koristeći pgAdmin(verzija 8.14)
 
-NAPOMENA: morate u .env datoteci postavit točne podatke za bazu podataka
+NAPOMENA: morate u .env datoteci postavit točne podatke za bazu podataka, također morate izraditi sve .env datokeke po uzore na njihove .example datoteke (npr. u frontend folder-u postoji .env.local.example, morate napravit .env.local datoteku)
