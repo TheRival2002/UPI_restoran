@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axiosInstance from './utils/axios.ts';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+
+    useEffect(() => {
+
+        (async function makeApiRequest() {
+            const response = await axiosInstance.get('/test');
+            console.log(response.data);
+        })();
+
+    }, []);
 
   return (
     <>
