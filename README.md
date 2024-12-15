@@ -4,6 +4,9 @@ Kod kloniranja projekta, napravite ```.env``` u root-u projekta po uzoru na ```.
 Isto tako, napravite ```.env.local``` u ```fronted``` folder-u po uzoru na ```.env.local.example```.
 
 ## Instalacija aplikacije
+### Root:
+- ```npm install```
+
 ### Backend:
 - ```cd backend```
 - ```npm install```
