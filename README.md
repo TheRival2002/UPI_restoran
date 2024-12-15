@@ -26,3 +26,19 @@ Isto tako, napravite ```.env.local``` u ```fronted``` folder-u po uzoru na ```.e
 
 Ili pokrenite sve odjednom iz root-a projekta:
 - ```npm run dev```
+
+## Izrada baze podataka
+- instalirat postgresql sa njihove stranice, verzija 16.6
+- unutar terminala pokrenuti postgresql
+  - Linux: ```sudo service postgresql start```
+  - Mac: ```brew services start postgresql```
+  - Windows: ```pg_ctl -D "C:\Program Files\PostgreSQL\16\data" start``` ili ```net start postgresql-<version>``` (nisam siguran, to triba provjerit)
+- spojiti se na postgresql
+  - ```psql -U postgres```
+  - kreirati svog korisnika ili možete nastaviti kao superuser
+    - ```CREATE USER your_new_username WITH PASSWORD 'your_password';``` ili ako želite da ima superuser dopuštenja ```CREATE USER your_new_username WITH PASSWORD 'your_password' SUPERUSER;```
+    - omogućiti privilegije korisniku ```GRANT ALL PRIVILEGES ON DATABASE your_database_name TO your_new_username;```
+    - izaći iz postgresql-a i spojiti se kao novi korisnik ```psql postgres```
+    - izvršiti naredbe iz ```database_schema.sql``` datoteke
+
+ILI koristeći pgAdmin(verzija 8.14)
