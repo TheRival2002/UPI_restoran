@@ -42,3 +42,5 @@ Ili pokrenite sve odjednom iz root-a projekta:
     - izvršiti naredbe iz ```database_schema.sql``` datoteke
 
 ILI koristeći pgAdmin(verzija 8.14)
+
+NAPOMENA: morate u .env datoteci postavit točne podatke za bazu podataka

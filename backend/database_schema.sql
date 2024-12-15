@@ -14,6 +14,9 @@ CREATE TABLE roles (
     name VARCHAR(255) NOT NULL
 );
 
+INSERT INTO roles (name) VALUES ('admin');
+INSERT INTO roles (name) VALUES ('user');
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
