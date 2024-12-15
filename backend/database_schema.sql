@@ -46,7 +46,7 @@ CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     order_status order_status_type NOT NULL,
-    totalPrice DOUBLE PRECISION NOT NULL,
+    total_price DOUBLE PRECISION NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -55,6 +55,7 @@ CREATE TABLE order_items (
     order_id INTEGER NOT NULL,
     meal_id INTEGER NOT NULL,
     amount INTEGER NOT NULL CHECK (amount > 0),
+    total_price DOUBLE PRECISION NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (meal_id) REFERENCES meals(id)
 );
@@ -62,6 +63,6 @@ CREATE TABLE order_items (
 CREATE TABLE daily_offers (
     id SERIAL PRIMARY KEY,
     meal_id INTEGER NOT NULL,
-    dailyOfferDate TIMESTAMP NOT NULL,
+    daily_offer_date TIMESTAMP NOT NULL,
     FOREIGN KEY (meal_id) REFERENCES meals(id)
 );

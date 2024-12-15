@@ -21,7 +21,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/test', async (req, res) => {
     try {
-        const newTest = await pool.query('SELECT * FROM users');
+        const newTest = await pool.query('SELECT * FROM roles');
         res.json(newTest);
     } catch (error: any) {
         console.error(error.message);
