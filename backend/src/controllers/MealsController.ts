@@ -1,9 +1,9 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { MealsService } from '../services/MealsService';
 
 export class MealsController {
-    private mealsService;
-    public mealsRouter;
+    private readonly mealsService;
+    public readonly mealsRouter;
 
     constructor() {
         this.mealsRouter = Router();
@@ -12,7 +12,7 @@ export class MealsController {
         this.mealsRouter.get('/meals', this.findAll.bind(this));
     }
 
-    private async findAll(req: any, res: any) {
+    private async findAll(_: Request, res: Response) {
         try {
             const meals = await this.mealsService.findAll();
             res.status(200).json(meals);

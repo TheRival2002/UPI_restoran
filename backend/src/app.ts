@@ -7,7 +7,6 @@ import { MainRouter } from './routes/MainRouter';
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const cors = require('cors');
-const pool = require('./database/db');
 
 const PORT = process.env.API_PORT || 3000;
 const app: Express = express();

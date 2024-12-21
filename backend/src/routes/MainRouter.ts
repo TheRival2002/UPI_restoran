@@ -2,13 +2,15 @@ import { Router } from 'express';
 import { MealsController } from '../controllers/MealsController';
 
 export class MainRouter {
-    private mealsController;
-    public routes;
+    private readonly mealsController = new MealsController();
+    public readonly routes;
 
     constructor() {
         this.routes = Router();
-        this.mealsController = new MealsController();
+        this.defineRoutes();
+    }
 
+    private defineRoutes() {
         this.routes.use(this.mealsController.mealsRouter);
     }
 }

@@ -1,12 +1,12 @@
 export class Meal {
-    id: Number;
-    name: String;
-    description: String | undefined;
-    price: Number;
-    image: String | undefined;
-    mealCategoryId: Number;
+    id: number;
+    name: string;
+    description?: string;
+    price: number;
+    image?: string;
+    mealCategoryId: number;
 
-    constructor(id: Number, name: String, description: String | undefined, price: Number, image: String | undefined, mealCategoryId: Number) {
+    constructor(id: number, name: string, price: number, mealCategoryId: number, description?: string, image?: string) {
         this.id = id;
         this.name = name;
         this.description = description;
