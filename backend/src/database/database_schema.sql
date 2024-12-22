@@ -66,3 +66,10 @@ CREATE TABLE daily_offers (
     daily_offer_date TIMESTAMP NOT NULL,
     FOREIGN KEY (meal_id) REFERENCES meals(id)
 );
+
+-- add username column to users table
+ALTER TABLE users ADD COLUMN username VARCHAR(255) NOT NULL;
+
+-- add unique constraints to email and username columns
+ALTER TABLE users ADD CONSTRAINT unique_email UNIQUE (email);
+ALTER TABLE users ADD CONSTRAINT unique_username UNIQUE (username);
