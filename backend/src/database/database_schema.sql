@@ -14,9 +14,6 @@ CREATE TABLE roles (
     name VARCHAR(255) NOT NULL
 );
 
-INSERT INTO roles (name) VALUES ('admin');
-INSERT INTO roles (name) VALUES ('user');
-
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -24,8 +21,12 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role_id INTEGER NOT NULL,
+    username VARCHAR(255) NOT NULL,
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
+
+ALTER TABLE users ADD CONSTRAINT unique_email UNIQUE (email);
+ALTER TABLE users ADD CONSTRAINT unique_username UNIQUE (username);
 
 CREATE TABLE meal_categories (
     id SERIAL PRIMARY KEY,
@@ -66,3 +67,4 @@ CREATE TABLE daily_offers (
     daily_offer_date TIMESTAMP NOT NULL,
     FOREIGN KEY (meal_id) REFERENCES meals(id)
 );
+
