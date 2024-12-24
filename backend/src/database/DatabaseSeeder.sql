@@ -115,7 +115,10 @@ VALUES
 (8, CURRENT_DATE + INTERVAL '7 day'), 
 (33, CURRENT_DATE + INTERVAL '7 day'), 
 (58, CURRENT_DATE + INTERVAL '7 day'); 
---ALTER SEQUENCE users_id_seq RESTART WITH 1;
+
+INSERT INTO Roles(Name) VALUES
+('Admin'),
+('User');
 
 INSERT INTO users (name, surname, email, password, role_id, username)
 VALUES
@@ -278,7 +281,6 @@ VALUES
 (78, 'in-progress', 19.99),
 (79, 'delivered', 24.40),
 (80, 'in-progress', 43.00);
---ALTER SEQUENCE order_items_id_seq restart with 1;
 
 INSERT INTO order_items (order_id, meal_id, amount, total_price)
 VALUES
