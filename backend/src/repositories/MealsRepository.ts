@@ -18,4 +18,15 @@ export class MealsRepository {
 
         return response.rows[0];
     }
+
+    public async mealNameIsUnique(mealName: string) {
+        const query = `SELECT COUNT(*)
+                       FROM meals
+                       WHERE LOWER(name) = LOWER($1)`;
+        const values = [mealName];
+        const response = await this.database.query(query, values);
+
+        return response.rows[0].count === '0';
+
+    }
 }
