@@ -10,7 +10,7 @@ export class MealsController {
         this.mealsService = new MealsService();
 
         this.mealsRouter.get('/meals', this.findAll.bind(this));
-        this.mealsRouter.post('/new-meal', this.createMeal.bind(this));
+        this.mealsRouter.post('/meals', this.createMeal.bind(this));
     }
 
     private async findAll(_: Request, res: Response) {
