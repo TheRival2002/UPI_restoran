@@ -9,7 +9,7 @@ export class MealsService {
     }
 
     public async createMeal(meal: Meal) {
-        if (!this.mealIsValid(meal))
+        if (!await this.mealIsValid(meal))
             return;
 
         return this.mealsRepository.createMeal(meal);

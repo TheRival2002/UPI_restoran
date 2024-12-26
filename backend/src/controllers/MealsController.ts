@@ -27,7 +27,7 @@ export class MealsController {
             const newMeal = await this.mealsService.createMeal(req.body);
 
             if (!newMeal) {
-                res.status(400).json({ error: 'Invalid input data' });
+                res.status(422).json({ error: 'Invalid input data' });
                 return;
             }
             res.status(201).json(newMeal);
