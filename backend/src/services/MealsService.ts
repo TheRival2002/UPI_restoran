@@ -1,4 +1,5 @@
 import { Meal } from '../entities/Meal';
+import { ValidationError, ConflictError } from '../errors/HttpError';
 import { MealCategoriesRepository } from '../repositories/MealCategoriesRepository';
 import { MealsRepository } from '../repositories/MealsRepository';
 import { validateCreateMeal } from '../validation_schema/Meal';
@@ -26,15 +27,15 @@ export class MealsService {
         const { error, value: validatedMeal } = validateCreateMeal(meal);
 
         if (error)
-            throw new Error(error.message);
+            throw new ValidationError(error.message);
 
         const mealNameIsUnique = await this.mealsRepository.mealNameIsUnique(validatedMeal.name);
         if (!mealNameIsUnique)
-            throw new Error('Meal already exists!');
+            throw new ConflictError('Meal already exists!');
 
         const mealCategoryExists = await this.mealCategoriesRepository.mealCategoryExists(validatedMeal.mealCategoryId);
         if (!mealCategoryExists)
-            throw new Error('Meal category does not exist!');
+            throw new ValidationError('Meal category does not exist!');
 
         return validatedMeal;
     }
