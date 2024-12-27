@@ -1,0 +1,80 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  display: flex; /* Dodaj Flexbox na body */
+  justify-content: center; /* Centriraj horizontalno */
+  align-items: center; /* Centriraj vertikalno */
+  height: 100vh; /* Visina cijelog prozora */
+}
+
+.login-container {
+  max-width: 400px;
+  width: 100%; /* Dodano za responzivnost */
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.input-group input {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+.login-button {
+  width: 70%;
+  background: #ff6b6b;
+  color: white;
+  padding: 10px;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff4b4b;
+}
+
+.login-footer {
+  color: #333;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-footer a {
+  color: #ff6b6b;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

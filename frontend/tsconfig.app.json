@@ -20,7 +20,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Include types explicitly */
+    "types": ["react", "react-dom", "react-router-dom"]
   },
   "include": ["src"]
 }
