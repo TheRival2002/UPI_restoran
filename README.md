@@ -46,3 +46,9 @@ ILI
     - izvršiti naredbe iz ```database_schema.sql``` datoteke
 
 NAPOMENA: morate u .env datoteci postavit točne podatke za bazu podataka, također morate izraditi sve .env datokeke po uzore na njihove .example datoteke (npr. u frontend folder-u postoji .env.local.example, morate napravit .env.local datoteku)
+
+## Error handling
+- kod bacanja errora u backendu, koristiti custom error klase iz ```errors/HttpError.ts``` datoteke koje sadržavaju status kod i poruku
+- u controller-u koristiti ```next()``` funkciju kako bi se error prebacio u ```errorHandler.ts``` datoteku
+- one će biti uhvaćene u ```errorHandler.ts``` datoteci i poslane korisniku
+- ukoliko se error ne uhvati, korisnik će dobiti ```Internal Server Error``` status kod
