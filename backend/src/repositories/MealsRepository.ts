@@ -9,4 +9,24 @@ export class MealsRepository {
 
         return response.rows;
     }
+
+    public async createMeal(meal: Meal) {
+        const query = `INSERT INTO meals (name, description, price, image, meal_category_id)
+                       VALUES ($1, $2, $3, $4, $5) RETURNING *`;
+        const values = [meal.name, meal.description, meal.price, meal.image, meal.mealCategoryId];
+        const response = await this.database.query(query, values);
+
+        return response.rows[0];
+    }
+
+    public async mealNameIsUnique(mealName: string) {
+        const query = `SELECT COUNT(*)
+                       FROM meals
+                       WHERE LOWER(name) = LOWER($1)`;
+        const values = [mealName];
+        const response = await this.database.query(query, values);
+
+        return response.rows[0].count === '0';
+
+    }
 }
