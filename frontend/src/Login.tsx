@@ -33,7 +33,7 @@ const Login: React.FC = () => {
       </form>
 
       <p className="login-footer">
-        Don’t have an account? <a href="/signup">Sign Up</a>
+        Don’t have an account? <a href="/auth/register">Sign Up</a>
       </p>
     </div>
   );
