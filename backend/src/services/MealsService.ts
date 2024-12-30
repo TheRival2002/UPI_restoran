@@ -1,32 +1,42 @@
 import { Meal } from '../entities/Meal';
+import { ValidationError, ConflictError } from '../errors/HttpError';
+import { MealCategoriesRepository } from '../repositories/MealCategoriesRepository';
 import { MealsRepository } from '../repositories/MealsRepository';
+import { validateCreateMeal } from '../validation_schema/Meal';
+
+// --------------------------------------------------------------------------------
 
 export class MealsService {
     private readonly mealsRepository = new MealsRepository();
+    private readonly mealCategoriesRepository = new MealCategoriesRepository();
 
     public async findAll(): Promise<Meal[]> {
         return this.mealsRepository.findAll();
     }
 
     public async createMeal(meal: Meal) {
-        if (!await this.mealIsValid(meal))
+        const validatedMeal = await this.mealIsValid(meal);
+
+        if (!validatedMeal)
             return;
 
-        return this.mealsRepository.createMeal(meal);
+        return this.mealsRepository.createMeal(validatedMeal);
     }
 
-    private async mealIsValid(meal: Meal) {
-        const mealName = meal.name.trim();
-        const mealNameIsUnique = await this.mealsRepository.mealNameIsUnique(mealName);
+    private async mealIsValid(meal: Meal): Promise<Meal> {
+        const { error, value: validatedMeal } = validateCreateMeal(meal);
 
+        if (error)
+            throw new ValidationError(error.message);
+
+        const mealNameIsUnique = await this.mealsRepository.mealNameIsUnique(validatedMeal.name);
         if (!mealNameIsUnique)
-            throw new Error('Meal already exists!');
+            throw new ConflictError('Meal already exists!');
 
-        if (meal.price < 0)
-            throw new Error('Price can\'t be negative!');
+        const mealCategoryExists = await this.mealCategoriesRepository.mealCategoryExists(validatedMeal.mealCategoryId);
+        if (!mealCategoryExists)
+            throw new ValidationError('Meal category does not exist!');
 
-        return true;
+        return validatedMeal;
     }
-
-
 }

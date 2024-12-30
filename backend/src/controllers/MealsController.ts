@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Request, Response, NextFunction, Router } from 'express';
 import { MealsService } from '../services/MealsService';
 
 export class MealsController {
@@ -13,16 +13,16 @@ export class MealsController {
         this.mealsRouter.post('/meals', this.createMeal.bind(this));
     }
 
-    private async findAll(_: Request, res: Response) {
+    private async findAll(_: Request, res: Response, next: NextFunction) {
         try {
             const meals = await this.mealsService.findAll();
             res.status(200).json(meals);
         } catch (error) {
-            res.status(500).json({ error: (error as Error).message });
+            next(error);
         }
     }
 
-    private async createMeal(req: Request, res: Response) {
+    private async createMeal(req: Request, res: Response, next: NextFunction) {
         try {
             const newMeal = await this.mealsService.createMeal(req.body);
 
@@ -32,7 +32,7 @@ export class MealsController {
             }
             res.status(201).json(newMeal);
         } catch (error) {
-            res.status(400).json({ error: (error as Error).message });
+            next(error);
         }
     }
 

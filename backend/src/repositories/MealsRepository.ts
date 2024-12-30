@@ -10,7 +10,7 @@ export class MealsRepository {
         return response.rows;
     }
 
-    public async createMeal(meal: Meal) {
+    public async createMeal(meal: Meal): Promise<Meal> {
         const query = `INSERT INTO meals (name, description, price, image, meal_category_id)
                        VALUES ($1, $2, $3, $4, $5) RETURNING *`;
         const values = [meal.name, meal.description, meal.price, meal.image, meal.mealCategoryId];
