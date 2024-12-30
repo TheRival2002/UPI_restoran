@@ -16,7 +16,7 @@ const router = new MainRouter();
 
 app.use(express.json());
 app.use(cors());
-app.use(router.routes);
+app.use('/api', router.routes);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
