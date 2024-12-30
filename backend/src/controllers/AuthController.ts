@@ -17,12 +17,18 @@ export class AuthController {
         this.authRouter.post('/login', this.login.bind(this));
     }
 
+    // TODO napravit refreshToken i logout funkcionalnost
     private async register(req: Request, res: Response, next: NextFunction) {
         try {
             const userData: User = req.body;
             const user = await this.authService.register(userData);
 
-            res.status(201).json({ message: 'User created', user });
+            // after creating user from registration process, log him in
+            const authData = { email: user.email, username: userData.username, password: userData.password };
+            const { accessToken, refreshToken } = await this.authService.login(authData);
+
+            res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // maxAge is in milliseconds, so it is 1 day
+            res.status(201).json({ message: 'User created', accessToken, user });
         } catch (error) {
             next(error);
         }

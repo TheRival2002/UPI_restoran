@@ -16,12 +16,12 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     jwt.verify(
         token,
         process.env.ACCESS_TOKEN_SECRET,
-        (err: Error, decoded: { username: string }) => {
+        (err: Error, decoded: { id: string }) => {
             if (err) {
                 return res.status(403);
             }
 
-            req.user = decoded.username;
+            req.user = decoded.id;
             next();
         },
     );

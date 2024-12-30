@@ -1,6 +1,6 @@
 import { User } from '../entities/User';
 import { RoleEnum } from '../enums/RolesEnum';
-import { NotFoundError, UnauthorizedError, ValidationError } from '../errors/HttpError';
+import { BadRequestError, NotFoundError, UnauthorizedError, ValidationError } from '../errors/HttpError';
 import { UsersRepository } from '../repositories/UsersRepository';
 import { LoginCredentials, LoginResponse } from '../types/auth';
 import { validateLogin, validateRegister } from '../validation_schema/Auth';
@@ -17,8 +17,16 @@ export class AuthService {
         if (error)
             throw new ValidationError(error.message);
 
-        userData.password = await this.bcrypt.hash(validatedUserData.password, 10);
-        userData.role_id = RoleEnum.USER;
+        const usernameExists = await this.usersRepository.findByUsername(validatedUserData.username);
+        if (usernameExists)
+            throw new BadRequestError('Username already exists');
+
+        const emailExists = await this.usersRepository.findByEmail(validatedUserData.email);
+        if (emailExists)
+            throw new BadRequestError('Email already exists');
+
+        validatedUserData.password = await this.bcrypt.hash(validatedUserData.password, 10);
+        validatedUserData.role_id = RoleEnum.USER;
 
         return await this.usersRepository.create(validatedUserData);
     }
@@ -43,11 +51,11 @@ export class AuthService {
         }
 
         const accessToken = this.jwt.sign({
-            username: foundUser.username
+            id: foundUser.id
         }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 
         const refreshToken = this.jwt.sign({
-            username: foundUser.username,
+            id: foundUser.id,
         }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
 
         return { accessToken, refreshToken };
