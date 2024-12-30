@@ -8,6 +8,8 @@ import { LoginCredentials } from '../types/auth';
 export class AuthController {
     private readonly authService;
     public readonly authRouter;
+    private readonly jwt = require('jsonwebtoken');
+    private readonly authMiddleware = require('../middleware/authMiddleware');
 
     constructor() {
         this.authRouter = Router();
@@ -15,7 +17,8 @@ export class AuthController {
 
         this.authRouter.post('/register', this.register.bind(this));
         this.authRouter.post('/login', this.login.bind(this));
-        this.authRouter.get('/logout', this.logout.bind(this));
+        this.authRouter.get('/logout', this.authMiddleware, this.logout.bind(this));
+        this.authRouter.get('/refresh-token', this.refreshToken.bind(this));
     }
 
     private async register(req: Request, res: Response, next: NextFunction) {
@@ -59,6 +62,35 @@ export class AuthController {
 
             res.clearCookie('jwt', { httpOnly: true });
             res.sendStatus(204);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    private refreshToken(req: Request, res: Response, next: NextFunction) {
+        try {
+            const cookies = req.cookies;
+            if (!cookies?.jwt) {
+                res.sendStatus(401);
+                return;
+            }
+
+            const refreshToken = cookies.jwt;
+
+            // TODO na frontu spremit accessToken
+            this.jwt.verify(
+                refreshToken,
+                process.env.REFRESH_TOKEN_SECRET,
+                (err: Error, decoded: { id: string }) => {
+                    if (err) {
+                        return res.sendStatus(403);
+                    }
+                    const accessToken = this.jwt.sign({
+                        id: decoded.id
+                    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+                    res.json({ accessToken });
+                }
+            );
         } catch (error) {
             next(error);
         }
