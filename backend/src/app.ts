@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { errorHandler } from './middleware/errorHandler';
 import { MainRouter } from './routes/MainRouter';
+import cookieParser from 'cookie-parser';
 
 // --------------------------------------------------------------
 
@@ -20,6 +21,7 @@ const app: Express = express();
 const router = new MainRouter();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use('/api', router.routes);
 app.use(errorHandler);
