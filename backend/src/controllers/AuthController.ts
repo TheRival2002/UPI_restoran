@@ -1,5 +1,7 @@
 import { Request, Response, Router } from 'express';
+import { User } from '../entities/User';
 import { AuthService } from '../services/AuthService';
+import { LoginCredentials } from '../types/auth';
 
 // --------------------------------------------------------------
 
@@ -17,8 +19,8 @@ export class AuthController {
 
     private async register(req: Request, res: Response) {
         try {
-            const { name, surname, username, email, password, role_id } = req.body; // TODO validacija podataka
-            const user = await this.authService.register(name, surname, username, email, password, role_id);
+            const userData: User = req.body;
+            const user = await this.authService.register(userData);
 
             res.status(201).json({ message: 'User created', user });
         } catch (error) {
@@ -28,8 +30,8 @@ export class AuthController {
 
     private async login(req: Request, res: Response) {
         try {
-            const { password, username, email } = req.body; // TODO validacija podataka
-            const { accessToken, refreshToken } = await this.authService.login(password, username, email);
+            const userAuthData: LoginCredentials = req.body;
+            const { accessToken, refreshToken } = await this.authService.login(userAuthData);
 
             res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // maxAge is in milliseconds, so it is 1 day
             res.status(200).json({ accessToken });

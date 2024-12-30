@@ -5,10 +5,10 @@ import { User } from '../entities/User';
 export class UsersRepository {
     private readonly database = require('./../database/db');
 
-    public async create(name: string, surname: string, username: string, email: string, password: string, role_id: number): Promise<User> {
+    public async create(user: User): Promise<User> {
         const query = 'INSERT INTO users (name, surname, username, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
 
-        return await this.database.query(query, [name, surname, username, email, password, role_id]);
+        return await this.database.query(query, [user.name, user.surname, user.username, user.email, user.password, user.role_id]);
     }
 
     public async findByUsername(username: string): Promise<User> {

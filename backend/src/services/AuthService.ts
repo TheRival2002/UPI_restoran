@@ -1,40 +1,45 @@
 import { User } from '../entities/User';
+import { RoleEnum } from '../enums/RolesEnum';
+import { NotFoundError, UnauthorizedError, ValidationError } from '../errors/HttpError';
 import { UsersRepository } from '../repositories/UsersRepository';
+import { LoginCredentials, LoginResponse } from '../types/auth';
+import { validateLogin, validateRegister } from '../validation_schema/Auth';
 
 // ----------------------------------------------------------------------
-
-type LoginResponse = {
-    accessToken: string;
-    refreshToken: string;
-}
 
 export class AuthService {
     private readonly usersRepository = new UsersRepository();
     private readonly bcrypt = require('bcrypt');
     private readonly jwt = require('jsonwebtoken');
 
-    public async register(name: string, surname: string, username: string, email: string, password: string, role_id: number): Promise<User> {
-        const hashedPassword = await this.bcrypt.hash(password, 10);
+    public async register(userData: User): Promise<User> {
+        const { error, value: validatedUserData } = validateRegister(userData);
+        if (error)
+            throw new ValidationError(error.message);
 
-        return await this.usersRepository.create(name, surname, username, email, hashedPassword, role_id);
+        userData.password = await this.bcrypt.hash(validatedUserData.password, 10);
+        userData.role_id = RoleEnum.USER;
+
+        return await this.usersRepository.create(validatedUserData);
     }
 
-    public async login(password: string, username?: string, email?: string): Promise<LoginResponse> {
-        if (!username && !email) {
-            throw new Error('Username or email is required'); // TODO moramo smislit kako vratit error sa response statusom
-        }
+    public async login(loginCredentials: LoginCredentials): Promise<LoginResponse> {
+        const { error, value: validatedLoginCredentials } = validateLogin(loginCredentials);
 
-        const foundUser = username
-            ? await this.usersRepository.findByUsername(username)
-            : await this.usersRepository.findByEmail(email!); // explicit non-null assertion because if username is not provided, email exists which we know from the if condition on the start
+        if (error)
+            throw new ValidationError(error.message);
+
+        const foundUser = validatedLoginCredentials.username
+            ? await this.usersRepository.findByUsername(validatedLoginCredentials.username)
+            : await this.usersRepository.findByEmail(validatedLoginCredentials.email!); // explicit non-null assertion because if username is not provided, email exists which we know from the if condition on the start
 
         if (!foundUser) {
-            throw new Error('User not found');
+            throw new NotFoundError('User not found');
         }
 
-        const passwordMatch = await this.bcrypt.compare(password, foundUser.password);
+        const passwordMatch = await this.bcrypt.compare(validatedLoginCredentials.password, foundUser.password);
         if (!passwordMatch) {
-            throw new Error('Invalid password');
+            throw new UnauthorizedError('Invalid password');
         }
 
         const accessToken = this.jwt.sign({
