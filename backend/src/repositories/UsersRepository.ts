@@ -12,14 +12,14 @@ export class UsersRepository {
     }
 
     public async findByUsername(username: string): Promise<User> {
-        const query = 'SELECT * FROM users WHERE username = $1';
+        const query = 'SELECT * FROM users WHERE LOWER(username) = LOWER($1)';
         const response = await this.database.query(query, [username]);
 
         return response.rows[0];
     }
 
     public async findByEmail(email: string): Promise<User> {
-        const query = 'SELECT * FROM users WHERE email = $1';
+        const query = 'SELECT * FROM users WHERE LOWER(email) = LOWER($1)';
         const response = await this.database.query(query, [email]);
 
         return response.rows[0];

@@ -7,7 +7,7 @@ import { LoginCredentials } from '../types/auth';
 const loginSchema: ObjectSchema<LoginCredentials> = Joi.object({
     username: Joi.string().trim().min(3),
     email: Joi.string().trim().email(),
-    password: Joi.string().trim().min(6).required(),
+    password: Joi.string().trim().min(8).required(),
 }).xor('username', 'email') // Ensures exactly one of username or email is present
     .required();
 
@@ -20,7 +20,7 @@ const registerSchema: ObjectSchema<User> = Joi.object({
     surname: Joi.string().trim().min(2).required(),
     username: Joi.string().trim().min(3).required(),
     email: Joi.string().trim().email().required(),
-    password: Joi.string().trim().min(6).required(),
+    password: Joi.string().trim().min(8).required(),
     role_id: Joi.number().integer().positive().optional(),
 });
 
