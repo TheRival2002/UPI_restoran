@@ -1,17 +1,17 @@
 import Joi, { ObjectSchema, ValidationResult } from 'joi';
 import { User } from '../entities/User';
-import { LoginCredentials } from '../types/auth';
+import { LoginCredentialsDto } from '../entities/types/auth.dto';
 
 // --------------------------------------------------------------------------------
 
-const loginSchema: ObjectSchema<LoginCredentials> = Joi.object({
+const loginSchema: ObjectSchema<LoginCredentialsDto> = Joi.object({
     username: Joi.string().trim().min(3),
     email: Joi.string().trim().email(),
     password: Joi.string().trim().min(8).required(),
 }).xor('username', 'email') // Ensures exactly one of username or email is present
     .required();
 
-const validateLogin = (loginCredentials: LoginCredentials): ValidationResult<LoginCredentials> => loginSchema.validate(loginCredentials);
+const validateLogin = (loginCredentials: LoginCredentialsDto): ValidationResult<LoginCredentialsDto> => loginSchema.validate(loginCredentials);
 
 // --------------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { User } from '../entities/User';
 import { AuthService } from '../services/AuthService';
-import { LoginCredentials } from '../types/auth';
+import { LoginCredentialsDto } from '../entities/types/auth.dto';
 
 // --------------------------------------------------------------
 
@@ -40,7 +40,7 @@ export class AuthController {
 
     private async login(req: Request, res: Response, next: NextFunction) {
         try {
-            const userAuthData: LoginCredentials = req.body;
+            const userAuthData: LoginCredentialsDto = req.body;
             const { accessToken, refreshToken } = await this.authService.login(userAuthData);
 
             // TODO na frontu spremit accessToken

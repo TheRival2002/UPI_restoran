@@ -1,10 +1,10 @@
-export type LoginCredentials = {
+export type LoginCredentialsDto = {
     username?: string;
     email?: string;
     password: string;
 }
 
-export type LoginResponse = {
+export type LoginResponseDto = {
     accessToken: string;
     refreshToken: string;
 }

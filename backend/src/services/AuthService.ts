@@ -1,8 +1,8 @@
 import { User } from '../entities/User';
-import { RoleEnum } from '../enums/RolesEnum';
+import { RoleEnum } from '../entities/enums/RolesEnum';
 import { BadRequestError, NotFoundError, UnauthorizedError, ValidationError } from '../errors/HttpError';
 import { UsersRepository } from '../repositories/UsersRepository';
-import { LoginCredentials, LoginResponse } from '../types/auth';
+import { LoginCredentialsDto, LoginResponseDto } from '../entities/types/auth.dto';
 import { validateLogin, validateRegister } from '../validation_schema/Auth';
 
 // ----------------------------------------------------------------------
@@ -31,7 +31,7 @@ export class AuthService {
         return await this.usersRepository.create(validatedUserData);
     }
 
-    public async login(loginCredentials: LoginCredentials): Promise<LoginResponse> {
+    public async login(loginCredentials: LoginCredentialsDto): Promise<LoginResponseDto> {
         const { error, value: validatedLoginCredentials } = validateLogin(loginCredentials);
 
         if (error)
