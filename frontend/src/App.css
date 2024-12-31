@@ -2,7 +2,9 @@ body {
   font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #ffffff, #f8f8f8);
+  background: url("https://media.istockphoto.com/id/1458698228/photo/selective-focus-wood-table-top-on-blur-kitchen-counter-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=cCqfdoyHuJ8Hp66onCG0tMJo6Ku2pbRCzl0GLdDgK7o="); /* Slika teksture drveta */
+  background-size: cover;
+  background-position: center;
 }
 
 .welcome-container {
@@ -16,48 +18,35 @@ body {
 }
 
 .welcome-header {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
   color: #ff6b6b;
   margin-bottom: 10px;
-}
-
-.welcome-subtitle {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 30px;
 }
 
 button {
   background: #ff6b6b;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 18px 30px;
+  border-radius: 30px;
   font-size: 1rem;
   cursor: pointer;
-  margin-top: 10px;
+  width: 60%;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   background: #ff4b4b;
 }
 
-.social-buttons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.social-button {
-  background: #fff;
-  color: #666;
-  border: 1px solid #ccc;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.social-button:hover {
-  background: #f0f0f0;
+.welcome-subtitle {
+  font-size: 1.5rem;
+  color: #444;
+  margin: 40px;
+  line-height: 1.5;
 }
