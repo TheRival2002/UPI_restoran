@@ -67,4 +67,3 @@ CREATE TABLE daily_offers (
     daily_offer_date TIMESTAMP NOT NULL,
     FOREIGN KEY (meal_id) REFERENCES meals(id)
 );
-

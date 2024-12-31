@@ -1,5 +1,7 @@
 import { Meal } from '../entities/Meal';
 
+// ----------------------------------------------------------------------
+
 export class MealsRepository {
     private readonly database = require('./../database/db');
 

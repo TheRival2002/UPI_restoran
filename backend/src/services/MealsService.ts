@@ -6,6 +6,8 @@ import { validateCreateMeal } from '../validation_schema/Meal';
 
 // --------------------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
 export class MealsService {
     private readonly mealsRepository = new MealsRepository();
     private readonly mealCategoriesRepository = new MealCategoriesRepository();

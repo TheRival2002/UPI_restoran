@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction, Router } from 'express';
 import { MealsService } from '../services/MealsService';
 
+// --------------------------------------------------------------
+
 export class MealsController {
     private readonly mealsService;
     public readonly mealsRouter;
@@ -35,6 +37,5 @@ export class MealsController {
             next(error);
         }
     }
-
 
 }
