@@ -1,5 +1,5 @@
 import { Meal } from '../entities/Meal';
-import { ValidationError, ConflictError } from '../errors/HttpError';
+import { ConflictError, ValidationError } from '../errors/HttpError';
 import { MealCategoriesRepository } from '../repositories/MealCategoriesRepository';
 import { MealsRepository } from '../repositories/MealsRepository';
 import { validateCreateMeal } from '../validation_schema/Meal';
@@ -25,6 +25,10 @@ export class MealsService {
         return this.mealsRepository.createMeal(validatedMeal);
     }
 
+    public async deleteMeal(mealId: number): Promise<void> {
+        return this.mealsRepository.deleteMeal(mealId);
+    }
+
     private async mealIsValid(meal: Meal): Promise<Meal> {
         const { error, value: validatedMeal } = validateCreateMeal(meal);
 
@@ -41,4 +45,6 @@ export class MealsService {
 
         return validatedMeal;
     }
+
+
 }

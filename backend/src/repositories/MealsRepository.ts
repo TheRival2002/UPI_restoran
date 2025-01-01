@@ -21,6 +21,16 @@ export class MealsRepository {
         return response.rows[0];
     }
 
+    public async deleteMeal(mealId: number): Promise<void> {
+        const query = `DELETE
+                       FROM meals
+                       WHERE id = $1`;
+        const values = [mealId];
+        const response = await this.database.query(query, values);
+
+        return response.rows[0];
+    }
+
     public async mealNameIsUnique(mealName: string) {
         const query = `SELECT COUNT(*)
                        FROM meals
@@ -31,4 +41,5 @@ export class MealsRepository {
         return response.rows[0].count === '0';
 
     }
+
 }
