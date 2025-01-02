@@ -5,7 +5,7 @@ import { API_URL } from '../config-global.ts';
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
-    // withCredentials:true,
+    withCredentials: true,
     // withXSRFToken:true,
     // headers:{
     //     'X-Requested-With': 'XMLHttpRequest',
@@ -15,3 +15,12 @@ const axiosInstance = axios.create({
 });
 
 export default axiosInstance;
+
+// ----------------------------------------------------------------------
+
+export const endpoints = {
+    auth: {
+        login: '/api/login',
+        register: '/api/register',
+    },
+}

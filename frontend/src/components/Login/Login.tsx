@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import c from "./index.module.css";
-import axiosInstance from "../../utils/axios";
+import axiosInstance, { endpoints } from "../../utils/axios";
 
 const Login: React.FC = () => {
-    const [email, setEmail] = useState("");
+    const [emailOrUsernameValue, setEmailOrUsernameValue] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const isEmailEntered = (/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(emailOrUsernameValue);
         try {
-            const response = await axiosInstance.post("/auth/login", {
-                email,
+            const response = await axiosInstance.post(endpoints.auth.login, {
+                [isEmailEntered ? 'email' : 'username']: emailOrUsernameValue,
                 password,
             });
             console.log("Login successful:", response.data);
-            localStorage.setItem("token", response.data.token);
-            window.location.href = "/";
+            // window.location.href = "/";
         } catch (err: any) {
             console.error("Login error:", err.response?.data || err.message);
             setError(err.response?.data?.message || "Login failed");
@@ -30,11 +30,11 @@ const Login: React.FC = () => {
                 <div className={c.inputGroup}>
                     <label htmlFor="email">E-mail</label>
                     <input
-                        type="email"
+                        type="text"
                         id="email"
-                        placeholder="Your email or phone"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Your email or username"
+                        value={emailOrUsernameValue}
+                        onChange={(e) => setEmailOrUsernameValue(e.target.value)}
                         required
                     />
                 </div>

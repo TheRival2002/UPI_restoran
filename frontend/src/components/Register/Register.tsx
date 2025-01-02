@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import c from "./reg.module.css";
-import axiosInstance from "../../utils/axios";
+import axiosInstance, { endpoints } from "../../utils/axios";
 
 const Register: React.FC = () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -13,16 +14,17 @@ const Register: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post("/auth/register", {
-                firstName,
-                lastName,
+            const response = await axiosInstance.post(endpoints.auth.register, {
+                name,
+                surname,
+                username,
                 email,
                 password,
             });
             console.log("Registration successful:", response.data);
             setSuccess("Registration successful! You can now login.");
-            setFirstName("");
-            setLastName("");
+            setName("");
+            setSurname("");
             setEmail("");
             setPassword("");
         } catch (err: any) {
@@ -36,24 +38,35 @@ const Register: React.FC = () => {
             <h1 className={c.registerHeader}>Register</h1>
             <form className={c.registerForm} onSubmit={handleSubmit}>
                 <div className={c.inputGroup}>
-                    <label htmlFor="firstName">First Name</label>
+                    <label htmlFor="name">First Name</label>
                     <input
                         type="text"
-                        id="firstName"
+                        id="name"
                         placeholder="Your first name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         required
                     />
                 </div>
                 <div className={c.inputGroup}>
-                    <label htmlFor="lastName">Last Name</label>
+                    <label htmlFor="surname">Last Name</label>
                     <input
                         type="text"
-                        id="lastName"
+                        id="surname"
                         placeholder="Your last name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
+                        value={surname}
+                        onChange={(e) => setSurname(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className={c.inputGroup}>
+                    <label htmlFor="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Your username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>

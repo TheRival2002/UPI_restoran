@@ -27,7 +27,7 @@ export class AuthController {
             const user = await this.authService.register(userData);
 
             // after creating user from registration process, log him in
-            const authData = { email: user.email, username: userData.username, password: userData.password };
+            const authData = { email: userData.email, password: userData.password };
             const { accessToken, refreshToken } = await this.authService.login(authData);
 
             // TODO na frontu spremit accessToken
