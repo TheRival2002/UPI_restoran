@@ -25,7 +25,7 @@ export class MealsRepository {
     public async deleteMeal(mealId: number): Promise<void> {
         const query = `DELETE
                        FROM meals
-                       WHERE id = $1 RETURNING *`;
+                       WHERE id = $1`;
         const values = [mealId];
         const response = await this.database.query(query, values);
 

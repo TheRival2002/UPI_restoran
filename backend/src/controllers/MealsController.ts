@@ -43,7 +43,7 @@ export class MealsController {
         try {
             const mealId = +(req.params.id);
             const deletedMeal = await this.mealsService.deleteMeal(mealId);
-            res.status(200).json(deletedMeal);
+            res.status(204).json(deletedMeal);
         } catch (error) {
             next(error);
         }
