@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router';
 import c from "./index.module.css";
 import axiosInstance, { endpoints } from "../../utils/axios";
 
@@ -6,6 +7,8 @@ const Login: React.FC = () => {
     const [emailOrUsernameValue, setEmailOrUsernameValue] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -15,8 +18,9 @@ const Login: React.FC = () => {
                 [isEmailEntered ? 'email' : 'username']: emailOrUsernameValue,
                 password,
             });
-            console.log("Login successful:", response.data);
-            // window.location.href = "/";
+            localStorage.setItem("accessToken", response.data.accessToken);
+
+            navigate('/');
         } catch (err: any) {
             console.error("Login error:", err.response?.data || err.message);
             setError(err.response?.data?.message || "Login failed");

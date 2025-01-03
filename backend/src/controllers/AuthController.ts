@@ -30,7 +30,6 @@ export class AuthController {
             const authData = { email: userData.email, password: userData.password };
             const { accessToken, refreshToken } = await this.authService.login(authData);
 
-            // TODO na frontu spremit accessToken
             res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // maxAge is in milliseconds, so it is 1 day
             res.status(201).json({ message: 'User created', accessToken, user });
         } catch (error) {
@@ -43,7 +42,6 @@ export class AuthController {
             const userAuthData: LoginCredentialsDto = req.body;
             const { accessToken, refreshToken } = await this.authService.login(userAuthData);
 
-            // TODO na frontu spremit accessToken
             res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // maxAge is in milliseconds, so it is 1 day
             res.status(200).json({ accessToken });
         } catch (error) {
