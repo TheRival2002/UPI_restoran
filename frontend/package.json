@@ -8,11 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix"

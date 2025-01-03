@@ -18,9 +18,9 @@ const Login: React.FC = () => {
                 [isEmailEntered ? 'email' : 'username']: emailOrUsernameValue,
                 password,
             });
-            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem("accessToken", response.data.accessToken);
 
-            navigate('/');
+            navigate("/");
         } catch (err: any) {
             console.error('Login error:', err.response?.data || err.message);
             setError(err.response?.data?.message || 'Login failed');
