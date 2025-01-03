@@ -15,12 +15,12 @@ const Login: React.FC = () => {
         const isEmailEntered = (/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(emailOrUsernameValue);
         try {
             const response = await axiosInstance.post(endpoints.auth.login, {
-                [isEmailEntered ? 'email' : 'username']: emailOrUsernameValue,
+                [isEmailEntered ? "email" : "username"]: emailOrUsernameValue,
                 password,
             });
             localStorage.setItem("accessToken", response.data.accessToken);
 
-            navigate("/");
+            navigate('/');
         } catch (err: any) {
             console.error('Login error:', err.response?.data || err.message);
             setError(err.response?.data?.message || 'Login failed');
