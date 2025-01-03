@@ -42,8 +42,9 @@ export class MealsController {
     private async deleteMeal(req: Request, res: Response, next: NextFunction) {
         try {
             const mealId = +(req.params.id);
-            const deletedMeal = await this.mealsService.deleteMeal(mealId);
-            res.status(204).json(deletedMeal);
+            await this.mealsService.deleteMeal(mealId);
+            
+            res.sendStatus(204);
         } catch (error) {
             next(error);
         }
