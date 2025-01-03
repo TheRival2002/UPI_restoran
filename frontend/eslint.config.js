@@ -32,12 +32,12 @@ export default tsEslint.config(
                 { allowConstantExport: true },
             ],
 
-            indent: [2, 4, {
+            indent: ["error", 4, {
                 MemberExpression: 1,
                 SwitchCase: 1,
             }],
 
-            quotes: [2, "single", "avoid-escape"],
+            quotes: ["error", "single", "avoid-escape"],
             "no-unused-vars": 0,
             "no-param-reassign": 0,
             "no-multiple-empty-lines": ["error", {

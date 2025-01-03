@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import c from "./reg.module.css";
-import axiosInstance, { endpoints } from "../../utils/axios";
+import c from './reg.module.css';
+import axiosInstance, { endpoints } from '../../utils/axios';
 
 const Register: React.FC = () => {
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
+    const [ name, setName ] = useState('');
+    const [ surname, setSurname ] = useState('');
+    const [ username, setUsername ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ error, setError ] = useState('');
+    const [ success, setSuccess ] = useState('');
 
     const navigate = useNavigate();
 
@@ -24,19 +24,19 @@ const Register: React.FC = () => {
                 email,
                 password,
             });
-            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem('accessToken', response.data.accessToken);
 
-            setSuccess("Registration successful! You can now login.");
-            setName("");
-            setSurname("");
-            setUsername("");
-            setEmail("");
-            setPassword("");
+            setSuccess('Registration successful! You can now login.');
+            setName('');
+            setSurname('');
+            setUsername('');
+            setEmail('');
+            setPassword('');
 
             navigate('/');
         } catch (err: any) {
-            console.error("Registration error:", err.response?.data || err.message);
-            setError(err.response?.data?.message || "Registration failed");
+            console.error('Registration error:', err.response?.data || err.message);
+            setError(err.response?.data?.message || 'Registration failed');
         }
     };
 
