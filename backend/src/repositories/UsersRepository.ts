@@ -11,14 +11,14 @@ export class UsersRepository {
         return await this.database.query(query, [user.name, user.surname, user.username.toLowerCase(), user.email.toLowerCase(), user.password, user.role_id]);
     }
 
-    public async findByUsername(username: string): Promise<User> {
+    public async findByUsername(username: string): Promise<User | undefined> {
         const query = 'SELECT * FROM users WHERE LOWER(username) = LOWER($1)';
         const response = await this.database.query(query, [username]);
 
         return response.rows[0];
     }
 
-    public async findByEmail(email: string): Promise<User> {
+    public async findByEmail(email: string): Promise<User | undefined> {
         const query = 'SELECT * FROM users WHERE LOWER(email) = LOWER($1)';
         const response = await this.database.query(query, [email]);
 

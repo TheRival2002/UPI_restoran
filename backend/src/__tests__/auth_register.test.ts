@@ -1,9 +1,10 @@
 import express from 'express';
 import request from 'supertest';
-import { User } from '../entities/User';
 import { BadRequestError } from '../errors/HttpError';
 import { createTestApp } from '../helpers/testApp';
 import { AuthService } from '../services/AuthService';
+import { jwtTokens } from './constants/auth';
+import { mockUser } from './constants/user';
 
 // --------------------------------------------------------------
 
@@ -20,21 +21,11 @@ describe('POST /register', () => {
         jest.clearAllMocks();
     });
 
-    const mockUser: User = {
-        id: 1,
-        name: 'John',
-        surname: 'Doe',
-        username: 'john_doe',
-        email: 'john@email.com',
-        password: 'password123',
-        role_id: 2,
-    };
-
     it('should register a new user and log him in', async () => {
         mockAuthService.prototype.register.mockResolvedValue(mockUser);
         mockAuthService.prototype.login.mockResolvedValue({
-            accessToken: 'accessToken',
-            refreshToken: 'refreshToken',
+            accessToken: jwtTokens.accessToken,
+            refreshToken: jwtTokens.refreshToken,
         });
 
         const response = await request(app)
@@ -44,7 +35,7 @@ describe('POST /register', () => {
         expect(response.status).toBe(201);
         expect(response.body).toEqual({
             message: 'User created',
-            accessToken: 'accessToken',
+            accessToken: jwtTokens.accessToken,
             user: mockUser,
         });
         expect(response.headers['set-cookie']).toBeDefined();
