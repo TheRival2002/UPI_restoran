@@ -1,5 +1,6 @@
 import express from 'express';
 import request from 'supertest';
+import { RoleEnum } from '../entities/enums/RolesEnum';
 import { BadRequestError } from '../errors/HttpError';
 import { createTestApp } from '../helpers/testApp';
 import { AuthService } from '../services/AuthService';
@@ -51,6 +52,23 @@ describe('POST /register', () => {
         });
     });
 
+    it('should verify cookie attributes after successful registration', async () => {
+        mockAuthService.prototype.register.mockResolvedValue(mockUser);
+        mockAuthService.prototype.login.mockResolvedValue({
+            accessToken: jwtTokens.accessToken,
+            refreshToken: jwtTokens.refreshToken,
+        });
+
+        const response = await request(app)
+            .post('/register')
+            .send(mockUser);
+
+        const cookieHeader = response.headers['set-cookie'][0];
+        expect(cookieHeader).toMatch(/HttpOnly/);
+        expect(cookieHeader).toMatch(/Max-Age=86400/); // 24 * 60 * 60 = 86400 seconds
+        expect(cookieHeader).toMatch(/Path=\//);
+    });
+
     it('should return 400 if user with the same username already exists', async () => {
         mockAuthService.prototype.register.mockRejectedValue(new BadRequestError('Username already exists'));
 
@@ -88,5 +106,51 @@ describe('POST /register', () => {
         expect(response.body).toEqual({ error: 'Internal server error' });
         expect(mockAuthService.prototype.register).toHaveBeenCalledTimes(1);
         expect(mockAuthService.prototype.register).toHaveBeenCalledWith(mockUser);
+    });
+
+    it('should handle login failure after successful registration', async () => {
+        mockAuthService.prototype.register.mockResolvedValue(mockUser);
+        mockAuthService.prototype.login.mockRejectedValue(
+            new Error('Login failed after registration')
+        );
+
+        const response = await request(app)
+            .post('/register')
+            .send(mockUser);
+
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ error: 'Internal server error' });
+        expect(mockAuthService.prototype.register).toHaveBeenCalledTimes(1);
+        expect(mockAuthService.prototype.register).toHaveBeenCalledWith(mockUser);
+        expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
+        expect(mockAuthService.prototype.login).toHaveBeenCalledWith({
+            email: mockUser.email,
+            username: mockUser.username,
+            password: mockUser.password,
+        });
+    });
+
+    it('should set correct role_id for new user', async () => {
+        mockAuthService.prototype.register.mockImplementation(async (userData) => {
+            expect(userData.role_id).toBe(RoleEnum.USER);
+            return mockUser;
+        });
+        mockAuthService.prototype.login.mockResolvedValue({
+            accessToken: jwtTokens.accessToken,
+            refreshToken: jwtTokens.refreshToken,
+        });
+
+        await request(app)
+            .post('/register')
+            .send(mockUser);
+
+        expect(mockAuthService.prototype.register).toHaveBeenCalledTimes(1);
+        expect(mockAuthService.prototype.register).toHaveBeenCalledWith(mockUser);
+        expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
+        expect(mockAuthService.prototype.login).toHaveBeenCalledWith({
+            email: mockUser.email,
+            username: mockUser.username,
+            password: mockUser.password,
+        });
     });
 });

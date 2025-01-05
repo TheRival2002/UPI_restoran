@@ -103,6 +103,23 @@ describe('POST /login', () => {
         expect(response.headers['set-cookie'][0]).toContain('jwt=refreshToken');
     });
 
+    it('should set correct cookie attributes', async () => {
+        mockUsersRepository.prototype.findByEmail.mockResolvedValue(mockUser);
+        mockAuthService.prototype.login.mockResolvedValue({
+            accessToken: jwtTokens.accessToken,
+            refreshToken: jwtTokens.refreshToken,
+        });
+
+        const response = await request(app)
+            .post('/login')
+            .send({ email: loginCredentials.email, password: loginCredentials.password });
+
+        const cookieHeader = response.headers['set-cookie'][0];
+        expect(cookieHeader).toMatch(/HttpOnly/);
+        expect(cookieHeader).toMatch(/Max-Age=86400/); // 24 * 60 * 60 = 86400 seconds
+        expect(cookieHeader).toMatch(/Path=\//);
+    });
+
     it('should return 404 if user not found', async () => {
         mockUsersRepository.prototype.findByEmail.mockResolvedValue(undefined);
         mockUsersRepository.prototype.findByUsername.mockResolvedValue(undefined);

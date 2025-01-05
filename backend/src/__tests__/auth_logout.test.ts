@@ -65,4 +65,13 @@ describe('GET /logout', () => {
         expect(cookieHeader).toMatch(/Expires/);
         expect(cookieHeader).toMatch(/jwt=;/);
     });
+
+    it('should handle empty jwt cookie value', async () => {
+        const response = await request(app)
+            .get('/logout')
+            .set('Cookie', ['jwt=']);
+
+        expect(response.status).toBe(204);
+        expect(response.headers['set-cookie']).toBeUndefined();
+    });
 });
