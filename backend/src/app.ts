@@ -1,35 +1,27 @@
-import { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import express, { Express } from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+import corsOptions from './corsOptions';
+import { errorHandler } from './middleware/errorHandler';
+import { MainRouter } from './routes/MainRouter';
+import cookieParser from 'cookie-parser';
 
 // --------------------------------------------------------------
 
-const path = require("path");
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
-
-const express = require("express");
-const app: Express = express();
-const cors = require("cors");
-const pool = require("./database/db");
-
-app.use(express.json());
-app.use(cors());
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Server radi!");
-});
-
-app.get("/test", async (req, res) => {
-  try {
-    const newTest = await pool.query("SELECT * FROM roles");
-    res.json(newTest);
-  } catch (error: any) {
-    console.error(error.message);
-  }
-});
+const cors = require('cors');
 
 const PORT = process.env.API_PORT || 3000;
+const app: Express = express();
+const router = new MainRouter();
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors(corsOptions));
+app.use('/api', router.routes);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`The server is listening on port:${PORT}`);
+    console.log(`The server is listening on port:${PORT}`);
 });

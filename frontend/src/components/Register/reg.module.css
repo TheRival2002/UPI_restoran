@@ -1,76 +1,76 @@
 .registerContainer {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 60px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 60px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .registerHeader {
-  font-size: 2.3rem;
-  font-weight: bold;
-  color: #333;
-  margin-top: 5px;
+    font-size: 2.3rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px;
 }
 
 .inputGroup {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .inputGroup label {
-  display: block;
-  font-size: 1rem;
-  margin-bottom: 5px;
-  color: #666;
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #666;
 }
 
 input {
-  width: 90%;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: #fff;
-  color: black;
+    width: 90%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: black;
 }
 
 input:focus {
-  outline: none;
-  border: 2px solid #ff6b6b;
+    outline: none;
+    border: 2px solid #ff6b6b;
 }
 
 .registerButton {
-  width: 80%;
-  background: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 20px;
-  border-radius: 25px;
-  font-size: 1.1rem;
-  cursor: pointer;
+    width: 80%;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 20px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 
 button:hover {
-  background: #ff4b4b;
-  color: antiquewhite;
+    background: #ff4b4b;
+    color: antiquewhite;
 }
 
 .registerFooter {
-  margin-top: 20px;
-  font-size: 1rem;
-  text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
+    text-align: center;
 }
 
 .registerFooter a {
-  color: #ff6b6b;
-  font-size: 1.1rem;
+    color: #ff6b6b;
+    font-size: 1.1rem;
 }
 
 .registerFooter a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .registerFooter {
-  color: black;
+    color: black;
 }

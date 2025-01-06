@@ -5,7 +5,7 @@ import { API_URL } from '../config-global.ts';
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
-    // withCredentials:true,
+    withCredentials: true,
     // withXSRFToken:true,
     // headers:{
     //     'X-Requested-With': 'XMLHttpRequest',
@@ -14,4 +14,23 @@ const axiosInstance = axios.create({
     // },
 });
 
+axiosInstance.interceptors.request.use((config) => {
+    const token = localStorage.getItem('accessToken');
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+});
+
 export default axiosInstance;
+
+// ----------------------------------------------------------------------
+
+export const endpoints = {
+    auth: {
+        login: '/api/login',
+        register: '/api/register',
+    },
+};

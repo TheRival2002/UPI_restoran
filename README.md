@@ -3,28 +3,22 @@
 Kod kloniranja projekta, napravite ```.env``` u root-u projekta po uzoru na ```.env.example```.
 Isto tako, napravite ```.env.local``` u ```fronted``` folder-u po uzoru na ```.env.local.example```.
 
-## Instalacija aplikacije
-### Root:
+## Instalacija i pokretanje aplikacije iz root-a projekta
+- ```npm run install-all``` -> instalacija svih paketa
+- ```npm run dev``` -> pokretanje aplikacije (klijent i server)
+
+### Ili pojedinačna instalacija i pokretanje aplikacije
+#### Root:
 - ```npm install```
 
-### Backend:
+#### Backend:
 - ```cd backend```
 - ```npm install```
+- ```npm run dev```
 
-### Frontend:
+#### Frontend:
 - ```cd frontend```
 - ```npm install```
-
-## Pokretanje aplikacije
-### Backend:
-- ```cd backend```
-- ```npm run dev```
-
-### Frontend:
-- ```cd frontend```
-- ```npm run dev```
-
-Ili pokrenite sve odjednom iz root-a projekta:
 - ```npm run dev```
 
 ## Izrada baze podataka
@@ -46,3 +40,9 @@ ILI
     - izvršiti naredbe iz ```database_schema.sql``` datoteke
 
 NAPOMENA: morate u .env datoteci postavit točne podatke za bazu podataka, također morate izraditi sve .env datokeke po uzore na njihove .example datoteke (npr. u frontend folder-u postoji .env.local.example, morate napravit .env.local datoteku)
+
+## Error handling
+- kod bacanja errora u backendu, koristiti custom error klase iz ```errors/HttpError.ts``` datoteke koje sadržavaju status kod i poruku
+- u controller-u koristiti ```next()``` funkciju kako bi se error prebacio u ```errorHandler.ts``` datoteku
+- one će biti uhvaćene u ```errorHandler.ts``` datoteci i poslane korisniku
+- ukoliko se error ne uhvati, korisnik će dobiti ```Internal Server Error``` status kod
