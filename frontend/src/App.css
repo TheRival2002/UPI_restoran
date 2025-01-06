@@ -2,7 +2,7 @@ body {
     font-family: "Arial", sans-serif;
     margin: 0;
     padding: 0;
-    background: url("./images/wood-texture.jpg");
+    background: url("assets/wood-texture.jpg");
     background-size: cover;
     background-position: center;
 }
