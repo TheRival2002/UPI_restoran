@@ -1,6 +1,6 @@
 import { useRoutes } from 'react-router';
-import Login from './components/Login/Login.tsx';
-import Register from './components/Register/Register.tsx';
+import LoginPage from './pages/auth/LoginPage.tsx';
+import RegisterPage from './pages/auth/RegisterPage.tsx';
 
 // ----------------------------------------------------------------------
 
@@ -11,11 +11,11 @@ export default function Router() {
             children: [
                 {
                     path: 'login',
-                    element: <Login />,
+                    element: <LoginPage />,
                 },
                 {
                     path: 'register',
-                    element: <Register />,
+                    element: <RegisterPage />,
                 },
             ],
         },

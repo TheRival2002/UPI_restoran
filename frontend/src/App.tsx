@@ -1,13 +1,17 @@
-import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router';
 import Router from './router.tsx';
 import './App.css';
 
-const App: React.FC = () => {
+// ----------------------------------------------------------------------
+
+const App = () => {
     return (
-        <BrowserRouter>
-            <Router/>
-        </BrowserRouter>
+        <HelmetProvider>
+            <BrowserRouter>
+                <Router/>
+            </BrowserRouter>
+        </HelmetProvider>
     );
 };
 export default App;
