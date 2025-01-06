@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { MealsService } from '../services/MealsService';
 
 // --------------------------------------------------------------
@@ -13,6 +13,7 @@ export class MealsController {
 
         this.mealsRouter.get('/meals', this.findAll.bind(this));
         this.mealsRouter.post('/meals', this.createMeal.bind(this));
+        this.mealsRouter.delete('/meals/:id', this.deleteMeal.bind(this));
     }
 
     private async findAll(_: Request, res: Response, next: NextFunction) {
@@ -33,6 +34,17 @@ export class MealsController {
                 return;
             }
             res.status(201).json(newMeal);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    private async deleteMeal(req: Request, res: Response, next: NextFunction) {
+        try {
+            const mealId = +(req.params.id);
+            await this.mealsService.deleteMeal(mealId);
+            
+            res.sendStatus(204);
         } catch (error) {
             next(error);
         }

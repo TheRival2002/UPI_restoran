@@ -12,10 +12,21 @@ export class MealsRepository {
         return response.rows;
     }
 
+
     public async createMeal(meal: Meal): Promise<Meal> {
         const query = `INSERT INTO meals (name, description, price, image, meal_category_id)
                        VALUES ($1, $2, $3, $4, $5) RETURNING *`;
         const values = [meal.name, meal.description, meal.price, meal.image, meal.mealCategoryId];
+        const response = await this.database.query(query, values);
+
+        return response.rows[0];
+    }
+
+    public async deleteMeal(mealId: number): Promise<void> {
+        const query = `DELETE
+                       FROM meals
+                       WHERE id = $1`;
+        const values = [mealId];
         const response = await this.database.query(query, values);
 
         return response.rows[0];
@@ -31,4 +42,6 @@ export class MealsRepository {
         return response.rows[0].count === '0';
 
     }
+
+
 }
