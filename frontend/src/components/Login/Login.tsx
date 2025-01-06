@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { paths } from '../../routes/paths.ts';
 import c from './index.module.css';
 import axiosInstance, { endpoints } from '../../utils/axios';
+
+// ----------------------------------------------------------------------
 
 const Login: React.FC = () => {
     const [ emailOrUsernameValue, setEmailOrUsernameValue ] = useState('');
@@ -22,7 +25,7 @@ const Login: React.FC = () => {
             });
             localStorage.setItem('accessToken', response.data.accessToken);
 
-            navigate('/');
+            navigate(paths.home.root);
         } catch (err: any) {
             console.error('Login error:', err.response?.data || err.message);
             setError(err.response?.data?.message || 'Login failed');
@@ -63,10 +66,10 @@ const Login: React.FC = () => {
             </form>
 
             <p className={c.loginFooter}>
-                Don’t have an account? <a href="/auth/register"> Register</a>
+                Don’t have an account? <a href={paths.auth.register}> Register</a>
             </p>
             <p className={c.loginFooter}>
-                <a href="/">Go to Home</a>
+                <a href={paths.home.root}>Go to Home</a>
             </p>
         </div>
     );

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { paths } from '../../routes/paths.ts';
 import c from './reg.module.css';
 import axiosInstance from '../../utils/axios';
+
+// ----------------------------------------------------------------------
 
 const Register: React.FC = () => {
     const [ userData, setUserData ] = useState({
@@ -103,10 +106,10 @@ const Register: React.FC = () => {
                 </button>
             </form>
             <p className={c.registerFooter}>
-                Already have an account? <a href="/auth/login">Login</a>
+                Already have an account? <a href={paths.auth.login}>Login</a>
             </p>
             <p className={c.registerFooter}>
-                <a href="/">Go to Home</a>
+                <a href={paths.home.root}>Go to Home</a>
             </p>
         </div>
     );
