@@ -58,6 +58,9 @@ const Login: React.FC = () => {
       <p className={c.loginFooter}>
         Don’t have an account? <a href="/auth/register"> Register</a>
       </p>
+      <p className={c.loginFooter}>
+        <a href="/">Go to Home</a>
+      </p>
     </div>
   );
 };

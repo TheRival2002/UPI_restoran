@@ -1,5 +1,5 @@
-import { Navigate, useRoutes } from "react-router";
-import Login from "./components/Login/login.tsx";
+import { useRoutes } from "react-router";
+import Login from "./components/Login/Login.tsx";
 import Register from "./components/Register/Register.tsx";
 
 export default function Router() {

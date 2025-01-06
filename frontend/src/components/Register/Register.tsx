@@ -3,28 +3,35 @@ import c from "./reg.module.css";
 import axiosInstance from "../../utils/axios";
 
 const Register: React.FC = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/auth/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+      const response = await axiosInstance.post("/auth/register", userData);
       console.log("Registration successful:", response.data);
       setSuccess("Registration successful! You can now login.");
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPassword("");
+      setUserData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+      });
     } catch (err: any) {
       console.error("Registration error:", err.response?.data || err.message);
       setError(err.response?.data?.message || "Registration failed");
@@ -40,9 +47,10 @@ const Register: React.FC = () => {
           <input
             type="text"
             id="firstName"
+            name="firstName"
             placeholder="Your first name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={userData.firstName}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -51,9 +59,10 @@ const Register: React.FC = () => {
           <input
             type="text"
             id="lastName"
+            name="lastName"
             placeholder="Your last name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={userData.lastName}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -62,9 +71,10 @@ const Register: React.FC = () => {
           <input
             type="email"
             id="email"
+            name="email"
             placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userData.email}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -73,9 +83,10 @@ const Register: React.FC = () => {
           <input
             type="password"
             id="password"
+            name="password"
             placeholder="Your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={userData.password}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -87,6 +98,9 @@ const Register: React.FC = () => {
       </form>
       <p className={c.registerFooter}>
         Already have an account? <a href="/auth/login">Login</a>
+      </p>
+      <p className={c.registerFooter}>
+        <a href="/">Go to Home</a>
       </p>
     </div>
   );

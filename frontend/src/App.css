@@ -2,7 +2,7 @@ body {
   font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
-  background: url("https://media.istockphoto.com/id/1458698228/photo/selective-focus-wood-table-top-on-blur-kitchen-counter-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=cCqfdoyHuJ8Hp66onCG0tMJo6Ku2pbRCzl0GLdDgK7o="); /* Slika teksture drveta */
+  background: url("./images/wood-texture.jpg");
   background-size: cover;
   background-position: center;
 }
