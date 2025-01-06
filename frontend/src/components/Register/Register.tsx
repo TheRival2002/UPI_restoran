@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import c from "./reg.module.css";
-import axiosInstance from "../../utils/axios";
+import React, { useState } from 'react';
+import c from './reg.module.css';
+import axiosInstance from '../../utils/axios';
 
 const Register: React.FC = () => {
-    const [userData, setUserData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
+    const [ userData, setUserData ] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
     });
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
+    const [ error, setError ] = useState('');
+    const [ success, setSuccess ] = useState('');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -24,23 +24,23 @@ const Register: React.FC = () => {
         e.preventDefault();
         try {
             const response = await axiosInstance.post(
-                "/auth/register",
+                '/auth/register',
                 userData
             );
-            console.log("Registration successful:", response.data);
-            setSuccess("Registration successful! You can now login.");
+            console.log('Registration successful:', response.data);
+            setSuccess('Registration successful! You can now login.');
             setUserData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                password: "",
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
             });
         } catch (err: any) {
             console.error(
-                "Registration error:",
+                'Registration error:',
                 err.response?.data || err.message
             );
-            setError(err.response?.data?.message || "Registration failed");
+            setError(err.response?.data?.message || 'Registration failed');
         }
     };
 

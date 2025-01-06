@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import c from "./index.module.css";
-import axiosInstance, { endpoints } from "../../utils/axios";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import c from './index.module.css';
+import axiosInstance, { endpoints } from '../../utils/axios';
 
 const Login: React.FC = () => {
-    const [emailOrUsernameValue, setEmailOrUsernameValue] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [ emailOrUsernameValue, setEmailOrUsernameValue ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ error, setError ] = useState('');
 
     const navigate = useNavigate();
 
@@ -17,15 +17,15 @@ const Login: React.FC = () => {
         );
         try {
             const response = await axiosInstance.post(endpoints.auth.login, {
-                [isEmailEntered ? "email" : "username"]: emailOrUsernameValue,
+                [isEmailEntered ? 'email' : 'username']: emailOrUsernameValue,
                 password,
             });
-            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem('accessToken', response.data.accessToken);
 
-            navigate("/");
+            navigate('/');
         } catch (err: any) {
-            console.error("Login error:", err.response?.data || err.message);
-            setError(err.response?.data?.message || "Login failed");
+            console.error('Login error:', err.response?.data || err.message);
+            setError(err.response?.data?.message || 'Login failed');
         }
     };
     return (
