@@ -1,4 +1,4 @@
-import c from '../../../styles/login.module.css';
+import c from '@styles/login.module.css';
 import LoginActions from './LoginActions.tsx';
 import LoginForm from './LoginForm.tsx';
 

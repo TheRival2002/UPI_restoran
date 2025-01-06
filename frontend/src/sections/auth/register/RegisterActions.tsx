@@ -1,5 +1,5 @@
-import { paths } from '../../../routes/paths.ts';
-import c from '../../../styles/register.module.css';
+import { paths } from '@routes/paths.ts';
+import c from '@styles/register.module.css';
 
 // ----------------------------------------------------------------------
 

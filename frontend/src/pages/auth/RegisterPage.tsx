@@ -1,5 +1,5 @@
+import Register from '@sections/auth/register/Register.tsx';
 import { Helmet } from 'react-helmet-async';
-import Register from '../../sections/auth/register/Register.tsx';
 
 // ----------------------------------------------------------------------
 

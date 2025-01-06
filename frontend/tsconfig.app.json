@@ -21,6 +21,19 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+
+    /* Paths */
+    "outDir": "./dist",
+    "baseUrl": "./src/",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@pages/*": ["pages/*"],
+      "@components/*": ["components/*"],
+      "@routes/*": ["routes/*"],
+      "@sections/*": ["sections/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"],
+    },
   },
   "include": ["src"]
 }

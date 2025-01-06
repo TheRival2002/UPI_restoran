@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { paths } from '../../../routes/paths.ts';
-import c from '../../../styles/login.module.css';
-import axiosInstance, { endpoints } from '../../../utils/axios.ts';
+import { paths } from '@routes/paths.ts';
+import c from '@styles/login.module.css';
+import axiosInstance, { endpoints } from '@utils/axios.ts';
 
 // ----------------------------------------------------------------------
 
