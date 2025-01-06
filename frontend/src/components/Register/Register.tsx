@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { paths } from '../../routes/paths.ts';
 import c from './reg.module.css';
-import axiosInstance from '../../utils/axios';
+import axiosInstance, { endpoints } from '../../utils/axios';
 
 // ----------------------------------------------------------------------
 
 const Register: React.FC = () => {
     const [ userData, setUserData ] = useState({
-        firstName: '',
-        lastName: '',
+        name: '',
+        surname: '',
+        username: '',
         email: '',
         password: '',
     });
     const [ error, setError ] = useState('');
     const [ success, setSuccess ] = useState('');
+
+    const navigate = useNavigate();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -27,17 +31,21 @@ const Register: React.FC = () => {
         e.preventDefault();
         try {
             const response = await axiosInstance.post(
-                '/auth/register',
+                endpoints.auth.register,
                 userData
             );
-            console.log('Registration successful:', response.data);
+            localStorage.setItem('accessToken', response.data.accessToken);
+
             setSuccess('Registration successful! You can now login.');
             setUserData({
-                firstName: '',
-                lastName: '',
+                name: '',
+                surname: '',
+                username: '',
                 email: '',
                 password: '',
             });
+
+            navigate(paths.home.root);
         } catch (err: any) {
             console.error(
                 'Registration error:',
@@ -52,25 +60,37 @@ const Register: React.FC = () => {
             <h1 className={c.registerHeader}>Register</h1>
             <form className={c.registerForm} onSubmit={handleSubmit}>
                 <div className={c.inputGroup}>
-                    <label htmlFor="firstName">First Name</label>
+                    <label htmlFor="name">First Name</label>
                     <input
                         type="text"
-                        id="firstName"
-                        name="firstName"
+                        id="name"
+                        name="name"
                         placeholder="Your first name"
-                        value={userData.firstName}
+                        value={userData.name}
                         onChange={handleInputChange}
                         required
                     />
                 </div>
                 <div className={c.inputGroup}>
-                    <label htmlFor="lastName">Last Name</label>
+                    <label htmlFor="surname">Last Name</label>
                     <input
                         type="text"
-                        id="lastName"
-                        name="lastName"
+                        id="surname"
+                        name="surname"
                         placeholder="Your last name"
-                        value={userData.lastName}
+                        value={userData.surname}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <div className={c.inputGroup}>
+                    <label htmlFor="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Your username"
+                        value={userData.username}
                         onChange={handleInputChange}
                         required
                     />

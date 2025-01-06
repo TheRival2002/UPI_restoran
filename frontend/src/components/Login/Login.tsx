@@ -7,21 +7,31 @@ import axiosInstance, { endpoints } from '../../utils/axios';
 // ----------------------------------------------------------------------
 
 const Login: React.FC = () => {
-    const [ emailOrUsernameValue, setEmailOrUsernameValue ] = useState('');
-    const [ password, setPassword ] = useState('');
+    const [ credentials, setCredentials ] = useState({
+        emailOrUsernameValue: '',
+        password: '',
+    });
     const [ error, setError ] = useState('');
 
     const navigate = useNavigate();
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setCredentials((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const isEmailEntered = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-            emailOrUsernameValue
+            credentials.emailOrUsernameValue,
         );
         try {
             const response = await axiosInstance.post(endpoints.auth.login, {
-                [isEmailEntered ? 'email' : 'username']: emailOrUsernameValue,
-                password,
+                [isEmailEntered ? 'email' : 'username']: credentials.emailOrUsernameValue,
+                password: credentials.password,
             });
             localStorage.setItem('accessToken', response.data.accessToken);
 
@@ -36,15 +46,14 @@ const Login: React.FC = () => {
             <h1 className={c.loginHeader}>Login</h1>
             <form className={c.loginForm} onSubmit={handleSubmit}>
                 <div className={c.inputGroup}>
-                    <label htmlFor="email">E-mail</label>
+                    <label htmlFor="emailOrUsernameValue">E-mail / Username</label>
                     <input
                         type="text"
-                        id="email"
+                        id="emailOrUsernameValue"
+                        name="emailOrUsernameValue"
                         placeholder="Your email or username"
-                        value={emailOrUsernameValue}
-                        onChange={(e) =>
-                            setEmailOrUsernameValue(e.target.value)
-                        }
+                        value={credentials.emailOrUsernameValue}
+                        onChange={handleInputChange}
                         required
                     />
                 </div>
@@ -53,9 +62,10 @@ const Login: React.FC = () => {
                     <input
                         type="password"
                         id="password"
+                        name="password"
                         placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={credentials.password}
+                        onChange={handleInputChange}
                         required
                     />
                 </div>

@@ -2,6 +2,7 @@ import { User } from '../entities/User';
 
 // ----------------------------------------------------------------------
 
+// TODO postavit da ne vracamo password
 export class UsersRepository {
     private readonly database = require('./../database/db');
 
