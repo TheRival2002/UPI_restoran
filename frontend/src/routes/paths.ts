@@ -1,16 +1,16 @@
-const ROOTS = {
-    HOME: '/',
-    AUTH: '/auth',
-};
+enum Roots {
+    HOME = '/',
+    AUTH = '/auth',
+}
 
 // ----------------------------------------------------------------------
 
 export const paths = {
     home: {
-        root: ROOTS.HOME,
+        root: Roots.HOME,
     },
     auth: {
-        login: `${ROOTS.AUTH}/login`,
-        register: `${ROOTS.AUTH}/register`,
+        login: `${Roots.AUTH}/login`,
+        register: `${Roots.AUTH}/register`,
     }
 };
