@@ -1,4 +1,4 @@
-import c from './../../styles/login.module.css';
+import c from './../../styles/inputField.module.css';
 import { ChangeEventHandler } from 'react';
 
 interface InputFieldProps {

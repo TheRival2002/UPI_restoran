@@ -1,80 +1,59 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
 }
 
 .loginContainer {
-    max-width: 400px;
-    padding: 70px;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width     : 400px;
+    padding       : 70px;
+    background    : #fff;
+    border-radius : 20px;
+    box-shadow    : 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .loginHeader {
-    font-size: 2.3rem;
-    font-weight: bold;
-    color: #333;
-    margin-top: 5px;
-}
-
-.inputGroup {
-    margin-bottom: 20px;
-}
-
-.inputGroup label {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: #666;
-}
-
-.inputGroup input {
-    width: 90%;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 1rem;
-    background-color: #fff;
-    color: black;
+    font-size   : 2.3rem;
+    font-weight : bold;
+    color       : #333;
+    margin-top  : 5px;
 }
 
 .loginButton {
-    width: 80%;
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 20px;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
+    width         : 80%;
+    background    : #ff6b6b;
+    color         : white;
+    border        : none;
+    padding       : 20px;
+    border-radius : 25px;
+    font-size     : 1.1rem;
+    cursor        : pointer;
 }
 
 button:hover {
-    background: #ff4b4b;
+    background : #ff4b4b;
 }
 
 .loginFooter {
-    margin-top: 20px;
-    font-size: 1rem;
-    text-align: center;
+    margin-top : 20px;
+    font-size  : 1rem;
+    text-align : center;
 }
 
 .loginFooter a {
-    color: #ff6b6b;
+    color : #ff6b6b;
 }
 
 .loginFooter a:hover {
-    text-decoration: underline;
+    text-decoration : underline;
 }
 
 .loginForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
 }
 
 .loginFooter {
-    color: black;
+    color : black;
 }
