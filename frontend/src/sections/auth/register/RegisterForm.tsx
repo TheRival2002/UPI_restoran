@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 import c from '@styles/register.module.css';
 import api, { endpoints } from '@utils/axios.ts';
+import InputField from '@components/InputField/InputField.tsx';
 
 // ----------------------------------------------------------------------
 
@@ -57,71 +58,62 @@ export default function RegisterForm() {
 
     return (
         <form className={c.registerForm} onSubmit={handleSubmit}>
-            <div className={c.inputGroup}>
-                <label htmlFor="name">First Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your first name"
-                    value={userData.name}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
-            <div className={c.inputGroup}>
-                <label htmlFor="surname">Last Name</label>
-                <input
-                    type="text"
-                    id="surname"
-                    name="surname"
-                    placeholder="Your last name"
-                    value={userData.surname}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
-            <div className={c.inputGroup}>
-                <label htmlFor="username">Username</label>
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Your username"
-                    value={userData.username}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
-            <div className={c.inputGroup}>
-                <label htmlFor="email">E-mail</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Your email"
-                    value={userData.email}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
-            <div className={c.inputGroup}>
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Your password"
-                    value={userData.password}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
-            {error && <p className={c.error}>{error}</p>}
-            {success && <p className={c.success}>{success}</p>}
+            <InputField
+                label="First Name"
+                type="text"
+                inputId="name"
+                placeholder="Your first name"
+                value={userData.name}
+                onChange={handleInputChange}
+                required={true}
+            />
+            <InputField
+                label="Last Name"
+                type="text"
+                inputId="surname"
+                placeholder="Your last name"
+                value={userData.surname}
+                onChange={handleInputChange}
+                required={true}
+            />
+            <InputField
+                label="Username"
+                type="text"
+                inputId="username"
+                placeholder="Your username"
+                value={userData.username}
+                onChange={handleInputChange}
+                required={true}
+            />
+            <InputField
+                label="E-mail"
+                type="email"
+                inputId="email"
+                placeholder="Your email"
+                value={userData.email}
+                onChange={handleInputChange}
+                required={true}
+            />
+            <InputField
+                label="Password"
+                type="password"
+                inputId="password"
+                placeholder="Your password"
+                value={userData.password}
+                onChange={handleInputChange}
+                required={true}
+            />
+            {
+                error && <p className={c.error}>{error}</p>
+            }
+            {
+                success && <p className={c.success}>{success}</p>
+            }
             <button type="submit" className={c.registerButton}>
                 Register
             </button>
+            ;
         </form>
-    );
+    )
+    ;
 }
