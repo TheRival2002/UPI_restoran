@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 import c from '@styles/login.module.css';
 import api, { endpoints } from '@utils/axios.ts';
+import InputField from '@components/InputField/InputField.tsx';
 
 // ----------------------------------------------------------------------
 
@@ -44,34 +45,30 @@ export default function LoginForm() {
 
     return (
         <form className={c.loginForm} onSubmit={handleSubmit}>
-            <div className={c.inputGroup}>
-                <label htmlFor="emailOrUsernameValue">E-mail / Username</label>
-                <input
-                    type="text"
-                    id="emailOrUsernameValue"
-                    name="emailOrUsernameValue"
-                    placeholder="Your email or username"
-                    value={credentials.emailOrUsernameValue}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
-            <div className={c.inputGroup}>
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Password"
-                    value={credentials.password}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
-            {error && <p className={c.error}>{error}</p>}
+            <InputField
+                label="Email / Username"
+                type="text"
+                inputId="emailOrUsernameValue"
+                placeholder="Your email or username"
+                value={credentials.emailOrUsernameValue}
+                onChange={handleInputChange}
+                required={true}
+            />
+            <InputField
+                label="Password"
+                type="password"
+                inputId="password"
+                placeholder="Password"
+                value={credentials.password}
+                onChange={handleInputChange}
+                required={true}
+            />
+
+            {error && <p className={c.errorMessage}>{error}</p>}
             <button type="submit" className={c.loginButton}>
                 Login
             </button>
         </form>
-    );
+    )
+    ;
 }
