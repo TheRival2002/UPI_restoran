@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 import c from '@styles/register.module.css';
-import axiosInstance, { endpoints } from '@utils/axios.ts';
+import api, { endpoints } from '@utils/axios.ts';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ export default function RegisterForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post(
+            const response = await api.post(
                 endpoints.auth.register,
                 userData
             );

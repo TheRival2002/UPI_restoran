@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 import c from '@styles/login.module.css';
-import axiosInstance, { endpoints } from '@utils/axios.ts';
+import api, { endpoints } from '@utils/axios.ts';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ export default function LoginForm() {
             credentials.emailOrUsernameValue,
         );
         try {
-            const response = await axiosInstance.post(endpoints.auth.login, {
+            const response = await api.post(endpoints.auth.login, {
                 [isEmailEntered ? 'email' : 'username']: credentials.emailOrUsernameValue,
                 password: credentials.password,
             });
