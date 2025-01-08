@@ -1,6 +1,7 @@
 import { useRoutes } from 'react-router';
 import LoginPage from './pages/auth/LoginPage.tsx';
 import RegisterPage from './pages/auth/RegisterPage.tsx';
+import c from './styles/homePage.module.css';
 
 // ----------------------------------------------------------------------
 
@@ -11,20 +12,20 @@ export default function Router() {
             children: [
                 {
                     path: 'login',
-                    element: <LoginPage />,
+                    element: <LoginPage/>,
                 },
                 {
                     path: 'register',
-                    element: <RegisterPage />,
+                    element: <RegisterPage/>,
                 },
             ],
         },
         {
             path: '/',
             element: ( // TODO ovo cemo izmijenit, imat cemo drugu komponentu za home page
-                <div className="welcome-container">
-                    <h1 className="welcome-header">Welcome to FoodHub!</h1>
-                    <p className="welcome-subtitle">
+                <div className={c.welcomeContainer}>
+                    <h1 className={c.welcomeHeader}>Welcome to FoodHub!</h1>
+                    <p className={c.welcomeSubtitle}>
                         Your favourite foods delivered fast at your door.
                     </p>
                     <button
