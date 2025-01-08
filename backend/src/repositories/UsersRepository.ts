@@ -2,13 +2,15 @@ import { User } from '../entities/User';
 
 // ----------------------------------------------------------------------
 
+// TODO postavit da ne vracamo password
 export class UsersRepository {
     private readonly database = require('./../database/db');
 
     public async create(user: User): Promise<User> {
         const query = 'INSERT INTO users (name, surname, username, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
+        const response = await this.database.query(query, [user.name, user.surname, user.username.toLowerCase(), user.email.toLowerCase(), user.password, user.role_id]);
 
-        return await this.database.query(query, [user.name, user.surname, user.username.toLowerCase(), user.email.toLowerCase(), user.password, user.role_id]);
+        return response.rows[0];
     }
 
     public async findByUsername(username: string): Promise<User | undefined> {

@@ -47,7 +47,6 @@ describe('POST /register', () => {
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
         expect(mockAuthService.prototype.login).toHaveBeenCalledWith({
             email: mockUser.email,
-            username: mockUser.username,
             password: mockUser.password,
         });
     });
@@ -111,7 +110,7 @@ describe('POST /register', () => {
     it('should handle login failure after successful registration', async () => {
         mockAuthService.prototype.register.mockResolvedValue(mockUser);
         mockAuthService.prototype.login.mockRejectedValue(
-            new Error('Login failed after registration')
+            new Error('LoginPage failed after registration')
         );
 
         const response = await request(app)
@@ -125,7 +124,6 @@ describe('POST /register', () => {
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
         expect(mockAuthService.prototype.login).toHaveBeenCalledWith({
             email: mockUser.email,
-            username: mockUser.username,
             password: mockUser.password,
         });
     });
@@ -149,7 +147,6 @@ describe('POST /register', () => {
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
         expect(mockAuthService.prototype.login).toHaveBeenCalledWith({
             email: mockUser.email,
-            username: mockUser.username,
             password: mockUser.password,
         });
     });

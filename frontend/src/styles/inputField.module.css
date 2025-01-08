@@ -1,0 +1,23 @@
+.inputGroup {
+    margin-bottom: 20px;
+}
+
+.inputGroup label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.inputGroup input {
+    width: 90%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: black;
+}
+.error {
+    color: red;
+}
