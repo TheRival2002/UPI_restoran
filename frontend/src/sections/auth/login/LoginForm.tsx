@@ -38,8 +38,8 @@ export default function LoginForm() {
 
             navigate(paths.home.root);
         } catch (err: any) {
-            console.error('LoginPage error:', err.response?.data || err.message);
-            setError(err.response?.data?.message || 'LoginPage failed');
+            console.error('LoginPage error:', err.response?.data?.error );
+            setError(err.response?.data?.error || 'LoginPage failed');
         }
     };
 
@@ -64,7 +64,7 @@ export default function LoginForm() {
                 required={true}
             />
 
-            {error && <p className={c.errorMessage}>{error}</p>}
+            {error && <p className={c.error}>{error}</p>}
             <button type="submit" className={c.loginButton}>
                 Login
             </button>

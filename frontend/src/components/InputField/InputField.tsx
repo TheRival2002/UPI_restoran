@@ -12,7 +12,7 @@ interface InputFieldProps {
 }
 
 export default function InputField({
-    label, type, inputId, placeholder, value, onChange, required
+    label, type, inputId, placeholder, value, onChange, required, 
 }: InputFieldProps) {
     return (
         <div className={c.inputGroup}>
@@ -25,7 +25,7 @@ export default function InputField({
                 value={value}
                 onChange={onChange}
                 required={required}
-            />
+            />          
         </div>
     );
 }

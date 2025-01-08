@@ -15,6 +15,13 @@ export default function RegisterForm() {
         email: '',
         password: '',
     });
+    const [ inputErrors, setInputErrors ] = useState({
+        name: '',
+        surname: '',
+        username: '',
+        email: '',
+        password: '',
+    });
     const [ error, setError ] = useState('');
     const [ success, setSuccess ] = useState('');
 
@@ -25,11 +32,37 @@ export default function RegisterForm() {
         setUserData((prevData) => ({
             ...prevData,
             [name]: value,
-        }));
+        }));        
     };
+    const validateNameOrSurname = (field: string, value: string): string => {
+        if ((/[^a-zA-Z]/.test(value))) {
+            return `${field} should contain only letters.`;
+        } 
+        return '';
+    };
+    const validateInput = () => {
+        let valid = true;
+        const newErrors = { name: '', surname: '', username: '', email: '', password: '' };
 
+        newErrors.name = validateNameOrSurname('First Name', userData.name);
+        newErrors.surname = validateNameOrSurname('Last Name', userData.surname);   
+
+        if ( /[^a-zA-Z0-9]/.test(userData.username)) {
+            newErrors.username = 'Username must contain only letters and numbers.';
+            valid = false;
+        }
+        if (/\s/.test(userData.password)) {
+            newErrors.password = 'Password should not contain spaces.';
+            valid = false;
+        }
+        setInputErrors(newErrors);
+        return valid;
+    };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!validateInput()) {
+            return;
+        }
         try {
             const response = await api.post(
                 endpoints.auth.register,
@@ -50,9 +83,9 @@ export default function RegisterForm() {
         } catch (err: any) {
             console.error(
                 'Registration error:',
-                err.response?.data || err.message
+                err.response.data.error
             );
-            setError(err.response?.data?.message || 'Registration failed');
+            setError(err.response?.data?.error || 'Registration failed');
         }
     };
 
@@ -66,6 +99,7 @@ export default function RegisterForm() {
                 value={userData.name}
                 onChange={handleInputChange}
                 required={true}
+                
             />
             <InputField
                 label="Last Name"
@@ -75,6 +109,7 @@ export default function RegisterForm() {
                 value={userData.surname}
                 onChange={handleInputChange}
                 required={true}
+                
             />
             <InputField
                 label="Username"
@@ -84,6 +119,7 @@ export default function RegisterForm() {
                 value={userData.username}
                 onChange={handleInputChange}
                 required={true}
+              
             />
             <InputField
                 label="E-mail"
@@ -93,6 +129,7 @@ export default function RegisterForm() {
                 value={userData.email}
                 onChange={handleInputChange}
                 required={true}
+               
             />
             <InputField
                 label="Password"
@@ -102,13 +139,16 @@ export default function RegisterForm() {
                 value={userData.password}
                 onChange={handleInputChange}
                 required={true}
+                
             />
-            {
-                error && <p className={c.error}>{error}</p>
-            }
-            {
-                success && <p className={c.success}>{success}</p>
-            }
+            {inputErrors.name && <p className={c.error}>{inputErrors.name}</p>}
+            {inputErrors.surname && <p className={c.error}>{inputErrors.surname}</p>}
+            {inputErrors.username && <p className={c.error}>{inputErrors.username}</p>} 
+            {inputErrors.email && <p className={c.error}>{inputErrors.email}</p>}
+            {inputErrors.password && <p className={c.error}>{inputErrors.password}</p>}
+
+            {error && <p className={c.error}>{error}</p>}
+            {success && <p className={c.success}>{success}</p>}
             <button type="submit" className={c.registerButton}>
                 Register
             </button>
