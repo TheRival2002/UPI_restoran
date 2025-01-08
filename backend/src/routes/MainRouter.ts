@@ -10,7 +10,7 @@ export class MainRouter {
     private readonly authController = new AuthController();
 
     // middleware
-    private readonly authMiddleware = require('../middleware/authMiddleware');
+    // private readonly authMiddleware = require('../middleware/authMiddleware');
 
     public readonly routes;
 
@@ -21,9 +21,7 @@ export class MainRouter {
 
     private defineRoutes() {
         this.routes.use(this.authController.authRouter);
-
-        this.routes.use(this.authMiddleware);
-
         this.routes.use(this.mealsController.mealsRouter);
+        // this.routes.use(this.authMiddleware);
     }
 }

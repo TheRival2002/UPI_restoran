@@ -6,14 +6,15 @@ import { MealsService } from '../services/MealsService';
 export class MealsController {
     private readonly mealsService;
     public readonly mealsRouter;
+    private readonly authMiddleware = require('../middleware/authMiddleware');
 
     constructor() {
         this.mealsRouter = Router();
         this.mealsService = new MealsService();
 
         this.mealsRouter.get('/meals', this.findAll.bind(this));
-        this.mealsRouter.post('/meals', this.createMeal.bind(this));
-        this.mealsRouter.delete('/meals/:id', this.deleteMeal.bind(this));
+        this.mealsRouter.post('/meals', this.authMiddleware, this.createMeal.bind(this));
+        this.mealsRouter.delete('/meals/:id', this.authMiddleware, this.deleteMeal.bind(this));
     }
 
     private async findAll(_: Request, res: Response, next: NextFunction) {
@@ -43,7 +44,7 @@ export class MealsController {
         try {
             const mealId = +(req.params.id);
             await this.mealsService.deleteMeal(mealId);
-            
+
             res.sendStatus(204);
         } catch (error) {
             next(error);
