@@ -55,6 +55,10 @@ export default function RegisterForm() {
             newErrors.password = 'Password should not contain spaces.';
             valid = false;
         }
+        if (!/\d/.test(userData.password)) {
+            newErrors.password = 'Password must contain at least one number.';
+            valid = false;
+        }
         setInputErrors(newErrors);
         return valid;
     };
