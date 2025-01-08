@@ -16,6 +16,7 @@
 .error {
     margin: 3px;
     color: red;
+    text-align: center;
 }
 input:focus {
     outline: none;
