@@ -47,7 +47,6 @@ describe('POST /register', () => {
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
         expect(mockAuthService.prototype.login).toHaveBeenCalledWith({
             email: mockUser.email,
-            username: mockUser.username,
             password: mockUser.password,
         });
     });
@@ -125,7 +124,6 @@ describe('POST /register', () => {
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
         expect(mockAuthService.prototype.login).toHaveBeenCalledWith({
             email: mockUser.email,
-            username: mockUser.username,
             password: mockUser.password,
         });
     });
@@ -149,7 +147,6 @@ describe('POST /register', () => {
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
         expect(mockAuthService.prototype.login).toHaveBeenCalledWith({
             email: mockUser.email,
-            username: mockUser.username,
             password: mockUser.password,
         });
     });

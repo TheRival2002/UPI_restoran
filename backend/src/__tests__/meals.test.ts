@@ -7,6 +7,9 @@ import { MealsService } from '../services/MealsService';
 // --------------------------------------------------------------------------------
 
 jest.mock('../services/MealsService');
+jest.mock('../middleware/authMiddleware', () => {
+    return jest.fn((_, __, next) => next());
+});
 
 const mockMealsService = MealsService as jest.MockedClass<typeof MealsService>;
 
