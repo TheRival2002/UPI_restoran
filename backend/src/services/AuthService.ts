@@ -51,11 +51,13 @@ export class AuthService {
         }
 
         const accessToken = this.jwt.sign({
-            id: foundUser.id
+            id: foundUser.id,
+            role_id: foundUser.role_id,
         }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 
         const refreshToken = this.jwt.sign({
             id: foundUser.id,
+            role_id: foundUser.role_id,
         }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
 
         return { accessToken, refreshToken };

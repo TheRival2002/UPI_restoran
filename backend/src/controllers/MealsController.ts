@@ -7,14 +7,15 @@ export class MealsController {
     private readonly mealsService;
     public readonly mealsRouter;
     private readonly authMiddleware = require('../middleware/authMiddleware');
+    private readonly adminMiddleware = require('../middleware/adminMiddleware');
 
     constructor() {
         this.mealsRouter = Router();
         this.mealsService = new MealsService();
 
         this.mealsRouter.get('/meals', this.findAll.bind(this));
-        this.mealsRouter.post('/meals', this.authMiddleware, this.createMeal.bind(this));
-        this.mealsRouter.delete('/meals/:id', this.authMiddleware, this.deleteMeal.bind(this));
+        this.mealsRouter.post('/meals', this.authMiddleware, this.adminMiddleware, this.createMeal.bind(this));
+        this.mealsRouter.delete('/meals/:id', this.authMiddleware, this.adminMiddleware, this.deleteMeal.bind(this));
     }
 
     private async findAll(_: Request, res: Response, next: NextFunction) {

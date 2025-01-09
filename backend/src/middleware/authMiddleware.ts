@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { JwtUserDto } from '../entities/types/user.dto';
 
 // --------------------------------------------------------------
 
@@ -15,12 +16,12 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     jwt.verify(
         token,
         process.env.ACCESS_TOKEN_SECRET,
-        (err: Error, decoded: { id: string }) => {
+        (err: Error, decoded: JwtUserDto) => {
             if (err) {
                 return res.sendStatus(403);
             }
 
-            req.user = decoded.id;
+            req.user = decoded;
             next();
         },
     );

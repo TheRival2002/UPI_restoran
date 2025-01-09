@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
+import { JwtUserDto } from '../entities/types/user.dto';
 import { User } from '../entities/User';
 import { AuthService } from '../services/AuthService';
 import { LoginCredentialsDto } from '../entities/types/auth.dto';
@@ -79,12 +80,13 @@ export class AuthController {
             this.jwt.verify(
                 refreshToken,
                 process.env.REFRESH_TOKEN_SECRET,
-                (err: Error, decoded: { id: string }) => {
+                (err: Error, decoded: JwtUserDto) => {
                     if (err) {
                         return res.sendStatus(403);
                     }
                     const accessToken = this.jwt.sign({
-                        id: decoded.id
+                        id: decoded.id,
+                        role_id: decoded.role_id,
                     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
                     res.json({ accessToken });
                 }
