@@ -1,8 +1,6 @@
-import { Page403, Page404 } from '@pages/error';
+import { LoginPage, Page403, Page404, RegisterPage } from '@routes/elements.tsx';
 import { Navigate, useRoutes } from 'react-router';
 import CompactLayout from './layouts/compact/CompactLayout.tsx';
-import LoginPage from './pages/auth/LoginPage.tsx';
-import RegisterPage from './pages/auth/RegisterPage.tsx';
 import c from './styles/homePage.module.css';
 
 // ----------------------------------------------------------------------
