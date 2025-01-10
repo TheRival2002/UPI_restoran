@@ -71,7 +71,7 @@ export default function LoginForm() {
     };
 
     return (
-        <form className={c.loginForm} onSubmit={handleSubmit}>
+        <form className={c.loginForm} onSubmit={handleSubmit} noValidate>
             <InputField
                 label="Email / Username"
                 inputId="emailOrUsernameValue"
