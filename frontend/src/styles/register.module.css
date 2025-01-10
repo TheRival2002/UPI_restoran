@@ -1,3 +1,11 @@
+.registerContainer {
+    max-width: 400px;
+    padding: 30px 50px 40px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 .registerHeader {
     font-size: 2.3rem;
     font-weight: bold;

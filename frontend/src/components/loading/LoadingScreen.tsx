@@ -2,7 +2,6 @@ import { Box, BoxProps, LinearProgress } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-// TODO istestirat i prominit ovo
 export default function LoadingScreen({ sx, ...other }: BoxProps) {
 
     return (
@@ -12,6 +11,7 @@ export default function LoadingScreen({ sx, ...other }: BoxProps) {
                 width: 1,
                 flexGrow: 1,
                 minHeight: 1,
+                minWidth: { xs: 300, sm: 500 },
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

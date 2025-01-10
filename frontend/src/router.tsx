@@ -13,11 +13,11 @@ export default function Router() {
             children: [
                 {
                     path: 'login',
-                    element: <LoginPage/>,
+                    element: <LoginPage />,
                 },
                 {
                     path: 'register',
-                    element: <RegisterPage/>,
+                    element: <RegisterPage />,
                 },
             ],
         },
