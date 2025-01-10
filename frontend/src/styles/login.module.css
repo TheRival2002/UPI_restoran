@@ -10,7 +10,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 .error {
-    margin: 3px;
+    margin-top: 0;
     color: red;
     text-align: center;
 }
