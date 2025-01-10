@@ -18,6 +18,11 @@
     background-color: #fff;
     color: black;
 }
+
+.inputGroup input:focus {
+    outline: 2px solid #ff6b6b;
+}
+
 .error {
     color: red;
     font-size: 0.85rem;

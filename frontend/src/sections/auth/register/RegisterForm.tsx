@@ -124,7 +124,6 @@ export default function RegisterForm() {
             <button type="submit" className={c.registerButton}>
                 Register
             </button>
-            ;
         </form>
     )
     ;
