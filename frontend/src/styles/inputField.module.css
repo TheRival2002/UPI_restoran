@@ -20,4 +20,7 @@
 }
 .error {
     color: red;
+    font-size: 0.85rem;
+    margin-top: 0.3125rem;
+    margin-bottom: 0;
 }

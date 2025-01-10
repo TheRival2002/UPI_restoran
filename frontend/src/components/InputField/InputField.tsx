@@ -3,16 +3,22 @@ import { ChangeEventHandler } from 'react';
 
 interface InputFieldProps {
     label: string;
-    type: string;
     inputId: string;
     placeholder: string;
     value: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
-    required: boolean;
+    type?: string;
+    error?: string;
 }
 
 export default function InputField({
-    label, type, inputId, placeholder, value, onChange, required, 
+    label,
+    inputId,
+    placeholder,
+    value,
+    onChange,
+    type = 'text',
+    error,
 }: InputFieldProps) {
     return (
         <div className={c.inputGroup}>
@@ -24,8 +30,8 @@ export default function InputField({
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                required={required}
-            />          
+            />
+            {error && <p className={c.error}>{error}</p>}
         </div>
     );
 }
