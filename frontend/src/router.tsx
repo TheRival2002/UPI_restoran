@@ -29,6 +29,7 @@ export default function Router() {
                         Your favourite foods delivered fast at your door.
                     </p>
                     <button
+                        className={c.authBtn}
                         onClick={() =>
                             (window.location.href = '/auth/register')
                         }
@@ -36,6 +37,7 @@ export default function Router() {
                         Register
                     </button>
                     <button
+                        className={c.authBtn}
                         onClick={() => (window.location.href = '/auth/login')}
                     >
                         Login

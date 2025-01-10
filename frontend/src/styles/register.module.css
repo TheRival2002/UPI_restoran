@@ -1,7 +1,6 @@
 .registerContainer {
     max-width: 400px;
-    margin: 50px auto;
-    padding: 60px;
+    padding: 20px 50px 30px;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -11,54 +10,28 @@
     font-size: 2.3rem;
     font-weight: bold;
     color: #333;
-    margin-top: 5px;
+    margin-bottom: 2rem;
 }
+
 .error {
     margin: 3px;
     color: red;
     text-align: center;
 }
-input:focus {
-    outline: none;
-    border: 2px solid #ff6b6b;
-}
+
 .registerForm {
-    width: 280px;
     display: flex;
     flex-direction: column;
 }
+
 .registerButton {
     align-self: center;
     width: 80%;
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 20px;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #ff4b4b;
-    color: antiquewhite;
+    padding: 1rem;
+    border-radius: 1.5rem;
 }
 
 .registerFooter {
-    margin-top: 20px;
-    font-size: 1rem;
+    margin-top: 2.5rem;
     text-align: center;
-}
-
-.registerFooter a {
-    color: #ff6b6b;
-    font-size: 1.1rem;
-}
-
-.registerFooter a:hover {
-    text-decoration: underline;
-}
-
-.registerFooter {
-    color: black;
 }

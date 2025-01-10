@@ -5,13 +5,13 @@ import c from '@styles/register.module.css';
 
 export default function RegisterActions() {
     return (
-        <>
-            <p className={c.registerFooter}>
+        <div className={c.registerFooter}>
+            <p>
                 Already have an account? <a href={paths.auth.login}>Login</a>
             </p>
-            <p className={c.registerFooter}>
+            <p>
                 <a href={paths.home.root}>Go to Home</a>
             </p>
-        </>
+        </div>
     );
 }

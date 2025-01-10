@@ -32,12 +32,12 @@ export default function RegisterForm() {
         setUserData((prevData) => ({
             ...prevData,
             [name]: value,
-        }));        
+        }));
     };
     const validateNameOrSurname = (field: string, value: string): string => {
         if ((/[^a-zA-Z]/.test(value))) {
             return `${field} should contain only letters.`;
-        } 
+        }
         return '';
     };
     const validateInput = () => {
@@ -45,7 +45,7 @@ export default function RegisterForm() {
         const newErrors = { name: '', surname: '', username: '', email: '', password: '' };
 
         newErrors.name = validateNameOrSurname('First Name', userData.name);
-        newErrors.surname = validateNameOrSurname('Last Name', userData.surname);   
+        newErrors.surname = validateNameOrSurname('Last Name', userData.surname);
 
         if ( /[^a-zA-Z0-9]/.test(userData.username)) {
             newErrors.username = 'Username must contain only letters and numbers.';
@@ -103,7 +103,6 @@ export default function RegisterForm() {
                 value={userData.name}
                 onChange={handleInputChange}
                 required={true}
-                
             />
             <InputField
                 label="Last Name"
@@ -113,7 +112,6 @@ export default function RegisterForm() {
                 value={userData.surname}
                 onChange={handleInputChange}
                 required={true}
-                
             />
             <InputField
                 label="Username"
@@ -123,7 +121,6 @@ export default function RegisterForm() {
                 value={userData.username}
                 onChange={handleInputChange}
                 required={true}
-              
             />
             <InputField
                 label="E-mail"
@@ -133,7 +130,6 @@ export default function RegisterForm() {
                 value={userData.email}
                 onChange={handleInputChange}
                 required={true}
-               
             />
             <InputField
                 label="Password"
@@ -143,11 +139,10 @@ export default function RegisterForm() {
                 value={userData.password}
                 onChange={handleInputChange}
                 required={true}
-                
             />
             {inputErrors.name && <p className={c.error}>{inputErrors.name}</p>}
             {inputErrors.surname && <p className={c.error}>{inputErrors.surname}</p>}
-            {inputErrors.username && <p className={c.error}>{inputErrors.username}</p>} 
+            {inputErrors.username && <p className={c.error}>{inputErrors.username}</p>}
             {inputErrors.email && <p className={c.error}>{inputErrors.email}</p>}
             {inputErrors.password && <p className={c.error}>{inputErrors.password}</p>}
 
@@ -156,7 +151,6 @@ export default function RegisterForm() {
             <button type="submit" className={c.registerButton}>
                 Register
             </button>
-            ;
         </form>
     )
     ;

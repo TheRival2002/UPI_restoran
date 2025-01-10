@@ -1,12 +1,10 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
 }
 
 .loginContainer {
     max-width: 400px;
-    padding: 70px;
+    padding: 20px 50px 30px;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -20,46 +18,22 @@ body {
 .loginHeader {
     font-size: 2.3rem;
     font-weight: bold;
-    color: #333;
-    margin-top: 5px;
+    margin-bottom: 2rem;
 }
 
 .loginButton {
     align-self: center;
     width: 80%;
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 20px;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #ff4b4b;
+    padding: 1rem;
+    border-radius: 1.5rem;
 }
 
 .loginFooter {
-    margin-top: 20px;
-    font-size: 1rem;
+    margin-top: 2.5rem;
     text-align: center;
 }
 
-.loginFooter a {
-    color: #ff6b6b;
-}
-
-.loginFooter a:hover {
-    text-decoration: underline;
-}
-
 .loginForm {
-    width: 280px;
     display: flex;
     flex-direction: column;
-}
-
-.loginFooter {
-    color: black;
 }
