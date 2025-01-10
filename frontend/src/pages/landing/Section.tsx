@@ -1,32 +1,13 @@
-// import c from './../../styles/inputField.module.css';
-// import { ChangeEventHandler } from 'react';
-
-// interface InputFieldProps {
-//     label: string;
-//     inputId: string;
-//     placeholder: string;
-//     value: string;
-//     onChange: ChangeEventHandler<HTMLInputElement>;
-//     type?: string;
-//     error?: string;
-// }
 import c from '@styles/landingPage.module.css';
 
-// export default function InputField({
-//     label,
-//     inputId,
-//     placeholder,
-//     value,
-//     onChange,
-//     type = 'text',
-//     error,
-// }: InputFieldProps) {
 interface SectionProps {
     title?: string;
     h3: string;
     p: string;
     buttonText: string;
     imgUrl?:string;
+    decoration?:string;
+    children?:React.ReactNode;
 }
 
 export default function Section({
@@ -35,6 +16,7 @@ export default function Section({
     p,        
     buttonText,
     imgUrl,
+    children,
 }: SectionProps) {
     return (
         <div className='container'>
@@ -44,6 +26,7 @@ export default function Section({
                 <p>{p}</p>
                 <button>{buttonText}</button>
                 {imgUrl && <img className={c.sectionImg} src={imgUrl} alt="photo" />}
+                {children}
             </div>  
         </div>
     );
