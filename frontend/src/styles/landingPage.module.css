@@ -1,20 +1,65 @@
-@media only screen and (max-width: 480px) {
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 0;
-    }
-    img {
-        max-width: 80%;
-        height: auto;
-    }
-    .signInWrapper {
-        margin: 0 auto;
-        text-align: center;
-        margin-top: 20px;
-    }
-    button {
-        padding: 12px 24px;
-    }
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+img {
+    max-width: 80%;
+    height: auto;
+}
+.signInWrapper {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+}
+button {
+    padding: 12px 24px;
+}
+
+.navBarMenu {
+    background-color: var(--primary-orange);
+    border-radius: 50px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.menuIcon {
+    color: white;
+}
+.landingPage {
+    position: relative;
+}
+.homeBannerImg {
+    position: absolute;
+    display: flex;
+    justify-content: end;
+    z-index: -2;
+
+    opacity: 50%;
+    width: 100%;
+}
+.homeBannerImg img {
+    max-height: 500px;
+}
+.homeSection {
+    margin-top: 40px;
+    text-align: center;
+}
+h3 {
+    margin-bottom: 30px;
+    font-size: 2.3em;
+    font-weight: 800;
+}
+p {
+    color: var(--font-light-color);
+    margin-bottom: 30px;
+}
+.goldTitle {
+    margin-bottom: 5px;
+    color: var(--primary-yellow);
+}
+.sectionImg {
+    margin-top: 35px;
 }

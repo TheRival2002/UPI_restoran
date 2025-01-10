@@ -30,8 +30,8 @@ export default function Navbar(){
                     <img src={Logo} alt="logo" />
                 </div>
                 
-                <div className="navbar-menu">
-                    <MenuIcon onClick={() => setOpenMenu(true)} />
+                <div className={c.navBarMenu}>
+                    <MenuIcon className={c.menuIcon} onClick={() => setOpenMenu(true)} />
                 </div>
                 <Drawer open={openMenu} onClose={() => setOpenMenu(false)}
                     anchor='right'>
