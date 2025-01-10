@@ -1,6 +1,6 @@
 import { LoginPage, Page403, Page404, RegisterPage } from '@routes/elements.tsx';
 import { Navigate, useRoutes } from 'react-router';
-import CompactLayout from './layouts/compact/CompactLayout.tsx';
+import { AuthLayout, CompactLayout } from './layouts';
 import c from './styles/homePage.module.css';
 
 // ----------------------------------------------------------------------
@@ -9,6 +9,7 @@ export default function Router() {
     return useRoutes([
         {
             path: 'auth',
+            element: <AuthLayout />,
             children: [
                 {
                     path: 'login',

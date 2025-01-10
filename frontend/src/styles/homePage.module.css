@@ -1,9 +1,3 @@
-body {
-    background: url("./../assets/images/wood-texture.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
 .welcomeContainer {
     display: flex;
     flex-direction: column;
@@ -22,7 +16,7 @@ body {
 
 .authBtn {
     padding: 18px 30px;
-    width: 60%;
+    width: 40%;
     margin-top: 20px;
 }
 
