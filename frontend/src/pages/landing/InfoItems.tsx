@@ -1,14 +1,14 @@
 import c from '@styles/landingPage.module.css';
-interface WorkItemProps{
+interface InfoItemProps{
     imgUrl: string;
     header: string;
     description: string;
 }
-export default function WorkItem({
+export default function InfoItem({
     imgUrl,
     header,
     description,
-}: WorkItemProps){
+}: InfoItemProps){
     return(
         <div className={c.workItem}>
             <img src={imgUrl}alt="work img" />

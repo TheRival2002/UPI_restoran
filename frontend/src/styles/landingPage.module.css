@@ -88,3 +88,6 @@ p {
 .workItem p {
     margin: 0;
 }
+.contactItems img {
+    width: 48px;
+}

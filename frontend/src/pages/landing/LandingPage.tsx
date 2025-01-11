@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import c from '@styles/landingPage.module.css';
 import Section from './Section';
+import InfoItem from './InfoItems';
 import HomeBanner from '@assets/images/landingPageImgs/home-banner-background.png';
 import BannerFood from '@assets/images/landingPageImgs/home-banner-image.png';
 import AboutFoodImg from '@assets/images/landingPageImgs/about-background-image.png';
@@ -8,8 +9,11 @@ import AboutBanner from '@assets/images/landingPageImgs/about-background.png';
 import PickMeal from '@assets/images/landingPageImgs/food.png';
 import AddToCart from '@assets/images/landingPageImgs/mobile-shopping.png';
 import Delivery from '@assets/images/landingPageImgs/fast-delivery.png';
+import Phone from '@assets/images/landingPageImgs/telephone (2).png';
+import Mail from '@assets/images/landingPageImgs/mail.png';
+import Clock from '@assets/images/landingPageImgs/clock.png';
+import Location from '@assets/images/landingPageImgs/pin-icon.png';
 
-import WorkItem from './WorkItem';
 export default function LandingPage(){
     return(
         <div className={c.landingPage}>
@@ -51,22 +55,53 @@ export default function LandingPage(){
                     magnis facilisis at fringilla quam."     
             >         
                 <div className={c.workSection}>    
-                    <WorkItem 
+                    <InfoItem 
                         imgUrl={PickMeal}
                         header='Pick Meals'
                         description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
                     />
-                    <WorkItem 
+                    <InfoItem 
                         imgUrl={AddToCart}
                         header='Review cart and buy'
                         description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
                     />
-                    <WorkItem 
+                    <InfoItem 
                         imgUrl={Delivery}
                         header='Fast Deliveries'
                         description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
                     />
                 </div>
+            </Section>
+            <Section
+                title='CONTACT'           
+                h3="You need more info?"
+                p="Lorem ipsum dolor sit amet consectetur. Non tincidunt 
+                    magna non et elit. Dolor  turpis molestie dui
+                    magnis facilisis at fringilla quam."  
+            >
+                <div className={c.contactItems}>
+                    <InfoItem 
+                        imgUrl={Phone}
+                        header='Phone'
+                        description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
+                    />
+                    <InfoItem 
+                        imgUrl={Mail}
+                        header='E-mail'
+                        description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
+                    />
+                    <InfoItem 
+                        imgUrl={Location}
+                        header='Location'
+                        description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
+                    />
+                    <InfoItem 
+                        imgUrl={Clock}
+                        header='Working hours'
+                        description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
+                    />
+                </div>
+
             </Section>
 
         </div>
