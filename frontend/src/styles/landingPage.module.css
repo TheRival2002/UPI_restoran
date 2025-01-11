@@ -91,3 +91,22 @@ p {
 .contactItems img {
     width: 48px;
 }
+.contactItems > * {
+    cursor: pointer;
+}
+.socialMedia img {
+    margin-right: 10px;
+    width: 32px;
+}
+
+.footerWrapper {
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--orange-opacity);
+    padding: 10px 0;
+}
+.contactFooter {
+    display: flex;
+    flex-direction: column;
+}

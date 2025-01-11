@@ -2,6 +2,7 @@ import Navbar from './Navbar';
 import c from '@styles/landingPage.module.css';
 import Section from './Section';
 import InfoItem from './InfoItems';
+import Footer from './Footer';
 import HomeBanner from '@assets/images/landingPageImgs/home-banner-background.png';
 import BannerFood from '@assets/images/landingPageImgs/home-banner-image.png';
 import AboutFoodImg from '@assets/images/landingPageImgs/about-background-image.png';
@@ -103,6 +104,7 @@ export default function LandingPage(){
                 </div>
 
             </Section>
+            <Footer></Footer>
 
         </div>
     );
