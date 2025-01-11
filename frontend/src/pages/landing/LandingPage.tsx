@@ -5,6 +5,11 @@ import HomeBanner from '@assets/images/landingPageImgs/home-banner-background.pn
 import BannerFood from '@assets/images/landingPageImgs/home-banner-image.png';
 import AboutFoodImg from '@assets/images/landingPageImgs/about-background-image.png';
 import AboutBanner from '@assets/images/landingPageImgs/about-background.png';
+import PickMeal from '@assets/images/landingPageImgs/food.png';
+import AddToCart from '@assets/images/landingPageImgs/mobile-shopping.png';
+import Delivery from '@assets/images/landingPageImgs/fast-delivery.png';
+
+import WorkItem from './WorkItem';
 export default function LandingPage(){
     return(
         <div className={c.landingPage}>
@@ -35,6 +40,32 @@ export default function LandingPage(){
             >             
                 <div className={c.aboutDecoration}>
                     <img src={AboutBanner} alt="aboutbanner" />
+                </div>
+            </Section>
+
+            <Section      
+                title='WORK'           
+                h3="How It Works"
+                p="Lorem ipsum dolor sit amet consectetur. Non tincidunt 
+                    magna non et elit. Dolor  turpis molestie dui
+                    magnis facilisis at fringilla quam."     
+            >         
+                <div className={c.workSection}>    
+                    <WorkItem 
+                        imgUrl={PickMeal}
+                        header='Pick Meals'
+                        description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
+                    />
+                    <WorkItem 
+                        imgUrl={AddToCart}
+                        header='Review cart and buy'
+                        description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
+                    />
+                    <WorkItem 
+                        imgUrl={Delivery}
+                        header='Fast Deliveries'
+                        description='Lorem ipsum dolor sit amet consectetur. Maecenas orci et '    
+                    />
                 </div>
             </Section>
 

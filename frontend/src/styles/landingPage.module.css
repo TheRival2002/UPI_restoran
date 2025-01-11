@@ -78,3 +78,13 @@ p {
     max-height: 500px;
     width: 350px;
 }
+.workItem {
+    border: 1px solid var(--orange-opacity);
+    margin-bottom: 20px;
+    padding: 30px 40px;
+    border-radius: 20px;
+    background-color: white;
+}
+.workItem p {
+    margin: 0;
+}

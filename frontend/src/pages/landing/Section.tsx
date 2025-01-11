@@ -4,7 +4,7 @@ interface SectionProps {
     title?: string;
     h3: string;
     p: string;
-    buttonText: string;
+    buttonText?: string;
     imgUrl?:string;
     decoration?:string;
     children?:React.ReactNode;
@@ -24,7 +24,7 @@ export default function Section({
                 {title && <p className={c.goldTitle}>{title}</p>}
                 <h3>{h3}</h3>
                 <p>{p}</p>
-                <button>{buttonText}</button>
+                {buttonText && <button>{buttonText}</button>}
                 {imgUrl && <img className={c.sectionImg} src={imgUrl} alt="photo" />}
                 {children}
             </div>  
