@@ -2,7 +2,6 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
 }
 img {
     max-width: 80%;
@@ -12,6 +11,18 @@ img {
     margin: 0 auto;
     text-align: center;
     margin-top: 20px;
+}
+.navWrapper {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+.navWrapper.scrolled {
+    background-color: var(--background-body);
+    border-bottom: 1px solid var(--orange-opacity);
 }
 button {
     padding: 12px 24px;
@@ -35,8 +46,7 @@ button {
     position: absolute;
     display: flex;
     justify-content: end;
-    z-index: -2;
-
+    z-index: 0;
     opacity: 50%;
     width: 100%;
 }
@@ -44,7 +54,7 @@ button {
     max-height: 500px;
 }
 .homeSection {
-    margin-top: 40px;
+    padding-top: 100px;
     text-align: center;
     position: relative;
 }
