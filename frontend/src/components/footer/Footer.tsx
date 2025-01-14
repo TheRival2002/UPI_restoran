@@ -13,13 +13,11 @@ export default function Footer(){
                     <a href="#"><img src={TwitterIcon} alt="twitter" /></a>
                     <a href="#"><img src={LinkedInIcon} alt="youtube" /></a>
                     <a href="#"><img src={YoutubeIcon} alt="linkedin" /></a>
-
                 </div>
+                
                 <div className={c.contactFooter}>
-                    <a href="#">244-5333-7783</a>
-                    <a href="#">hello@food.com</a>
-                    <a href="#">press@food.com</a>
-                    <a href="#">contact@food.com</a>
+                    <a href="#">+385-91-900-9000</a>
+                    <a href="#">foodhub@info.com</a>                    
                 </div>
             </div>            
         </footer>

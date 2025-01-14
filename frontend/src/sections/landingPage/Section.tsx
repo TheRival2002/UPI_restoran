@@ -2,8 +2,8 @@ import c from '@styles/landingPage.module.css';
 
 interface SectionProps {
     title?: string;
-    h3: string;
-    p: string;
+    heading: string;
+    description: string;
     buttonText?: string;
     buttonAction?: React.MouseEventHandler<HTMLButtonElement>;
     imgUrl?:string;
@@ -14,8 +14,8 @@ interface SectionProps {
 
 export default function Section({
     title,
-    h3,
-    p,        
+    heading,
+    description,        
     buttonText,
     buttonAction,
     imgUrl,
@@ -26,10 +26,10 @@ export default function Section({
         <div className='container' id={id}>
             <div className={c.homeSection}>         
                 {title && <p className={c.goldTitle}>{title}</p>}
-                <h3>{h3}</h3>
-                <p>{p}</p>                
+                <h3 className={c.sectionHeading}>{heading}</h3>
+                <p className={c.sectionDescription}>{description}</p>                
                 {imgUrl && <img className={c.sectionImg} src={imgUrl} alt="photo" />}
-                {buttonText && <button onClick={buttonAction}>{buttonText}</button>}
+                {buttonText && <button className={c.landingPageBtn} onClick={buttonAction}>{buttonText}</button>}
                 {children}
             </div>  
         </div>

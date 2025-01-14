@@ -1,18 +1,18 @@
 import c from '@styles/landingPage.module.css';
-interface InfoItemProps{
+interface InfoCardProps{
     imgUrl: string;
-    header: string;
+    heading: string;
     description: string;
 }
-export default function InfoItem({
+export default function InfoCard({
     imgUrl,
-    header,
+    heading,
     description,
-}: InfoItemProps){
+}: InfoCardProps){
     return(
         <div className={c.workItem}>
             <img src={imgUrl}alt="work img" />
-            <h4>{header}</h4>
+            <h4>{heading}</h4>
             <p>{description}</p>
         </div>               
       

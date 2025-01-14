@@ -4,7 +4,7 @@
     display: grid;
     place-content: center;
 
-    background: url("./../assets/images/wood-texture.jpg");
+    background: linear-gradient(40deg, #f18b6e, #ffe396);
     background-size: cover;
     background-position: center;
 }

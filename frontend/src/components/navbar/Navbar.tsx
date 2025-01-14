@@ -7,9 +7,15 @@ import ProcessIcon from '@mui/icons-material/AssignmentTurnedIn';
 import { Box, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Drawer } from '@mui/material';
 import { useEffect, useState } from 'react';
 import c from '@styles/landingPage.module.css';
+import { useNavigate } from 'react-router';
+import { paths } from '@routes/paths';
 
 export default function Navbar(){
+    const navigate = useNavigate();
+    
     const [ openMenu, setOpenMenu ] = useState(false);
+    const [ scrolled, setScrolled ] = useState(false);
+
     const menuOptions = [
         {
             text: 'Home',            
@@ -32,31 +38,29 @@ export default function Navbar(){
             targetId: 'contact-section'
         }
     ];
+
     const scrollToSection = (targetId: string) =>{
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
             targetElement.scrollIntoView({ behavior:'smooth' });
         }
     };
-    const [ scrolled, setScrolled ] = useState(false);
+
     const handleNavScroll = () =>{
-        if (window.scrollY > 70) {
-            setScrolled(true);   
-        }
-        else{
-            setScrolled(false);
-        }        
+        setScrolled(window.scrollY > 70);     
     };
+
     useEffect(() => {
         window.addEventListener('scroll', handleNavScroll);
         return () => {
             window.removeEventListener('scroll', handleNavScroll); 
         };
     }, []);
+
     return(
         <div className={`${c.navWrapper} ${scrolled ? c.scrolled : ''}`}>
             <div className="container">
-                <nav>
+                <nav className={c.navBar}>
                     <div className={'nav-logo'}>
                         <img src={Logo} alt="logo" />
                     </div>
@@ -64,6 +68,7 @@ export default function Navbar(){
                     <div className={c.navBarMenu}>
                         <MenuIcon className={c.menuIcon} onClick={() => setOpenMenu(true)} />
                     </div>
+
                     <Drawer open={openMenu} onClose={() => setOpenMenu(false)}
                         anchor='right'>
                         <Box sx={{ width: 250 }}
@@ -80,15 +85,13 @@ export default function Navbar(){
                                     </ListItem>
                                 ))}
                                 <div className={c.signInWrapper}>
-                                    <button onClick={() => (window.location.href = '/auth/login')}>Sign In</button>
+                                    <button className={c.landingPageBtn} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
                                 </div>  
                             </List>                                          
                         </Box>
                     </Drawer>
-
                 </nav>
             </div>   
-        </div>       
-        
+        </div>               
     );
 }
