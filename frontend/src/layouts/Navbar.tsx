@@ -11,29 +11,29 @@ import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths';
 
 export default function Navbar(){
-    const navigate = useNavigate();
-    
     const [ openMenu, setOpenMenu ] = useState(false);
     const [ scrolled, setScrolled ] = useState(false);
 
+    const navigate = useNavigate();
+
     const menuOptions = [
         {
-            text: 'Home',            
+            text: 'Home',
             icon: <HomeIcon sx={{ color: 'var(--primary-orange)' }}/>,
             targetId: 'home-section'
         },
         {
-            text: 'About',            
+            text: 'About',
             icon: <AboutIcon sx={{ color: 'var(--primary-orange)' }}/>,
             targetId: 'about-section'
         },
         {
-            text: 'How it works',            
+            text: 'How it works',
             icon: <ProcessIcon sx={{ color: 'var(--primary-orange)' }}/>,
             targetId: 'work-section'
         },
         {
-            text: 'Contact',            
+            text: 'Contact',
             icon: <ContactIcon sx={{ color: 'var(--primary-orange)' }}/>,
             targetId: 'contact-section'
         }
@@ -47,13 +47,14 @@ export default function Navbar(){
     };
 
     const handleNavScroll = () =>{
-        setScrolled(window.scrollY > 70);     
+        setScrolled(window.scrollY > 70);
     };
 
     useEffect(() => {
         window.addEventListener('scroll', handleNavScroll);
+
         return () => {
-            window.removeEventListener('scroll', handleNavScroll); 
+            window.removeEventListener('scroll', handleNavScroll);
         };
     }, []);
 
@@ -64,7 +65,7 @@ export default function Navbar(){
                     <div className={'nav-logo'}>
                         <img src={Logo} alt="logo" />
                     </div>
-                    
+
                     <div className={c.navBarMenu}>
                         <MenuIcon className={c.menuIcon} onClick={() => setOpenMenu(true)} />
                     </div>
@@ -72,9 +73,9 @@ export default function Navbar(){
                     <Drawer open={openMenu} onClose={() => setOpenMenu(false)}
                         anchor='right'>
                         <Box sx={{ width: 250 }}
-                            role = "presentation"
-                            onClick = {() => setOpenMenu(false)}                   
-                        >  
+                            role="presentation"
+                            onClick={() => setOpenMenu(false)}
+                        >
                             <List>
                                 {menuOptions.map((item) => (
                                     <ListItem key={item.text}>
@@ -86,12 +87,12 @@ export default function Navbar(){
                                 ))}
                                 <div className={c.signInWrapper}>
                                     <button className={c.menuBtn} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
-                                </div>  
-                            </List>                                          
+                                </div>
+                            </List>
                         </Box>
                     </Drawer>
                 </nav>
-            </div>   
-        </div>               
+            </div>
+        </div>
     );
 }

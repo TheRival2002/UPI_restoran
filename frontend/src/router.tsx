@@ -22,15 +22,15 @@ export default function Router() {
                 },
             ],
         },
-        {           
-            element:(<MainLayout />),
-            path:'/',
+        {
+            path: '/',
+            element: <MainLayout />,
             children: [
-                {                  
-                    index:true,  
-                    element:<LandingPage />,
-                }
-            ]            
+                {
+                    element: <LandingPage />,
+                    index: true,
+                },
+            ]
         },
         {
             element: <CompactLayout />,

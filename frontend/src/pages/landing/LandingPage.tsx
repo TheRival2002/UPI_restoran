@@ -7,6 +7,7 @@ export default function LandingPage(){
             <Helmet>
                 <title>Home</title>
             </Helmet>
+
             <Landing />
         </>
     );

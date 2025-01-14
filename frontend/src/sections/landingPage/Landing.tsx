@@ -17,22 +17,23 @@ import { paths } from '@routes/paths.ts';
 
 export default function Landing(){
     const navigate = useNavigate();
-    const openAllMealsPage = () =>{        
+
+    const openAllMealsPage = () =>{
         navigate(paths.auth.login);
     };
+
     return(
         <div className={c.landingPage}>
-            
             <div className={c.homeBannerImg}>
                 <img src={HomeBanner} alt="banner" />
-            </div>  
-            
+            </div>
+
             <div className={c.spaceFromNav}>
-                <Section                 
+                <Section
                     heading="Your Favourite Food
                         Delivered Hot &
                         Fresh"
-                    description="Healthy switcher chefs do all the prep work, like 
+                    description="Healthy switcher chefs do all the prep work, like
                         peeding, chopping & marinating, so you can cook
                         a fresh food."
                     buttonText="Order Now"
@@ -40,82 +41,81 @@ export default function Landing(){
                     imgUrl={BannerFood}
                     id="home-section"
                 />
-            </div>           
+            </div>
 
-            <Section      
-                title='ABOUT US'           
+            <Section
+                title='ABOUT US'
                 heading="Bringing Flavor to Your Table"
-                description="We are passionate about providing an unforgettable dining experience with every meal. 
+                description="We are passionate about providing an unforgettable dining experience with every meal.
                 Our mission is to deliver high-quality, delicious food made from fresh, locally sourced ingredients."
                 buttonText="Explore Our Menu"
                 buttonAction={openAllMealsPage}
                 imgUrl={AboutFoodImg}
                 id="about-section"
-            >             
+            >
                 <div className={c.aboutDecoration}>
                     <img src={AboutBanner} alt="aboutbanner" />
                 </div>
             </Section>
 
-            <Section      
-                title='WORK'           
+            <Section
+                title='WORK'
                 heading="How It Works"
-                description="Browse our menu to explore a wide range of delicious options. Once you've found your favorites, select them and proceed to place your order. 
-                After that, just sit back and relax as we prepare your meal, and enjoy it delivered hot and fresh right to your door."   
-                id="work-section"  
-            >         
-                <div className={c.workSection}>    
-                    <InfoCard 
+                description="Browse our menu to explore a wide range of delicious options. Once you've found your favorites, select them and proceed to place your order.
+                After that, just sit back and relax as we prepare your meal, and enjoy it delivered hot and fresh right to your door."
+                id="work-section"
+            >
+                <div className={c.workSection}>
+                    <InfoCard
                         imgUrl={PickMeal}
                         heading='Pick Meals'
-                        description='Browse our menu, and select your favourites.'    
+                        description='Browse our menu, and select your favourites.'
                     />
-                    <InfoCard 
+                    <InfoCard
                         imgUrl={AddToCart}
                         heading='Review cart and buy'
-                        description='Add to cart and view before closing the order'    
+                        description='Add to cart and view before closing the order'
                     />
-                    <InfoCard 
+                    <InfoCard
                         imgUrl={Delivery}
                         heading='Fast Deliveries'
-                        description="Once you see confirmation screen only thing you can do 
-                        is relax and wait for your delivery to arrive hot and fresh at your door." 
+                        description="Once you see confirmation screen only thing you can do
+                        is relax and wait for your delivery to arrive hot and fresh at your door."
                     />
                 </div>
             </Section>
 
             <Section
-                title='CONTACT'           
+                title='CONTACT'
                 heading="You need more info?"
-                description="Lorem ipsum dolor sit amet consectetur. Non tincidunt 
+                description="Lorem ipsum dolor sit amet consectetur. Non tincidunt
                     magna non et elit. Dolor  turpis molestie dui
-                    magnis facilisis at fringilla quam."  
+                    magnis facilisis at fringilla quam."
                 id="contact-section"
             >
                 <div className={c.contactItems}>
-                    <InfoCard 
+                    <InfoCard
                         imgUrl={Phone}
                         heading='Phone'
-                        description='+385 91 900 9000'    
+                        description='+385 91 900 9000'
                     />
-                    <InfoCard 
+                    <InfoCard
                         imgUrl={Mail}
                         heading='E-mail'
-                        description='foodhub@info.com'    
+                        description='foodhub@info.com'
                     />
-                    <InfoCard 
+                    <InfoCard
                         imgUrl={Location}
                         heading='Location'
-                        description='Split, Ruđera Boškovića 32'    
+                        description='Split, Ruđera Boškovića 32'
                     />
-                    <InfoCard 
+                    <InfoCard
                         imgUrl={Clock}
                         heading='Working hours'
-                        description='08:00 - 22:00'    
+                        description='08:00 - 22:00'
                     />
                 </div>
             </Section>
-
         </div>
     );
 }
