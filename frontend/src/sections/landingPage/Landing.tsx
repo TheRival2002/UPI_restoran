@@ -1,8 +1,6 @@
-import Navbar from '../../components/navbar/Navbar';
 import c from '@styles/landingPage.module.css';
 import Section from '../../sections/landingPage/Section';
 import InfoCard from '../../components/card/InfoCard';
-import Footer from '../../components/footer/Footer';
 import HomeBanner from '@assets/images/landingPageImgs/home-banner-background.png';
 import BannerFood from '@assets/images/landingPageImgs/home-banner-image.png';
 import AboutFoodImg from '@assets/images/landingPageImgs/about-background-image.png';
@@ -28,9 +26,7 @@ export default function Landing(){
             <div className={c.homeBannerImg}>
                 <img src={HomeBanner} alt="banner" />
             </div>  
-
-            <Navbar />
-
+            
             <div className={c.spaceFromNav}>
                 <Section                 
                     heading="Your Favourite Food
@@ -120,7 +116,6 @@ export default function Landing(){
                 </div>
             </Section>
 
-            <Footer />
         </div>
     );
 }

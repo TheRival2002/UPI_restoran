@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ProcessIcon from '@mui/icons-material/AssignmentTurnedIn';
 import { Box, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Drawer } from '@mui/material';
 import { useEffect, useState } from 'react';
-import c from '@styles/landingPage.module.css';
+import c from '@styles/mainLayout.module.css';
 import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths';
 
@@ -85,7 +85,7 @@ export default function Navbar(){
                                     </ListItem>
                                 ))}
                                 <div className={c.signInWrapper}>
-                                    <button className={c.landingPageBtn} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
+                                    <button className={c.menuBtn} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
                                 </div>  
                             </List>                                          
                         </Box>

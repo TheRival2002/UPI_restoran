@@ -1,4 +1,4 @@
-import c from '@styles/landingPage.module.css';
+import c from '@styles/mainLayout.module.css';
 import FacebookIcon from '@assets/images/socialMedia/facebook.svg';
 import TwitterIcon from '@assets/images/socialMedia/twitter.svg';
 import LinkedInIcon from '@assets/images/socialMedia/linkedin.svg';
