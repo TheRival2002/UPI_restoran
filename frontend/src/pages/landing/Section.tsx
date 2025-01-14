@@ -27,9 +27,9 @@ export default function Section({
             <div className={c.homeSection}>         
                 {title && <p className={c.goldTitle}>{title}</p>}
                 <h3>{h3}</h3>
-                <p>{p}</p>
-                {buttonText && <button onClick={buttonAction}>{buttonText}</button>}
+                <p>{p}</p>                
                 {imgUrl && <img className={c.sectionImg} src={imgUrl} alt="photo" />}
+                {buttonText && <button onClick={buttonAction}>{buttonText}</button>}
                 {children}
             </div>  
         </div>
