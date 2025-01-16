@@ -1,5 +1,6 @@
 import c from '@styles/landingPage.module.css';
-import Section from '../../sections/landingPage/Section';
+import Section from '@sections/landing/Section';
+import { useEffect } from 'react';
 import InfoCard from '../../components/card/InfoCard';
 import HomeBanner from '@assets/images/landingPageImgs/home-banner-background.png';
 import BannerFood from '@assets/images/landingPageImgs/home-banner-image.png';
@@ -12,14 +13,32 @@ import Phone from '@assets/images/landingPageImgs/telephone (2).png';
 import Mail from '@assets/images/landingPageImgs/mail.png';
 import Clock from '@assets/images/landingPageImgs/clock.png';
 import Location from '@assets/images/landingPageImgs/pin-icon.png';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 
 export default function Landing(){
     const navigate = useNavigate();
 
+    const { state } = useLocation();
+    const { targetId } = state || {};
+
+    useEffect(() => {
+
+        const timeout = setTimeout(() => {
+            if (targetId) {
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }, 100);
+
+        return () => clearTimeout(timeout);
+
+    }, []);
+
     const openAllMealsPage = () =>{
-        navigate(paths.auth.login);
+        navigate(paths.meals.root);
     };
 
     return(

@@ -18,6 +18,7 @@ export const RegisterPage = Loadable(lazy(() => import('@pages/auth/RegisterPage
 
 // MAIN APP
 export const LandingPage = Loadable(lazy(() => import('@pages/landing/LandingPage.tsx')));
+export const AllMealsPage = Loadable(lazy(() => import('@pages/meals/AllMealsPage.tsx')));
 
 // ERROR
 export const Page403 = Loadable(lazy(() => import('@pages/error/Page403.tsx')));
