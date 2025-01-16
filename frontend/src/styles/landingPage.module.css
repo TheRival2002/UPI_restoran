@@ -1,0 +1,88 @@
+.landingPageBtn {
+    padding: 16px 32px;
+}
+
+.landingPage {
+    position: relative;
+}
+
+.homeBannerImg {
+    position: absolute;
+    display: flex;
+    justify-content: end;
+    z-index: 0;
+    opacity: 50%;
+    width: 100%;
+}
+
+.homeBannerImg img {
+    max-height: 500px;
+}
+.spaceFromNav {
+    padding-top: 100px;
+}
+.homeSection {
+    padding-top: 80px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.sectionHeading {
+    margin-bottom: 30px;
+    font-size: 2.3em;
+    font-weight: 800;
+}
+
+.sectionDescription {
+    color: var(--font-light-color);
+    margin-bottom: 30px;
+}
+
+.goldTitle {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--primary-yellow);
+}
+
+.sectionImg {
+    margin-bottom: 35px;
+    display: block;
+    max-width: 70%;
+}
+
+.aboutDecoration {
+    display: flex;
+    position: absolute;
+    left: -160px;
+    top: 60px;
+    z-index: -2;
+    opacity: 50%;
+}
+
+.aboutDecoration img {
+    max-height: 500px;
+    width: 350px;
+}
+
+.workItem {
+    border: 1px solid var(--orange-opacity);
+    margin-bottom: 20px;
+    padding: 30px 40px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.workItem p {
+    margin: 0;
+}
+
+.contactItems img {
+    width: 48px;
+}
+
+.contactItems {
+    width: 100%;
+}

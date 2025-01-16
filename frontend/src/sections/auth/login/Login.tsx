@@ -9,9 +9,9 @@ export default function Login() {
         <div className={c.loginContainer}>
             <h1 className={c.loginHeader}>Login</h1>
 
-            <LoginForm />
+            <LoginForm/>
 
-            <LoginActions />
+            <LoginActions/>
         </div>
     );
 }
