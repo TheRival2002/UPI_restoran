@@ -60,6 +60,6 @@ export class AuthService {
             role_id: foundUser.role_id,
         }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
 
-        return { accessToken, refreshToken };
+        return { user: foundUser, accessToken, refreshToken };
     }
 }
