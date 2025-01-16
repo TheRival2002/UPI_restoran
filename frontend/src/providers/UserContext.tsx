@@ -1,34 +1,93 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useCallback, useMemo, useReducer } from 'react';
+import api, { endpoints } from '@utils/axios.ts';
+import { UserLoginDataDTO, UserRegisterDataDTO } from '../types/user.dto.ts';
 
-interface GeneralUserInfo {
+type AuthenticatedUser = {
     name: string;
     surname: string;
     role: string;
     accessToken: string;
-    refreshToken: string;
+} | null;
+
+type AuthContextType = {
+    user: AuthenticatedUser;
+    isAuthenticated: boolean;
+    register: (userData: UserRegisterDataDTO) => Promise<void>;
+    login: (userData: UserLoginDataDTO) => Promise<void>;
 }
 
-interface UserContextProps {
-    user: GeneralUserInfo | null;
-    setUser: (user: GeneralUserInfo | null) => void;
+enum Types {
+    REGISTER = 'REGISTER',
+    LOGIN = 'LOGIN',
 }
 
-const UserContext = createContext<UserContextProps | undefined>(undefined);
+type Payload = {
+    [Types.LOGIN]: { user: AuthenticatedUser };
+    [Types.REGISTER]: { user: AuthenticatedUser };
+}
+
+type ActionsType = {
+    type: keyof Payload;
+    payload: Payload[keyof Payload];
+}
+type AuthState = {
+    user: AuthenticatedUser;
+}
+// ----------------------------------------------------------------
+const initialState: AuthState = { user: null };
+const reducer = (state: AuthState, action: ActionsType) => {
+    switch (action.type) {
+        case Types.REGISTER:
+            return { user: action.payload.user };
+        case Types.LOGIN:
+            return { user: action.payload.user };
+        default:
+            return state;
+    }
+};
+export const UserContext = createContext<AuthContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-    const [ user, setUser ] =useState<GeneralUserInfo | null>(null);
+    const [ state, dispatch ] = useReducer(reducer, initialState);
+    console.log(state);
+    const register = useCallback(async (userData: UserRegisterDataDTO) => {
+        const response = await api.post(
+            endpoints.auth.register,
+            userData
+        );
+
+        const { user, accessToken } = response.data;
+        localStorage.setItem('accessToken', accessToken);
+        dispatch({ type: Types.REGISTER, payload: { user }});
+    }, []);
+
+    const login = useCallback(async (userData: UserLoginDataDTO) => {
+        const isEmailEntered = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+            userData.emailOrUsernameValue,
+        );
+        const response = await api.post(endpoints.auth.login, {
+            [isEmailEntered ? 'email' : 'username']: userData.emailOrUsernameValue,
+            password: userData.password,
+        });
+
+        const { user, accessToken } = response.data;
+        localStorage.setItem('accessToken', accessToken);
+        dispatch({ type: Types.LOGIN, payload: { user }});
+    }, []);
+
+    const memoizedValue = useMemo(
+        () => ({
+            user: state.user,
+            isAuthenticated: !!state.user,
+            register,
+            login
+        }),
+        [ state.user, register, login ]);
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={memoizedValue}>
             {children}
         </UserContext.Provider>
     );
 };
 
-export const useUser = (): UserContextProps => {
-    const context = useContext(UserContext);
-    if (!context) {
-        throw new Error('useUser must be used within a UserProvider');
-    }
-    return context;
-};
