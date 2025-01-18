@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useMemo, useReducer } from 'react';
+import React, { createContext, useCallback, useEffect, useMemo, useReducer } from 'react';
 import api, { endpoints } from '@utils/axios.ts';
 import { UserLoginDataDTO, UserRegisterDataDTO } from '../types/user.dto.ts';
 
@@ -49,15 +49,21 @@ export const UserContext = createContext<AuthContextType | undefined>(undefined)
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const [ state, dispatch ] = useReducer(reducer, initialState);
-    console.log(state);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            dispatch({ type: Types.LOGIN, payload: { user: JSON.parse(storedUser) }});
+        }
+    }, []);
+
     const register = useCallback(async (userData: UserRegisterDataDTO) => {
-        const response = await api.post(
-            endpoints.auth.register,
-            userData
-        );
+        const response = await api.post(endpoints.auth.register, userData);
 
         const { user, accessToken } = response.data;
         localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('user', JSON.stringify(user));
+
         dispatch({ type: Types.REGISTER, payload: { user }});
     }, []);
 
@@ -72,7 +78,16 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
         const { user, accessToken } = response.data;
         localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('user', JSON.stringify(user));
+
         dispatch({ type: Types.LOGIN, payload: { user }});
+    }, []);
+
+    const logout = useCallback(() => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('user');
+
+        dispatch({ type: Types.LOGIN, payload: { user: null }});
     }, []);
 
     const memoizedValue = useMemo(
@@ -80,7 +95,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
             user: state.user,
             isAuthenticated: !!state.user,
             register,
-            login
+            login,
+            logout
         }),
         [ state.user, register, login ]);
 
