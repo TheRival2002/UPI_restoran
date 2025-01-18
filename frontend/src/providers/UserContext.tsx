@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useMemo, useReducer } from 'react';
+import React, { createContext, useCallback, useMemo, useReducer } from 'react';
 import api, { endpoints } from '@utils/axios.ts';
 import { UserLoginDataDTO, UserRegisterDataDTO } from '../types/user.dto.ts';
 
@@ -54,19 +54,10 @@ export const UserContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [ state, dispatch ] = useReducer(reducer, initialState);
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            dispatch({ type: Types.LOGIN, payload: { user: JSON.parse(storedUser) }});
-        }
-    }, []);
-
     const register = useCallback(async (userData: UserRegisterDataDTO) => {
         const response = await api.post(endpoints.auth.register, userData);
 
-        const { user, accessToken } = response.data;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('user', JSON.stringify(user));
+        const { user } = response.data;
 
         dispatch({ type: Types.REGISTER, payload: { user }});
     }, []);
@@ -80,18 +71,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             password: userData.password,
         });
 
-        const { user, accessToken } = response.data;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('user', JSON.stringify(user));
+        const { user } = response.data;
 
         dispatch({ type: Types.LOGIN, payload: { user }});
     }, []);
 
     const logout = useCallback(() => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('user');
-
-        dispatch({ type: Types.LOGIN, payload: { user: null }});
+        dispatch({ type: Types.LOGOUT, payload: { user: null }});
     }, []);
 
     const memoizedValue = useMemo(
