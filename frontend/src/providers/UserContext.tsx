@@ -47,7 +47,7 @@ const reducer = (state: AuthState, action: ActionsType) => {
 };
 export const UserContext = createContext<AuthContextType | undefined>(undefined);
 
-export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [ state, dispatch ] = useReducer(reducer, initialState);
 
     useEffect(() => {

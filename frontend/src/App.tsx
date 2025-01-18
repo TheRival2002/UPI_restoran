@@ -1,19 +1,19 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router';
 import Router from './router.tsx';
-import { UserProvider } from './providers/UserContext.tsx';
+import { AuthProvider } from './providers/UserContext.tsx';
 
 // ----------------------------------------------------------------------
 
 const App = () => {
     return (
-        <UserProvider>
+        <AuthProvider>
             <HelmetProvider>
                 <BrowserRouter>
                     <Router/>
                 </BrowserRouter>
             </HelmetProvider>
-        </UserProvider>
+        </AuthProvider>
     );
 };
 export default App;
