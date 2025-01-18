@@ -19,11 +19,13 @@ type AuthContextType = {
 enum Types {
     REGISTER = 'REGISTER',
     LOGIN = 'LOGIN',
+    LOGOUT = 'LOGOUT',
 }
 
 type Payload = {
     [Types.LOGIN]: { user: AuthenticatedUser };
     [Types.REGISTER]: { user: AuthenticatedUser };
+    [Types.LOGOUT]: { user: null };
 }
 
 type ActionsType = {
@@ -33,7 +35,7 @@ type ActionsType = {
 type AuthState = {
     user: AuthenticatedUser;
 }
-// ----------------------------------------------------------------
+
 const initialState: AuthState = { user: null };
 const reducer = (state: AuthState, action: ActionsType) => {
     switch (action.type) {
@@ -41,6 +43,8 @@ const reducer = (state: AuthState, action: ActionsType) => {
             return { user: action.payload.user };
         case Types.LOGIN:
             return { user: action.payload.user };
+        case Types.LOGOUT:
+            return { user: null };
         default:
             return state;
     }
@@ -98,7 +102,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             login,
             logout
         }),
-        [ state.user, register, login ]);
+        [ state.user, register, login, logout ]);
 
     return (
         <UserContext.Provider value={memoizedValue}>
