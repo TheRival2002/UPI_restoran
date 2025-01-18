@@ -49,7 +49,7 @@ const reducer = (state: AuthState, action: ActionsType) => {
             return state;
     }
 };
-export const UserContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [ state, dispatch ] = useReducer(reducer, initialState);
@@ -57,7 +57,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const register = useCallback(async (userData: UserRegisterDataDTO) => {
         const response = await api.post(endpoints.auth.register, userData);
 
-        const { user } = response.data;
+        const { user, accessToken } = response.data;
+        localStorage.setItem('accessToken', accessToken);
 
         dispatch({ type: Types.REGISTER, payload: { user }});
     }, []);
@@ -71,7 +72,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             password: userData.password,
         });
 
-        const { user } = response.data;
+        const { user, accessToken } = response.data;
+        localStorage.setItem('accessToken', accessToken);
 
         dispatch({ type: Types.LOGIN, payload: { user }});
     }, []);
@@ -91,9 +93,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         [ state.user, register, login, logout ]);
 
     return (
-        <UserContext.Provider value={memoizedValue}>
+        <AuthContext.Provider value={memoizedValue}>
             {children}
-        </UserContext.Provider>
+        </AuthContext.Provider>
     );
 };
 

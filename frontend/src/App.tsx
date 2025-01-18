@@ -1,7 +1,7 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router';
 import Router from './router.tsx';
-import { AuthProvider } from './providers/UserContext.tsx';
+import { AuthProvider } from './providers/AuthContext.tsx';
 
 // ----------------------------------------------------------------------
 
