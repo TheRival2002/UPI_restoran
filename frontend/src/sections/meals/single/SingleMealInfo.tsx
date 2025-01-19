@@ -1,4 +1,5 @@
-import { Stack, Typography } from '@mui/material';
+import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
+import { Box, Stack, Typography } from '@mui/material';
 import { Meal } from '../../../types/meal.ts';
 
 // ----------------------------------------------------------------------
@@ -18,16 +19,24 @@ export default function SingleMealInfo({
                 {meal.name}
             </Typography>
 
-            <Typography variant={'h5'} fontWeight={'bold'} color={'primary.main'}>
-                {meal.price}<Typography
-                    variant={'h5'}
-                    component={'span'}
-                    fontWeight={'inherit'}
-                    ml={0.25}
-                >
-                €
+            <Box
+                display={'flex'}
+                justifyContent={'space-between'}
+                alignItems={'center'}
+            >
+                <Typography variant={'h5'} fontWeight={'bold'} color={'primary.main'}>
+                    {meal.price}<Typography
+                        variant={'h5'}
+                        component={'span'}
+                        fontWeight={'inherit'}
+                        ml={0.25}
+                    >
+                        €
+                    </Typography>
                 </Typography>
-            </Typography>
+
+                <QuantityButtonGroup />
+            </Box>
 
             <Typography
                 variant={'body2'}
