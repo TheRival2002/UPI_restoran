@@ -11,7 +11,11 @@ export default function MealItemCard({
     meal,
 }: MealItemCardProps) {
     return (
-        <Card sx={{ position: 'relative' }}>
+        <Card sx={{
+            position: 'relative',
+            borderRadius: '1em',
+            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)',
+        }}>
             <CardMedia
                 component={'img'}
                 image={`/images/meals/${meal.image}`}
@@ -20,6 +24,8 @@ export default function MealItemCard({
                 sx={{
                     height: 140,
                     objectFit: 'cover',
+                    borderRadius: '0.75em',
+                    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
                 }}
             />
             <Box
