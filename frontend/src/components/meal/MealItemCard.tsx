@@ -21,6 +21,9 @@ export default function MealItemCard({
                 image={`/images/meals/${meal.image}`}
                 title={meal.name}
                 alt={meal.name}
+                onError={(e) => {
+                    e.currentTarget.src = '/images/meals/no_meal.png';
+                }}
                 sx={{
                     height: 140,
                     objectFit: 'cover',
