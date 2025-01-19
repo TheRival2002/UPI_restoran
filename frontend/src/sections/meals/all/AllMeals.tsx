@@ -1,7 +1,8 @@
 import MealItemCard from '@components/meal/MealItemCard.tsx';
 import CustomSnackbarAlert from '@components/snackbar/CustomSnackbarAlert.tsx';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid2';
+import MealsHeader from '@sections/meals/all/MealsHeader.tsx';
 import api, { endpoints } from '@utils/axios.ts';
 import { useEffect, useState } from 'react';
 import { FetchState } from '../../../types/common.ts';
@@ -67,23 +68,9 @@ export default function AllMeals() {
                     severity: 'error',
                 }}
             />
-            <Typography
-                variant={'h2'}
-                component={'h1'}
-                fontWeight={800}
-                color={'text.primary'}
-                textAlign={{ xs: 'start', sm: 'center' }}
-            >
-                All <Typography
-                    variant={'h2'}
-                    component={'span'}
-                    display={{ xs: 'block', sm: 'inline' }}
-                    fontWeight={'inherit'}
-                    color={'primary.main'}
-                >
-                    Meals
-                </Typography>
-            </Typography>
+
+            <MealsHeader />
+
             <Grid
                 container
                 columnSpacing={{ xs: 2, sm: 3, lg: 4 }}
