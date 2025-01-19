@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import { Footer, Navbar } from './index.ts';
 
 // ----------------------------------------------------------------------
 
