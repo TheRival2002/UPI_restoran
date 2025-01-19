@@ -2,12 +2,9 @@
     padding: 16px 32px;
 }
 
-.landingPage {
-    position: relative;
-}
-
 .homeBannerImg {
     position: absolute;
+    top: 0;
     display: flex;
     justify-content: end;
     z-index: 0;
