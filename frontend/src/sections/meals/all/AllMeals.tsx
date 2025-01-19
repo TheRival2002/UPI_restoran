@@ -58,7 +58,7 @@ export default function AllMeals() {
     }, []);
 
     return (
-        <Box mt={2} mb={4}>
+        <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
             <CustomSnackbarAlert
                 isOpen={mealsFetchState.isError}
                 onClose={handleCloseSnackbar}
@@ -67,16 +67,17 @@ export default function AllMeals() {
                     severity: 'error',
                 }}
             />
-            <Typography // TODO sliku stavit
-                variant={'h3'}
+            <Typography
+                variant={'h2'}
                 component={'h1'}
                 fontWeight={800}
                 color={'text.primary'}
+                textAlign={{ xs: 'start', sm: 'center' }}
             >
                 All <Typography
-                    variant={'h3'}
+                    variant={'h2'}
                     component={'span'}
-                    display={'block'}
+                    display={{ xs: 'block', sm: 'inline' }}
                     fontWeight={'inherit'}
                     color={'primary.main'}
                 >
@@ -87,7 +88,7 @@ export default function AllMeals() {
                 container
                 columnSpacing={{ xs: 2, sm: 3, lg: 4 }}
                 rowSpacing={{ xs: 2, sm: 3, lg: 4 }}
-                mt={4}
+                mt={{ xs: 4, sm: 6 }}
             >
                 {meals.map((meal) => (
                     <Grid key={meal.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
