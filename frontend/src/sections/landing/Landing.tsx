@@ -2,7 +2,6 @@ import c from '@styles/landingPage.module.css';
 import Section from '@sections/landing/Section';
 import { useEffect } from 'react';
 import InfoCard from '../../components/card/InfoCard';
-import HomeBanner from '@assets/images/landingPageImgs/home-banner-background.png';
 import BannerFood from '@assets/images/landingPageImgs/home-banner-image.png';
 import AboutFoodImg from '@assets/images/landingPageImgs/about-background-image.png';
 import AboutBanner from '@assets/images/landingPageImgs/about-background.png';
@@ -43,10 +42,6 @@ export default function Landing(){
 
     return(
         <div className={c.landingPage}>
-            <div className={c.homeBannerImg}>
-                <img src={HomeBanner} alt="banner" />
-            </div>
-
             <div className={c.spaceFromNav}>
                 <Section
                     heading="Your Favourite Food
