@@ -1,5 +1,6 @@
-import CustomSnackbarAlert from '@components/snackbar/customSnackbarAlert.tsx';
-import { Stack, Typography } from '@mui/material';
+import MealItemCard from '@components/meal/MealItemCard.tsx';
+import CustomSnackbarAlert from '@components/snackbar/CustomSnackbarAlert.tsx';
+import { Box, Stack, Typography } from '@mui/material';
 import api, { endpoints } from '@utils/axios.ts';
 import { useEffect, useState } from 'react';
 import { FetchState } from '../../../types/common.ts';
@@ -56,7 +57,7 @@ export default function AllMeals() {
     }, []);
 
     return (
-        <>
+        <Box mt={2} mb={4}>
             <CustomSnackbarAlert
                 isOpen={mealsFetchState.isError}
                 onClose={handleCloseSnackbar}
@@ -65,24 +66,30 @@ export default function AllMeals() {
                     severity: 'error',
                 }}
             />
-            <Stack spacing={2} my={2}>
-                <Typography // TODO sliku stavit
+            <Typography // TODO sliku stavit
+                variant={'h3'}
+                component={'h1'}
+                fontWeight={800}
+                color={'text.primary'}
+            >
+                All <Typography
                     variant={'h3'}
-                    component={'h1'}
-                    fontWeight={800}
-                    color={'text.primary'}
+                    component={'span'}
+                    display={'block'}
+                    fontWeight={'inherit'}
+                    color={'primary.main'}
                 >
-                    All <Typography
-                        variant={'h3'}
-                        component={'span'}
-                        display={'block'}
-                        fontWeight={'inherit'}
-                        color={'primary.main'}
-                    >
                     Meals
-                    </Typography>
                 </Typography>
+            </Typography>
+            <Stack spacing={2} mt={4}>
+                {meals.map((meal) => (
+                    <MealItemCard
+                        key={meal.id}
+                        meal={meal}
+                    />
+                ))}
             </Stack>
-        </>
+        </Box>
     );
 }
