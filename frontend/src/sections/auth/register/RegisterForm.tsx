@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 import c from '@styles/register.module.css';
-import api, { endpoints } from '@utils/axios.ts';
 import InputField from '@components/InputField/InputField.tsx';
 import { z } from 'zod';
 import { SingleValidationError } from '../../../types/common.ts';
+import { UserRegisterDataDTO } from '../../../types/user.dto.ts';
+import { useAuthContext } from '../../../hooks/useAuthContext.ts';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
-    const [ userData, setUserData ] = useState({
+    const [ userData, setUserData ] = useState<UserRegisterDataDTO>({
         name: '',
         surname: '',
         username: '',
@@ -22,7 +23,7 @@ export default function RegisterForm() {
         message: '',
     });
     const [ error, setError ] = useState('');
-
+    const { register } = useAuthContext();
     const navigate = useNavigate();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,13 +56,7 @@ export default function RegisterForm() {
 
         try {
             registerValidationSchema.parse(userData);
-
-            const response = await api.post(
-                endpoints.auth.register,
-                userData
-            );
-            localStorage.setItem('accessToken', response.data.accessToken);
-
+            await register(userData);
             navigate(paths.home.root);
         } catch (err: any) {
             if (err instanceof z.ZodError) {

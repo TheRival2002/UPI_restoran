@@ -1,3 +1,5 @@
+import { User } from '../User';
+
 export type LoginCredentialsDto = {
     username?: string;
     email?: string;
@@ -5,6 +7,7 @@ export type LoginCredentialsDto = {
 }
 
 export type LoginResponseDto = {
+    user: User;
     accessToken: string;
     refreshToken: string;
 }
