@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 import c from '@styles/login.module.css';
-import api, { endpoints } from '@utils/axios.ts';
 import InputField from '@components/InputField/InputField.tsx';
 import { z } from 'zod';
 import { SingleValidationError } from '../../../types/common.ts';
+import { UserLoginDataDTO } from '../../../types/user.dto.ts';
+import { useAuthContext } from '../../../hooks/useAuthContext.ts';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-    const [ credentials, setCredentials ] = useState({
+    const [ credentials, setCredentials ] = useState<UserLoginDataDTO>({
         emailOrUsernameValue: '',
         password: '',
     });
@@ -19,6 +20,7 @@ export default function LoginForm() {
         field: '',
         message: '',
     });
+    const { login } = useAuthContext();
 
     const navigate = useNavigate();
 
@@ -44,18 +46,9 @@ export default function LoginForm() {
         });
         setError('');
 
-        const isEmailEntered = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-            credentials.emailOrUsernameValue,
-        );
-
         try {
             loginValidationSchema.parse(credentials);
-
-            const response = await api.post(endpoints.auth.login, {
-                [isEmailEntered ? 'email' : 'username']: credentials.emailOrUsernameValue,
-                password: credentials.password,
-            });
-            localStorage.setItem('accessToken', response.data.accessToken);
+            await login(credentials);
 
             navigate(paths.home.root);
         } catch (err: any) {
