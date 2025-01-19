@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 import c from '@styles/register.module.css';
-import InputField from '@components/InputField/InputField.tsx';
+import InputField from '@components/inputField/InputField.tsx';
 import { z } from 'zod';
 import { SingleValidationError } from '../../../types/common.ts';
 import { UserRegisterDataDTO } from '../../../types/user.dto.ts';
