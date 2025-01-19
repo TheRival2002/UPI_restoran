@@ -6,7 +6,7 @@ import InputField from '@components/inputField/InputField.tsx';
 import { z } from 'zod';
 import { SingleValidationError } from '../../../types/common.ts';
 import { UserLoginDataDTO } from '../../../types/user.dto.ts';
-import { useAuthContext } from '../../../hooks/useAuthContext.ts';
+import { useAuthContext } from '@hooks/useAuthContext.ts';
 
 // ----------------------------------------------------------------------
 
