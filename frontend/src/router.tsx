@@ -1,4 +1,12 @@
-import { LoginPage, Page403, Page404, RegisterPage, LandingPage, AllMealsPage } from '@routes/elements.tsx';
+import {
+    LoginPage,
+    Page403,
+    Page404,
+    RegisterPage,
+    LandingPage,
+    AllMealsPage,
+    SingleMealPage
+} from '@routes/elements.tsx';
 import { Navigate, useRoutes } from 'react-router';
 import { AuthLayout, CompactLayout, MainLayout } from './layouts';
 
@@ -31,7 +39,11 @@ export default function Router() {
                 {
                     path: 'meals',
                     element: <AllMealsPage />,
-                }
+                },
+                {
+                    path: 'meals/:id',
+                    element: <SingleMealPage />,
+                },
             ]
         },
         {

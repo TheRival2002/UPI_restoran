@@ -67,6 +67,7 @@ export default function AllMeals() {
                     severity: 'error',
                 }}
             />
+
             <Typography
                 variant={'h2'}
                 component={'h1'}
@@ -84,6 +85,7 @@ export default function AllMeals() {
                     Meals
                 </Typography>
             </Typography>
+
             <Grid
                 container
                 columnSpacing={{ xs: 2, sm: 3, lg: 4 }}

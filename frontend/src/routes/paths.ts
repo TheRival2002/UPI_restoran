@@ -15,5 +15,6 @@ export const paths = {
     },
     meals: {
         root: '/meals',
+        single: (id: number) => `/meals/${id}`,
     },
 };
