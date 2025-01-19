@@ -1,4 +1,5 @@
-import { Alert, Snackbar, Stack, Typography } from '@mui/material';
+import CustomSnackbarAlert from '@components/snackbar/customSnackbarAlert.tsx';
+import { Stack, Typography } from '@mui/material';
 import api, { endpoints } from '@utils/axios.ts';
 import { useEffect, useState } from 'react';
 import { FetchState } from '../../../types/common.ts';
@@ -56,20 +57,14 @@ export default function AllMeals() {
 
     return (
         <>
-            <Snackbar
-                open={mealsFetchState.isError}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                autoHideDuration={5000}
+            <CustomSnackbarAlert
+                isOpen={mealsFetchState.isError}
                 onClose={handleCloseSnackbar}
-            >
-                <Alert
-                    onClose={handleCloseSnackbar}
-                    severity={'error'}
-                    variant={'filled'}
-                >
-                    Error fetching meals
-                </Alert>
-            </Snackbar>
+                alertMessage={'Error fetching meals'}
+                alertProps={{
+                    severity: 'error',
+                }}
+            />
             <Stack spacing={2} my={2}>
                 <Typography // TODO sliku stavit
                     variant={'h3'}
