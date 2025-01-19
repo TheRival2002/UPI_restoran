@@ -1,3 +1,4 @@
+import AddToCartButton from '@components/button/AddToCartButton.tsx';
 import SingleMealCardImg from '@components/meal/SingleMealCardImg.tsx';
 import { Box } from '@mui/material';
 import SingleMealInfo from '@sections/meals/single/SingleMealInfo.tsx';
@@ -24,18 +25,27 @@ export default function SingleMeal({
     console.log(mealId);
 
     return (
-        <Box
-            mt={{ xs: 3, sm: 4 }}
-            mb={{ xs: 6, sm: 8 }}
-            display={'flex'}
-            rowGap={3}
-            columnGap={{ sm: 5, md: 8 }}
-            flexDirection={{ xs: 'column', sm: 'row' }}
-            alignItems={{ xs: 'stretch', sm: 'center' }}
-        >
-            <SingleMealCardImg meal={meal} />
+        <>
+            <Box
+                mt={{ xs: 3, sm: 4 }}
+                display={'flex'}
+                rowGap={3}
+                columnGap={{ sm: 5, md: 8 }}
+                flexDirection={{ xs: 'column', sm: 'row' }}
+                alignItems={{ xs: 'stretch', sm: 'center' }}
+            >
+                <SingleMealCardImg meal={meal} />
 
-            <SingleMealInfo meal={meal} />
-        </Box>
+                <SingleMealInfo meal={meal} />
+            </Box>
+            <Box
+                mt={{ xs: 0, sm: 10 }}
+                mb={{ xs: 6, sm: 6 }}
+                display={'flex'}
+                justifyContent={'center'}
+            >
+                <AddToCartButton />
+            </Box>
+        </>
     );
 }
