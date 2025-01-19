@@ -2,6 +2,11 @@ import { createTheme } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
+const COMMON = {
+    black: '#000',
+    white: '#fff',
+};
+
 const PRIMARY = {
     light: '#f89d82',
     main: '#fe724c',
@@ -16,14 +21,11 @@ const SECONDARY = {
 
 const customTheme = createTheme({
     palette: {
-        common: {
-            black: '#000',
-            white: '#fff',
-        },
+        common: COMMON,
         primary: PRIMARY,
         secondary: SECONDARY,
         text: {
-            primary: '#000',
+            primary: COMMON.black,
             secondary: '#828282',
         },
     },
