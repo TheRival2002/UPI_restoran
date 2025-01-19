@@ -1,5 +1,6 @@
 import SingleMealCardImg from '@components/meal/SingleMealCardImg.tsx';
 import { Box } from '@mui/material';
+import SingleMealInfo from '@sections/meals/single/SingleMealInfo.tsx';
 import { Meal } from '../../../types/meal.ts';
 
 // ----------------------------------------------------------------------
@@ -15,7 +16,7 @@ export default function SingleMeal({
     const meal: Meal = {
         id: 1,
         name: 'Spring Rolls',
-        description: 'A delicious plate of spaghetti',
+        description: 'Crispy rolls filled with vegetables and served with sweet chili sauce.',
         price: 10.99,
         image: 'spring_rolls.jpeg',
         mealCategoryId: 1,
@@ -23,8 +24,18 @@ export default function SingleMeal({
     console.log(mealId);
 
     return (
-        <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
+        <Box
+            mt={{ xs: 3, sm: 4 }}
+            mb={{ xs: 6, sm: 8 }}
+            display={'flex'}
+            rowGap={3}
+            columnGap={{ sm: 5, md: 8 }}
+            flexDirection={{ xs: 'column', sm: 'row' }}
+            alignItems={{ xs: 'stretch', sm: 'center' }}
+        >
             <SingleMealCardImg meal={meal} />
+
+            <SingleMealInfo meal={meal} />
         </Box>
     );
 }
