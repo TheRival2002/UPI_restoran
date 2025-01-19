@@ -1,6 +1,7 @@
 import MealItemCard from '@components/meal/MealItemCard.tsx';
 import CustomSnackbarAlert from '@components/snackbar/CustomSnackbarAlert.tsx';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import api, { endpoints } from '@utils/axios.ts';
 import { useEffect, useState } from 'react';
 import { FetchState } from '../../../types/common.ts';
@@ -82,14 +83,20 @@ export default function AllMeals() {
                     Meals
                 </Typography>
             </Typography>
-            <Stack spacing={2} mt={4}>
+            <Grid
+                container
+                columnSpacing={{ xs: 2, sm: 3, lg: 4 }}
+                rowSpacing={{ xs: 2, sm: 3, lg: 4 }}
+                mt={4}
+            >
                 {meals.map((meal) => (
-                    <MealItemCard
-                        key={meal.id}
-                        meal={meal}
-                    />
+                    <Grid key={meal.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                        <MealItemCard
+                            meal={meal}
+                        />
+                    </Grid>
                 ))}
-            </Stack>
+            </Grid>
         </Box>
     );
 }

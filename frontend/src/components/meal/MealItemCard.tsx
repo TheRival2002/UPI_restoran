@@ -25,7 +25,7 @@ export default function MealItemCard({
                     e.currentTarget.src = '/images/meals/no_meal.png';
                 }}
                 sx={{
-                    height: 140,
+                    height: { xs: 140, sm: 200, md: 250 },
                     objectFit: 'cover',
                     borderRadius: '0.75em',
                     boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
