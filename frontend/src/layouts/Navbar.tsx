@@ -117,9 +117,13 @@ export default function Navbar(){
         <div className={`${c.navWrapper} ${scrolled ? c.scrolled : ''}`}>
             <div className="container">
                 <nav className={c.navBar}>
-                    <div className={'nav-logo'}>
+                    <Box
+                        className={'nav-logo'}
+                        onClick={() => handleNavigate(paths.home.root)}
+                        sx={{ cursor: 'pointer' }}
+                    >
                         <img src={Logo} alt="logo" />
-                    </div>
+                    </Box>
 
                     <div className={c.navBarMenu}>
                         <MenuIcon className={c.menuIcon} onClick={() => setOpenMenu(true)} />
