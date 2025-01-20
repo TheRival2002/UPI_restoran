@@ -26,5 +26,8 @@ export const endpoints = {
     auth: {
         login: '/api/login',
         register: '/api/register',
+        logout: '/api/logout',
+        refreshToken: '/api/refresh-token',
+        check: '/api/check',
     },
 };

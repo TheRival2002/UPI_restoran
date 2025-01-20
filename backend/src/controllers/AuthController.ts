@@ -101,23 +101,26 @@ export class AuthController {
         try {
             const authHeader = req.headers['authorization'];
 
-            if (!authHeader)
+            if (!authHeader) {
                 res.sendStatus(401);
+
+                return;
+            }
 
             const token = authHeader?.split(' ')[1];
 
             this.jwt.verify(
                 token,
                 process.env.ACCESS_TOKEN_SECRET,
-                (err: Error, decoded: JwtUserDto) => {
+                async (err: Error, decoded: JwtUserDto) => {
                     if (err) {
-                        res.sendStatus(403);
+                        return res.sendStatus(401);
                     }
 
                     req.user = decoded;
 
                     const userId = decoded.id;
-                    const user = this.authService.checkIsAuthenticated(userId);
+                    const user = await this.authService.checkIsAuthenticated(userId);
 
                     res.json({ user });
                 },
