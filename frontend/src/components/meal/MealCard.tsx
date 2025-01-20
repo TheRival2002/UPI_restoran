@@ -7,7 +7,7 @@ type MealItemCardProps = {
     meal: Meal;
 }
 
-export default function MealItemCard({
+export default function MealCard({
     meal,
 }: MealItemCardProps) {
     return (

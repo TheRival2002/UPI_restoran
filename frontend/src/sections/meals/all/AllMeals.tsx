@@ -1,4 +1,4 @@
-import MealItemCard from '@components/meal/MealItemCard.tsx';
+import MealCard from '@components/meal/MealCard.tsx';
 import CustomSnackbarAlert from '@components/snackbar/CustomSnackbarAlert.tsx';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid2';
@@ -79,7 +79,7 @@ export default function AllMeals() {
             >
                 {meals.map((meal) => (
                     <Grid key={meal.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                        <MealItemCard
+                        <MealCard
                             meal={meal}
                         />
                     </Grid>
