@@ -25,9 +25,14 @@ export default function SingleMeal({
     console.log(mealId);
 
     return (
-        <>
+        <Box
+            pt={{ xs: 3, sm: 4 }}
+            height={1}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'space-between'}
+        >
             <Box
-                mt={{ xs: 3, sm: 4 }}
                 display={'flex'}
                 rowGap={3}
                 columnGap={{ sm: 5, md: 8 }}
@@ -46,6 +51,6 @@ export default function SingleMeal({
             >
                 <AddToCartButton />
             </Box>
-        </>
+        </Box>
     );
 }
