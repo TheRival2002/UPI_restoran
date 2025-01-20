@@ -1,15 +1,17 @@
-import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
 import { Box, Stack, Typography } from '@mui/material';
+import { ReactNode } from 'react';
 import { Meal } from '../../../types/meal.ts';
 
 // ----------------------------------------------------------------------
 
 type SingleMealInfoProps = {
     meal: Meal;
+    children?: ReactNode;
 }
 
 export default function SingleMealInfo({
     meal,
+    children,
 }: SingleMealInfoProps) {
     return (
         <Stack
@@ -24,18 +26,7 @@ export default function SingleMealInfo({
                 justifyContent={'space-between'}
                 alignItems={'center'}
             >
-                <Typography variant={'h5'} fontWeight={'bold'} color={'primary.main'}>
-                    {meal.price}<Typography
-                        variant={'h5'}
-                        component={'span'}
-                        fontWeight={'inherit'}
-                        ml={0.25}
-                    >
-                        €
-                    </Typography>
-                </Typography>
-
-                <QuantityButtonGroup />
+                {children}
             </Box>
 
             <Typography

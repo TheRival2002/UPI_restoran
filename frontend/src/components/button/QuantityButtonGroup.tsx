@@ -4,7 +4,15 @@ import AddIcon from '@mui/icons-material/Add';
 
 // ----------------------------------------------------------------------
 
-export default function QuantityButtonGroup() {
+type QuantityButtonGroupProps = {
+    quantity: number;
+    setQuantity: (quantity: number) => void;
+}
+
+export default function QuantityButtonGroup({
+    quantity,
+    setQuantity,
+}: QuantityButtonGroupProps) {
     return (
         <Box
             display={'flex'}
@@ -13,6 +21,8 @@ export default function QuantityButtonGroup() {
         >
             <IconButton
                 color={'primary'}
+                disabled={quantity <= 1}
+                onClick={() => setQuantity(quantity - 1)}
                 sx={{
                     border: '1px solid',
                     borderRadius: '100%',
@@ -23,10 +33,11 @@ export default function QuantityButtonGroup() {
                 <RemoveIcon sx={{ width: 20 }} />
             </IconButton>
             <Typography>
-                1
+                {quantity}
             </Typography>
             <IconButton
                 color={'primary'}
+                onClick={() => setQuantity(quantity + 1)}
                 sx={{
                     border: '1px solid',
                     borderColor: 'primary.main',

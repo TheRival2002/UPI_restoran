@@ -1,28 +1,24 @@
 import AddToCartButton from '@components/button/AddToCartButton.tsx';
+import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
 import SingleMealCardImg from '@components/meal/SingleMealCardImg.tsx';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import SingleMealInfo from '@sections/meals/single/SingleMealInfo.tsx';
+import { useState } from 'react';
 import { Meal } from '../../../types/meal.ts';
 
 // ----------------------------------------------------------------------
 
 type SingleMealProps = {
-    mealId: number;
+    meal: Meal;
 }
 
 export default function SingleMeal({
-    mealId,
+    meal,
 }: SingleMealProps) {
-    // TODO maknit hardkodirano i fetchati meal sa mealId kad bude napravljen API
-    const meal: Meal = {
-        id: 1,
-        name: 'Spring Rolls',
-        description: 'Crispy rolls filled with vegetables and served with sweet chili sauce.',
-        price: 10.99,
-        image: 'spring_rolls.jpeg',
-        mealCategoryId: 1,
-    };
-    console.log(mealId);
+    // NAPOMENA - ovdje se drze podaci koji ce se poslat u kosaricu kad se napravi ta funkcionalnost (context kosarice) skupa s cijelim meal-om
+    const [ mealQuantity, setMealQuantity ] = useState(1);
+
+    const mealTotalPrice = meal.price * mealQuantity;
 
     return (
         <Box
@@ -41,7 +37,23 @@ export default function SingleMeal({
             >
                 <SingleMealCardImg meal={meal} />
 
-                <SingleMealInfo meal={meal} />
+                <SingleMealInfo meal={meal}>
+                    <Typography variant={'h5'} fontWeight={'bold'} color={'primary.main'}>
+                        {mealTotalPrice}<Typography
+                            variant={'h5'}
+                            component={'span'}
+                            fontWeight={'inherit'}
+                            ml={0.25}
+                        >
+                            €
+                        </Typography>
+                    </Typography>
+
+                    <QuantityButtonGroup
+                        quantity={mealQuantity}
+                        setQuantity={setMealQuantity}
+                    />
+                </SingleMealInfo>
             </Box>
             <Box
                 mt={{ xs: 0, sm: 10 }}
