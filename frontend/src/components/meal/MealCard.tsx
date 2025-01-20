@@ -60,9 +60,25 @@ export default function MealCard({
                     sx={{
                         fontWeight: 'bold',
                         mb: meal.description ? 0.75 : 0,
+                        display: '-webkit-box',
+                        WebkitLineClamp: 1,
+                        lineClamp: 1,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
                     }}
                 >{meal.name}</Typography>
-                <Typography variant={'body2'}>{meal.description}</Typography>
+                <Typography
+                    variant={'body2'}
+                    sx={{
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        lineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                    }}
+                >
+                    {meal.description}
+                </Typography>
             </CardContent>
         </Card>
     );
