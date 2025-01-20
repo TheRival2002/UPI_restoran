@@ -15,7 +15,7 @@ interface SectionProps {
 export default function Section({
     title,
     heading,
-    description,        
+    description,
     buttonText,
     buttonAction,
     imgUrl,
@@ -24,14 +24,14 @@ export default function Section({
 }: SectionProps) {
     return (
         <div className='container' id={id}>
-            <div className={c.homeSection}>         
+            <div className={c.homeSection}>
                 {title && <p className={c.goldTitle}>{title}</p>}
                 <h3 className={c.sectionHeading}>{heading}</h3>
-                <p className={c.sectionDescription}>{description}</p>                
+                <p className={c.sectionDescription}>{description}</p>
                 {imgUrl && <img className={c.sectionImg} src={imgUrl} alt="photo" />}
-                {buttonText && <button className={c.landingPageBtn} onClick={buttonAction}>{buttonText}</button>}
+                {buttonText && <button className={`button ${c.landingPageBtn}`} onClick={buttonAction}>{buttonText}</button>}
                 {children}
-            </div>  
+            </div>
         </div>
     );
 }

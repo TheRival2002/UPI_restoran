@@ -178,7 +178,7 @@ export default function Navbar(){
                                     </Fragment>
                                 ))}
                                 <div className={c.signInWrapper}>
-                                    <button className={c.menuBtn} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
+                                    <button className={`button ${c.menuBtn}`} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
                                 </div>
                             </List>
                         </Box>

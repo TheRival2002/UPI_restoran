@@ -84,7 +84,7 @@ export default function LoginForm() {
             />
 
             {error && <p className={c.error}>{error}</p>}
-            <button type="submit" className={c.loginButton}>
+            <button type="submit" className={`button ${c.loginButton}`}>
                 Login
             </button>
         </form>

@@ -64,7 +64,9 @@ export default function MealItemCard({
                             fontWeight: 'bold',
                             mb: meal.description ? 0.75 : 0,
                         }}
-                    >{meal.name}</Typography>
+                    >
+                        {meal.name}
+                    </Typography>
                     <Typography variant={'body2'}>{meal.description}</Typography>
                 </CardContent>
             </Card>

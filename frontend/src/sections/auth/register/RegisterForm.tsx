@@ -116,7 +116,7 @@ export default function RegisterForm() {
             />
 
             {error && <p className={c.error}>{error}</p>}
-            <button type="submit" className={c.registerButton}>
+            <button type="submit" className={`button ${c.registerButton}`}>
                 Register
             </button>
         </form>
