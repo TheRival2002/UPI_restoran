@@ -8,19 +8,32 @@ import HomeBanner from '@assets/images/landingPageImgs/home-banner-background.pn
 export default function MainLayout() {
 
     return (
-        <main style={{ position: 'relative' }}>
+        <Box
+            component={'main'}
+            sx={{
+                position: 'relative',
+                height: 1,
+                display: 'flex',
+                flexDirection: 'column',
+            }}
+        >
             <Navbar/>
 
             <div className={'homeBannerImg'}>
                 <img src={HomeBanner} alt="banner"/>
             </div>
 
-            <Box pt={'66.5px'}>
+            <Box
+                sx={{
+                    flexGrow: 1,
+                    pt: '66.5px',
+                }}
+            >
                 <Outlet/>
             </Box>
 
             <Footer/>
-        </main>
+        </Box>
     );
 
 }
