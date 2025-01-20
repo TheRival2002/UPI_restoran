@@ -20,6 +20,7 @@ export class AuthController {
         this.authRouter.post('/login', this.login.bind(this));
         this.authRouter.get('/logout', this.authMiddleware, this.logout.bind(this));
         this.authRouter.get('/refresh-token', this.refreshToken.bind(this));
+        this.authRouter.get('/check', this.checkIsAuthenticated.bind(this));
     }
 
     private async register(req: Request, res: Response, next: NextFunction) {
@@ -90,6 +91,36 @@ export class AuthController {
                     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
                     res.json({ accessToken });
                 }
+            );
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    private checkIsAuthenticated(req: Request, res: Response, next: NextFunction) {
+        try {
+            const authHeader = req.headers['authorization'];
+
+            if (!authHeader)
+                res.sendStatus(401);
+
+            const token = authHeader?.split(' ')[1];
+
+            this.jwt.verify(
+                token,
+                process.env.ACCESS_TOKEN_SECRET,
+                (err: Error, decoded: JwtUserDto) => {
+                    if (err) {
+                        res.sendStatus(403);
+                    }
+
+                    req.user = decoded;
+
+                    const userId = decoded.id;
+                    const user = this.authService.checkIsAuthenticated(userId);
+
+                    res.json({ user });
+                },
             );
         } catch (error) {
             next(error);

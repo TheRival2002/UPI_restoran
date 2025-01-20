@@ -62,4 +62,14 @@ export class AuthService {
 
         return { user: foundUser, accessToken, refreshToken };
     }
+
+    public async checkIsAuthenticated(userId: number): Promise<User> {
+        const foundUser = await this.usersRepository.findById(userId);
+
+        if (!foundUser) {
+            throw new UnauthorizedError('Not authenticated');
+        }
+
+        return foundUser;
+    }
 }

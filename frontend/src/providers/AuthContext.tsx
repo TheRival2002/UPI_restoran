@@ -32,11 +32,13 @@ type ActionsType = {
     type: keyof Payload;
     payload: Payload[keyof Payload];
 }
+
 type AuthState = {
     user: AuthenticatedUser;
 }
 
 const initialState: AuthState = { user: null };
+
 const reducer = (state: AuthState, action: ActionsType) => {
     switch (action.type) {
         case Types.REGISTER:
@@ -49,10 +51,12 @@ const reducer = (state: AuthState, action: ActionsType) => {
             return state;
     }
 };
+
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [ state, dispatch ] = useReducer(reducer, initialState);
+    console.log('AuthProvider state:', state);
 
     const register = useCallback(async (userData: UserRegisterDataDTO) => {
         const response = await api.post(endpoints.auth.register, userData);
@@ -79,6 +83,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const logout = useCallback(() => {
+        localStorage.removeItem('accessToken');
+
         dispatch({ type: Types.LOGOUT, payload: { user: null }});
     }, []);
 
