@@ -77,7 +77,6 @@ export class AuthController {
 
             const refreshToken = cookies.jwt;
 
-            // TODO na frontu spremit accessToken
             this.jwt.verify(
                 refreshToken,
                 process.env.REFRESH_TOKEN_SECRET,
