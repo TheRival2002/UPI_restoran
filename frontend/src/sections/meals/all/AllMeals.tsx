@@ -1,4 +1,4 @@
-import MealItemCard from '@components/meal/MealItemCard.tsx';
+import MealCard from '@components/meal/MealCard.tsx';
 import CustomSnackbarAlert from '@components/snackbar/CustomSnackbarAlert.tsx';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid2';
@@ -12,13 +12,13 @@ import { Meal } from '../../../types/meal.ts';
 
 export default function AllMeals() {
     const [ meals, setMeals ] = useState<Meal[]>([]);
-    const [ mealsFetchState, setMealsFetchState ] = useState<FetchState>({
+    const [ mealsFetchingState, setMealsFetchingState ] = useState<FetchState>({
         isLoading: false,
         isError: false,
     });
 
     const handleCloseSnackbar = () => {
-        setMealsFetchState((prevState) => ({
+        setMealsFetchingState((prevState) => ({
             ...prevState,
             isError: false,
         }));
@@ -28,7 +28,7 @@ export default function AllMeals() {
 
         (async () => {
 
-            setMealsFetchState((prevState) => ({
+            setMealsFetchingState((prevState) => ({
                 ...prevState,
                 isLoading: true,
             }));
@@ -38,7 +38,7 @@ export default function AllMeals() {
                 const response = await api.get(endpoints.meals.all);
 
                 setMeals(response.data);
-                setMealsFetchState((prevState) => ({
+                setMealsFetchingState((prevState) => ({
                     ...prevState,
                     isLoading: false,
                 }));
@@ -46,7 +46,7 @@ export default function AllMeals() {
             } catch (error) {
 
                 console.error(error);
-                setMealsFetchState((prevState) => ({
+                setMealsFetchingState((prevState) => ({
                     ...prevState,
                     isLoading: false,
                     isError: true,
@@ -61,7 +61,7 @@ export default function AllMeals() {
     return (
         <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
             <CustomSnackbarAlert
-                isOpen={mealsFetchState.isError}
+                isOpen={mealsFetchingState.isError}
                 onClose={handleCloseSnackbar}
                 alertMessage={'Error fetching meals'}
                 alertProps={{
@@ -79,7 +79,7 @@ export default function AllMeals() {
             >
                 {meals.map((meal) => (
                     <Grid key={meal.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                        <MealItemCard
+                        <MealCard
                             meal={meal}
                         />
                     </Grid>

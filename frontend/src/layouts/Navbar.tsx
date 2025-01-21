@@ -25,19 +25,19 @@ import { paths } from '@routes/paths';
 
 // ----------------------------------------------------------
 
-type TMenuOption = {
+type MenuOption = {
     text: string;
     icon: ReactElement;
 }
 
-type TMenuOptionParent = TMenuOption & {
+type MenuOptionParent = MenuOption & {
     id: number;
     path: string;
     targetId?: string;
-    children?: TMenuOptionChild[];
+    children?: MenuOptionChild[];
 };
 
-type TMenuOptionChild = TMenuOption & {
+type MenuOptionChild = MenuOption & {
     targetId: string;
 }
 
@@ -51,7 +51,7 @@ export default function Navbar(){
 
     const { pathname } = useLocation();
 
-    const menuOptions: TMenuOptionParent[] = [
+    const menuOptions: MenuOptionParent[] = [
         {
             id: 1,
             text: 'Home',

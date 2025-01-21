@@ -9,7 +9,7 @@ type MealItemCardProps = {
     meal: Meal;
 }
 
-export default function MealItemCard({
+export default function MealCard({
     meal,
 }: MealItemCardProps) {
     return (
@@ -53,7 +53,7 @@ export default function MealItemCard({
                             color={'primary.main'}
                             ml={0.25}
                         >
-                        €
+                            €
                         </Typography>
                     </Typography>
                 </Box>
@@ -63,11 +63,25 @@ export default function MealItemCard({
                         sx={{
                             fontWeight: 'bold',
                             mb: meal.description ? 0.75 : 0,
+                            display: '-webkit-box',
+                            WebkitLineClamp: 1,
+                            lineClamp: 1,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                        }}
+                    >{meal.name}</Typography>
+                    <Typography
+                        variant={'body2'}
+                        sx={{
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            lineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
                         }}
                     >
-                        {meal.name}
+                        {meal.description}
                     </Typography>
-                    <Typography variant={'body2'}>{meal.description}</Typography>
                 </CardContent>
             </Card>
         </Link>
