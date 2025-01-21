@@ -3,6 +3,8 @@ import api, { endpoints } from '@utils/axios';
 import { useEffect, useState } from 'react';
 import { FetchState } from 'types/common';
 import { Meal } from 'types/meal';
+import Grid from '@mui/material/Grid2';
+import { Box } from '@mui/material';
 
 export default function DailyOffer() {
     const [ meals, setMeals ] = useState<Meal[]>([]);
@@ -58,13 +60,24 @@ export default function DailyOffer() {
 
     return (
         <div className="container">
-            <h1>Daily Offers</h1>
-            {meals.map((meal) => (
-                <MealCard
-                    meal={meal}
-                />
-            ))}           
-          
+            <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
+                
+                <h1>Daily Offer</h1>
+                <Grid
+                    container
+                    columnSpacing={{ xs: 2, sm: 3, lg: 4 }}
+                    rowSpacing={{ xs: 2, sm: 3, lg: 4 }}
+                    mt={{ xs: 4, sm: 6 }}
+                >
+                    {meals.map((meal) => (
+                        <Grid key={meal.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                            <MealCard
+                                meal={meal}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
         </div>
     );
 }
