@@ -29,7 +29,7 @@ export default function DailyOffer() {
 
             try {
                 const response = await api.get(endpoints.meals.daily);
-                setMeals(response.data.offers); // Access 'offers' from the response
+                setMeals(response.data.offers); 
                 setMealsFetchingState((prevState) => ({
                     ...prevState,
                     isLoading: false,
@@ -61,7 +61,6 @@ export default function DailyOffer() {
     return (
         <div className="container">
             <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
-                
                 <h1>Daily Offer</h1>
                 <Grid
                     container

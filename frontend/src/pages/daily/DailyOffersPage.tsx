@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import DailyOffer from '@sections/daily/DailyOffer';
 
-export default function DailyOffers(){
+export default function DailyOffersPage(){
     return(
         <>
             <Helmet>
