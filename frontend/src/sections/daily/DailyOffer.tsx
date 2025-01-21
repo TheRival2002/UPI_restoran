@@ -43,20 +43,7 @@ export default function DailyOffer() {
                 }));
             }
         })();
-    }, []);
-
-    if (mealsFetchingState.isLoading) {
-        return <p>Loading...</p>;
-    }
-
-    if (mealsFetchingState.isError) {
-        return (
-            <div>
-                <p>Error fetching daily meals.</p>
-                <button onClick={handleCloseSnackbar}>Close</button>
-            </div>
-        );
-    }
+    }, []);   
 
     return (
         <div className="container">
