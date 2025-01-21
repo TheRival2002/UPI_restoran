@@ -3,11 +3,11 @@
 }
 
 .spaceFromNav {
-    padding-top: 100px;
+    padding-top: 60px;
 }
 
 .homeSection {
-    padding-top: 20px;
+    padding-top: 80px;
     text-align: center;
     display: flex;
     flex-direction: column;
