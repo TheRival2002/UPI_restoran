@@ -1,8 +1,6 @@
-
-import { LoginPage, Page403, Page404, RegisterPage, LandingPage } from '@routes/elements.tsx';
+import { LoginPage, Page403, Page404, RegisterPage, LandingPage, AllMealsPage } from '@routes/elements.tsx';
 import { Navigate, useRoutes } from 'react-router';
-import { AuthLayout, CompactLayout } from './layouts';
-import MainLayout from 'layouts/MainLayout';
+import { AuthLayout, CompactLayout, MainLayout } from './layouts';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +28,10 @@ export default function Router() {
                     element: <LandingPage />,
                     index: true,
                 },
+                {
+                    path: 'meals',
+                    element: <AllMealsPage />,
+                }
             ]
         },
         {

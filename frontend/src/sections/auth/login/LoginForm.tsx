@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { paths } from '@routes/paths.ts';
 import c from '@styles/login.module.css';
-import InputField from '@components/InputField/InputField.tsx';
+import InputField from '@components/inputField/InputField.tsx';
 import { z } from 'zod';
 import { SingleValidationError } from '../../../types/common.ts';
 import { UserLoginDataDTO } from '../../../types/user.dto.ts';
-import { useAuthContext } from '../../../hooks/useAuthContext.ts';
+import { useAuthContext } from '@hooks/useAuthContext.ts';
 
 // ----------------------------------------------------------------------
 

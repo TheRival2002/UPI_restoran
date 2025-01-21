@@ -12,5 +12,8 @@ export const paths = {
     auth: {
         login: `${Roots.AUTH}/login`,
         register: `${Roots.AUTH}/register`,
-    }
+    },
+    meals: {
+        root: '/meals',
+    },
 };

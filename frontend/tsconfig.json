@@ -15,6 +15,10 @@
       "@sections/*": ["sections/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
+      "@layouts/*": ["layouts/*"],
+      "@providers/*": ["providers/*"],
+      "@theme": ["theme/*"],
     },
   },
 }
