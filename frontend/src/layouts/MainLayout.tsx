@@ -1,19 +1,39 @@
+import { Box } from '@mui/material';
 import { Outlet } from 'react-router';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import { Footer, Navbar } from './index.ts';
+import HomeBanner from '@assets/images/landingPageImgs/home-banner-background.png';
 
 // ----------------------------------------------------------------------
 
 export default function MainLayout() {
 
     return (
-        <main>
-            <Navbar />
+        <Box
+            component={'main'}
+            sx={{
+                position: 'relative',
+                height: 1,
+                display: 'flex',
+                flexDirection: 'column',
+            }}
+        >
+            <Navbar/>
 
-            <Outlet />
+            <div className={'homeBannerImg'}>
+                <img src={HomeBanner} alt="banner"/>
+            </div>
 
-            <Footer />
-        </main>
+            <Box
+                sx={{
+                    flexGrow: 1,
+                    pt: '66.5px',
+                }}
+            >
+                <Outlet/>
+            </Box>
+
+            <Footer/>
+        </Box>
     );
 
 }

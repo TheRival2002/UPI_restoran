@@ -11,10 +11,10 @@ export default function InfoCard({
 }: InfoCardProps){
     return(
         <div className={c.workItem}>
-            <img src={imgUrl}alt="work img" />
+            <img src={imgUrl} alt="work img" />
             <h4>{heading}</h4>
             <p>{description}</p>
-        </div>               
-      
+        </div>
+
     );
 }

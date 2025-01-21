@@ -9,12 +9,15 @@
     --orange-opacity: #ffe3db;
     --background-body: #ffffff;
 }
+
 .container {
     width: 90%;
+    height: 100%;
     margin: 0 auto;
     padding: 0 10px;
     position: relative;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -26,11 +29,15 @@ a {
     color: var(--primary-orange);
     text-decoration: inherit;
 }
+
 body {
     background-color: var(--background-body);
 }
-body > #root {
-    height: 100vh;
+
+html,
+body,
+#root {
+    height: 100% !important;
     width: 100%;
 }
 
@@ -39,7 +46,7 @@ h1 {
     line-height: 1.1;
 }
 
-button {
+.button {
     background: var(--primary-orange);
     color: white;
     border: none;
@@ -52,14 +59,28 @@ button {
         box-shadow 0.2s;
 }
 
-button:hover {
+.button:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     background: var(--orange-opacity);
     color: black;
 }
 
-button:focus,
-button:focus-visible {
+.button:focus,
+.button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+}
+
+.homeBannerImg {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: end;
+    z-index: 0;
+    opacity: 50%;
+    width: 100%;
+}
+
+.homeBannerImg img {
+    max-height: 500px;
 }

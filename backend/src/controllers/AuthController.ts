@@ -41,10 +41,10 @@ export class AuthController {
     private async login(req: Request, res: Response, next: NextFunction) {
         try {
             const userAuthData: LoginCredentialsDto = req.body;
-            const { accessToken, refreshToken } = await this.authService.login(userAuthData);
+            const { user, accessToken, refreshToken } = await this.authService.login(userAuthData);
 
             res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // maxAge is in milliseconds, so it is 1 day
-            res.status(200).json({ accessToken });
+            res.status(200).json({ user, accessToken });
         } catch (error) {
             next(error);
         }

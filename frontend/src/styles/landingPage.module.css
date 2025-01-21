@@ -2,25 +2,10 @@
     padding: 16px 32px;
 }
 
-.landingPage {
-    position: relative;
-}
-
-.homeBannerImg {
-    position: absolute;
-    display: flex;
-    justify-content: end;
-    z-index: 0;
-    opacity: 50%;
-    width: 100%;
-}
-
-.homeBannerImg img {
-    max-height: 500px;
-}
 .spaceFromNav {
-    padding-top: 100px;
+    padding-top: 60px;
 }
+
 .homeSection {
     padding-top: 80px;
     text-align: center;

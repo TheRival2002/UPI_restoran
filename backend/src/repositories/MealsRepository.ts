@@ -6,7 +6,7 @@ export class MealsRepository {
     private readonly database = require("./../database/db");
 
     public async findAll(): Promise<Meal[]> {
-        const query = "SELECT * FROM meals";
+        const query = "SELECT * FROM meals ORDER BY id ASC";
         const response = await this.database.query(query);
 
         return response.rows;
@@ -46,11 +46,11 @@ export class MealsRepository {
 
         return response.rows[0].count === "0";
     }
-    public async findById(mealId: number): Promise<Meal | null> {
+    public async findById(mealId: number): Promise<Meal> {
         const query = `SELECT * FROM meals WHERE id = $1`;
         const values = [mealId];
         const response = await this.database.query(query, values);
 
-        return response.rows[0] || null;
+        return response.rows[0];
     }
 }

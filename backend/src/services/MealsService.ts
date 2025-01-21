@@ -51,7 +51,7 @@ export class MealsService {
 
         return validatedMeal;
     }
-    public async findbyId(mealId: number): Promise<Meal | null> {
+    public async findById(mealId: number): Promise<Meal> {
         const meal = await this.mealsRepository.findById(mealId);
 
         if (!meal) {

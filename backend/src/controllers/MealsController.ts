@@ -14,6 +14,7 @@ export class MealsController {
         this.mealsService = new MealsService();
 
         this.mealsRouter.get("/meals", this.findAll.bind(this));
+        this.mealsRouter.get("/meals/:id", this.findById.bind(this));
         this.mealsRouter.post(
             "/meals",
             this.authMiddleware,
@@ -26,7 +27,6 @@ export class MealsController {
             this.adminMiddleware,
             this.deleteMeal.bind(this)
         );
-        this.mealsRouter.get("/meals/:id", this.findbyId.bind(this));
     }
 
     private async findAll(_: Request, res: Response, next: NextFunction) {
@@ -63,10 +63,10 @@ export class MealsController {
         }
     }
 
-    private async findbyId(req: Request, res: Response, next: NextFunction) {
+    private async findById(req: Request, res: Response, next: NextFunction) {
         try {
             const mealId = +req.params.id;
-            const meal = await this.mealsService.findbyId(mealId);
+            const meal = await this.mealsService.findById(mealId);
 
             res.status(200).json(meal);
         } catch (error) {
