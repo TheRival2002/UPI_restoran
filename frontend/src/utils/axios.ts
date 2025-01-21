@@ -29,5 +29,6 @@ export const endpoints = {
     },
     meals: {
         all: '/api/meals',
+        daily:'/api/daily-offers',
     },
 };
