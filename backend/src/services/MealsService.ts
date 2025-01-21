@@ -1,8 +1,12 @@
-import { Meal } from '../entities/Meal';
-import { ConflictError, ValidationError } from '../errors/HttpError';
-import { MealCategoriesRepository } from '../repositories/MealCategoriesRepository';
-import { MealsRepository } from '../repositories/MealsRepository';
-import { validateCreateMeal } from '../validation_schema/Meal';
+import { Meal } from "../entities/Meal";
+import {
+    ConflictError,
+    NotFoundError,
+    ValidationError,
+} from "../errors/HttpError";
+import { MealCategoriesRepository } from "../repositories/MealCategoriesRepository";
+import { MealsRepository } from "../repositories/MealsRepository";
+import { validateCreateMeal } from "../validation_schema/Meal";
 
 // --------------------------------------------------------------------------------
 
@@ -19,8 +23,7 @@ export class MealsService {
     public async createMeal(meal: Meal) {
         const validatedMeal = await this.mealIsValid(meal);
 
-        if (!validatedMeal)
-            return;
+        if (!validatedMeal) return;
 
         return this.mealsRepository.createMeal(validatedMeal);
     }
@@ -32,19 +35,28 @@ export class MealsService {
     private async mealIsValid(meal: Meal): Promise<Meal> {
         const { error, value: validatedMeal } = validateCreateMeal(meal);
 
-        if (error)
-            throw new ValidationError(error.message);
+        if (error) throw new ValidationError(error.message);
 
-        const mealNameIsUnique = await this.mealsRepository.mealNameIsUnique(validatedMeal.name);
-        if (!mealNameIsUnique)
-            throw new ConflictError('Meal already exists!');
+        const mealNameIsUnique = await this.mealsRepository.mealNameIsUnique(
+            validatedMeal.name
+        );
+        if (!mealNameIsUnique) throw new ConflictError("Meal already exists!");
 
-        const mealCategoryExists = await this.mealCategoriesRepository.mealCategoryExists(validatedMeal.mealCategoryId);
+        const mealCategoryExists =
+            await this.mealCategoriesRepository.mealCategoryExists(
+                validatedMeal.mealCategoryId
+            );
         if (!mealCategoryExists)
-            throw new ValidationError('Meal category does not exist!');
+            throw new ValidationError("Meal category does not exist!");
 
         return validatedMeal;
     }
+    public async findById(mealId: number): Promise<Meal> {
+        const meal = await this.mealsRepository.findById(mealId);
 
-
+        if (!meal) {
+            throw new NotFoundError("Meal is not found!");
+        }
+        return meal;
+    }
 }
