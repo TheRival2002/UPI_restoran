@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useMemo, useReducer } from 'react';
+import React, { createContext, useCallback, useEffect, useMemo, useReducer } from 'react';
 import api, { endpoints } from '@utils/axios.ts';
 import { UserLoginDataDTO, UserRegisterDataDTO } from '../types/user.dto.ts';
 
@@ -17,12 +17,14 @@ type AuthContextType = {
 }
 
 enum Types {
+    INITIAL = 'INITIAL',
     REGISTER = 'REGISTER',
     LOGIN = 'LOGIN',
     LOGOUT = 'LOGOUT',
 }
 
 type Payload = {
+    [Types.INITIAL]: { user: AuthenticatedUser };
     [Types.LOGIN]: { user: AuthenticatedUser };
     [Types.REGISTER]: { user: AuthenticatedUser };
     [Types.LOGOUT]: { user: null };
@@ -32,13 +34,17 @@ type ActionsType = {
     type: keyof Payload;
     payload: Payload[keyof Payload];
 }
+
 type AuthState = {
     user: AuthenticatedUser;
 }
 
 const initialState: AuthState = { user: null };
+
 const reducer = (state: AuthState, action: ActionsType) => {
     switch (action.type) {
+        case Types.INITIAL:
+            return { user: action.payload.user };
         case Types.REGISTER:
             return { user: action.payload.user };
         case Types.LOGIN:
@@ -49,10 +55,28 @@ const reducer = (state: AuthState, action: ActionsType) => {
             return state;
     }
 };
+
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [ state, dispatch ] = useReducer(reducer, initialState);
+
+    const initialize = useCallback(async () => {
+        try {
+            const response = await api.get(endpoints.auth.check);
+            const { user } = response.data;
+
+            dispatch({ type: Types.INITIAL, payload: { user }});
+        } catch (error) {
+            console.error('Error while initializing AuthProvider:', error);
+        }
+    }, []);
+
+    useEffect(() => {
+
+        initialize();
+
+    }, [ initialize ]);
 
     const register = useCallback(async (userData: UserRegisterDataDTO) => {
         const response = await api.post(endpoints.auth.register, userData);
@@ -79,6 +103,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const logout = useCallback(() => {
+        localStorage.removeItem('accessToken');
+
         dispatch({ type: Types.LOGOUT, payload: { user: null }});
     }, []);
 

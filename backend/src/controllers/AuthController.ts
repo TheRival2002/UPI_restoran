@@ -20,6 +20,7 @@ export class AuthController {
         this.authRouter.post('/login', this.login.bind(this));
         this.authRouter.get('/logout', this.authMiddleware, this.logout.bind(this));
         this.authRouter.get('/refresh-token', this.refreshToken.bind(this));
+        this.authRouter.get('/check', this.checkIsAuthenticated.bind(this));
     }
 
     private async register(req: Request, res: Response, next: NextFunction) {
@@ -76,7 +77,6 @@ export class AuthController {
 
             const refreshToken = cookies.jwt;
 
-            // TODO na frontu spremit accessToken
             this.jwt.verify(
                 refreshToken,
                 process.env.REFRESH_TOKEN_SECRET,
@@ -90,6 +90,39 @@ export class AuthController {
                     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
                     res.json({ accessToken });
                 }
+            );
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    private checkIsAuthenticated(req: Request, res: Response, next: NextFunction) {
+        try {
+            const authHeader = req.headers['authorization'];
+
+            if (!authHeader) {
+                res.sendStatus(401);
+
+                return;
+            }
+
+            const token = authHeader?.split(' ')[1];
+
+            this.jwt.verify(
+                token,
+                process.env.ACCESS_TOKEN_SECRET,
+                async (err: Error, decoded: JwtUserDto) => {
+                    if (err) {
+                        return res.sendStatus(401);
+                    }
+
+                    req.user = decoded;
+
+                    const userId = decoded.id;
+                    const user = await this.authService.checkIsAuthenticated(userId);
+
+                    res.json({ user });
+                },
             );
         } catch (error) {
             next(error);
