@@ -22,26 +22,24 @@ describe('DELETE /meals/:id', () => {
     it('should delete a meal and return 204 if successful', async () => {
         const mealId = 1;
 
-        // Mock the service to simulate successful deletion
         jest.spyOn(MealsService.prototype, 'deleteMeal').mockResolvedValue();
 
         const response = await request(app).delete(`/meals/${mealId}`);
 
-        expect(response.status).toBe(204); // No Content
+        expect(response.status).toBe(204);
         expect(response.body).toEqual({});
     });
 
     it('should return 500 if an internal server error occurs', async () => {
         const mealId = 1;
 
-        // Mock the service to simulate a server error
         jest.spyOn(MealsService.prototype, 'deleteMeal').mockRejectedValue(
             new Error('Internal server error')
         );
 
         const response = await request(app).delete(`/meals/${mealId}`);
 
-        expect(response.status).toBe(500); // Internal Server Error
+        expect(response.status).toBe(500);
         expect(response.body).toEqual({ error: 'Internal server error' });
     });
 });

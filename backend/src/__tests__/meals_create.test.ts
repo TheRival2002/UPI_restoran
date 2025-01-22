@@ -4,7 +4,6 @@ import { createTestApp } from '../helpers/testApp';
 import { mockMeal } from './constants/meal';
 import { MealsService } from '../services/MealsService';
 
-// Mockiramo middleware
 jest.mock('../middleware/authMiddleware', () => {
     return jest.fn((_, __, next) => next());
 });
@@ -33,10 +32,9 @@ describe('POST /meals', () => {
     });
 
     it('should return 422 for invalid input', async () => {
-        // Mockiramo da se vrati `null` za nevalidni unos
         jest.spyOn(MealsService.prototype, 'createMeal').mockResolvedValue(undefined);
 
-        const invalidMeal = {}; // Prazan objekt kao nevažeći unos
+        const invalidMeal = {};
         const response = await request(app)
             .post('/meals')
             .send(invalidMeal);
