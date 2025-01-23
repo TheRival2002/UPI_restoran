@@ -5,6 +5,7 @@ import { FetchState } from 'types/common';
 import { Meal } from 'types/meal';
 import Grid from '@mui/material/Grid2';
 import { Box } from '@mui/material';
+import CustomSnackbarAlert from '@components/snackbar/CustomSnackbarAlert';
 
 export default function DailyOffer() {
     const [ meals, setMeals ] = useState<Meal[]>([]);
@@ -47,6 +48,14 @@ export default function DailyOffer() {
 
     return (
         <div className="container">
+            <CustomSnackbarAlert
+                isOpen={mealsFetchingState.isError}
+                onClose={handleCloseSnackbar}
+                alertMessage={'Error fetching meals'}
+                alertProps={{
+                    severity: 'error',
+                }}
+            />
             <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
                 <h1>Daily Offer</h1>
                 <Grid
