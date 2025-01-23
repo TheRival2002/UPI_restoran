@@ -26,4 +26,11 @@ export class UsersRepository {
 
         return response.rows[0];
     }
+
+    public async findById(id: number): Promise<User | undefined> {
+        const query = 'SELECT * FROM users WHERE id = $1';
+        const response = await this.database.query(query, [id]);
+
+        return response.rows[0];
+    }
 }
