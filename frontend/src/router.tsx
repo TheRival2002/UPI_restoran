@@ -5,7 +5,8 @@ import {
     RegisterPage,
     LandingPage,
     AllMealsPage,
-    SingleMealPage
+    SingleMealPage,
+    DailyOffers
 } from '@routes/elements.tsx';
 import { Navigate, useRoutes } from 'react-router';
 import { AuthLayout, CompactLayout, MainLayout } from './layouts';
@@ -43,6 +44,10 @@ export default function Router() {
                 {
                     path: 'meals/:id',
                     element: <SingleMealPage />,
+                },
+                {
+                    path: 'daily-offers',
+                    element: <DailyOffers />
                 },
             ]
         },

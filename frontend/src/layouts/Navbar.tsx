@@ -7,6 +7,7 @@ import ProcessIcon from '@mui/icons-material/AssignmentTurnedIn';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
+import DailyOfferIcon from '@mui/icons-material/Restaurant';
 import {
     Box,
     List,
@@ -81,6 +82,12 @@ export default function Navbar(){
             text: 'Meals',
             icon: <FastfoodIcon sx={{ color: 'var(--primary-orange)' }}/>,
             path: paths.meals.root,
+        },
+        {
+            id: 3,
+            text: 'Daily Offer',
+            icon: <DailyOfferIcon sx={{ color: 'var(--primary-orange)' }}/>,
+            path: paths.meals.daily,
         },
     ];
 
