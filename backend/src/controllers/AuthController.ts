@@ -71,7 +71,7 @@ export class AuthController {
         try {
             const cookies = req.cookies;
             if (!cookies?.jwt) {
-                res.sendStatus(401);
+                res.sendStatus(403);
                 return;
             }
 
