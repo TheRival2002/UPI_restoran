@@ -1,7 +1,7 @@
 import { useAuthContext } from '@hooks/useAuthContext.ts';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Button, Stack, Typography } from '@mui/material';
-import { paths } from '@routes/paths.ts';
+import { useLocation } from 'react-router';
 import EmptyProfileImg from '../../assets/images/empty_profile.jpg';
 
 // ---------------------------------------------------------------
@@ -20,13 +20,15 @@ export default function AccountDisplay({
 
     const { user, logout } = useAuthContext();
 
+    const { pathname } = useLocation();
+
     const handleLogout = async () => {
 
         try {
 
             await logout();
 
-            handleNavigate(paths.home.root);
+            handleNavigate(pathname);
 
         } catch (error) {
 
