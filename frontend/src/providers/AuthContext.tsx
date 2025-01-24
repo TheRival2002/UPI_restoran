@@ -14,6 +14,7 @@ type AuthContextType = {
     isAuthenticated: boolean;
     register: (userData: UserRegisterDataDTO) => Promise<void>;
     login: (userData: UserLoginDataDTO) => Promise<void>;
+    logout: () => Promise<void>;
 }
 
 enum Types {
@@ -116,7 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             isAuthenticated: !!state.user,
             register,
             login,
-            logout
+            logout,
         }),
         [ state.user, register, login, logout ]);
 

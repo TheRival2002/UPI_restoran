@@ -1,4 +1,5 @@
 import Logo from '@assets/images/landingPageImgs/Logo.svg';
+import { useAuthContext } from '@hooks/useAuthContext.ts';
 import HomeIcon from '@mui/icons-material/Home';
 import ContactIcon from '@mui/icons-material/Phone';
 import AboutIcon from '@mui/icons-material/Info';
@@ -19,6 +20,7 @@ import {
     IconButton,
     Collapse
 } from '@mui/material';
+import AccountDisplay from '@sections/auth/AccountDisplay.tsx';
 import { Fragment, ReactElement, useEffect, useState } from 'react';
 import c from '@styles/mainLayout.module.css';
 import { useLocation, useNavigate } from 'react-router';
@@ -49,6 +51,8 @@ export default function Navbar(){
     const [ collapseOpen, setCollapseOpen ] = useState(false);
 
     const navigate = useNavigate();
+
+    const { isAuthenticated } = useAuthContext();
 
     const { pathname } = useLocation();
 
@@ -144,7 +148,12 @@ export default function Navbar(){
                             <List component={'nav'} disablePadding>
                                 {menuOptions.map((item, parentIndex) => (
                                     <Fragment key={parentIndex}>
-                                        <ListItem disablePadding>
+                                        <ListItem
+                                            disablePadding
+                                            sx={{
+                                                mb: parentIndex === menuOptions.length - 1 ? 2 : 0,
+                                            }}
+                                        >
                                             <ListItemButton onClick={() => handleNavigate(item.path, item.targetId)}>
                                                 <ListItemIcon>{item.icon}</ListItemIcon>
                                                 <ListItemText primary={item.text} />
@@ -184,9 +193,13 @@ export default function Navbar(){
                                         }
                                     </Fragment>
                                 ))}
-                                <div className={c.signInWrapper}>
-                                    <button className={`button ${c.menuBtn}`} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
-                                </div>
+                                {
+                                    !isAuthenticated
+                                        ? <div className={c.signInWrapper}>
+                                            <button className={`button ${c.menuBtn}`} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
+                                        </div>
+                                        : <AccountDisplay handleNavigate={handleNavigate} />
+                                }
                             </List>
                         </Box>
                     </Drawer>
