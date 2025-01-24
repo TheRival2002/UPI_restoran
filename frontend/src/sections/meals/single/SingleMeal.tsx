@@ -3,7 +3,9 @@ import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
 import SingleMealCardImg from '@components/meal/SingleMealCardImg.tsx';
 import { Box, Typography } from '@mui/material';
 import SingleMealInfo from '@sections/meals/single/SingleMealInfo.tsx';
+import { PRICE_MULTIPLIER } from '@utils/constants.ts';
 import { useState } from 'react';
+import { useLocation } from 'react-router';
 import { Meal } from '../../../types/meal.ts';
 
 // ----------------------------------------------------------------------
@@ -18,7 +20,13 @@ export default function SingleMeal({
     // NAPOMENA - ovdje se drze podaci koji ce se poslat u kosaricu kad se napravi ta funkcionalnost (context kosarice) skupa s cijelim meal-om
     const [ mealQuantity, setMealQuantity ] = useState(1);
 
-    const mealTotalPrice = meal.price * mealQuantity;
+    const { state } = useLocation();
+    const { isInDailyOffer } = state || {};
+
+    const mealPrice = isInDailyOffer
+        ? (meal.price * PRICE_MULTIPLIER).toPrecision(2)
+        : meal.price;
+    const mealTotalPrice = Number(mealPrice) * mealQuantity;
 
     return (
         <Box

@@ -1,11 +1,10 @@
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { paths } from '@routes/paths.ts';
+import { PRICE_MULTIPLIER } from '@utils/constants.ts';
 import { Link } from 'react-router';
 import { Meal } from '../../types/meal.ts';
 
 // ----------------------------------------------------------------------
-
-const PRICE_MULTIPLIER = 0.85;
 
 type MealItemCardProps = {
     meal: Meal;
@@ -17,7 +16,7 @@ export default function MealCard({
     isInDailyOffer = false,
 }: MealItemCardProps) {
     return (
-        <Link to={paths.meals.single(meal.id)}>
+        <Link to={paths.meals.single(meal.id)} state={{ isInDailyOffer }}>
             <Card sx={{
                 position: 'relative',
                 borderRadius: '1em',
