@@ -24,9 +24,9 @@ export default function SingleMeal({
     const { isInDailyOffer } = state || {};
 
     const mealPrice = isInDailyOffer
-        ? (meal.price * PRICE_MULTIPLIER).toPrecision(2)
+        ? (meal.price * PRICE_MULTIPLIER).toPrecision(3)
         : meal.price;
-    const mealTotalPrice = Number(mealPrice) * mealQuantity;
+    const mealTotalPrice = (Number(mealPrice) * mealQuantity).toPrecision(3);
 
     return (
         <Box

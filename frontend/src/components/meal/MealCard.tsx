@@ -49,7 +49,7 @@ export default function MealCard({
                     }}
                 >
                     <Typography variant={'subtitle1'} fontWeight={'bold'}>
-                        {isInDailyOffer ? (meal.price * PRICE_MULTIPLIER).toPrecision(2) : meal.price}<Typography
+                        {isInDailyOffer ? (meal.price * PRICE_MULTIPLIER).toPrecision(3) : meal.price}<Typography
                             variant={'subtitle1'}
                             component={'span'}
                             fontWeight={'inherit'}
