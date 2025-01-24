@@ -53,7 +53,6 @@ export class AuthController {
 
     private logout(req: Request, res: Response, next: NextFunction) {
         try {
-            // TODO na frontu izbrisat accessToken
             const cookies = req.cookies;
             if (!cookies?.jwt) {
                 res.sendStatus(204);
