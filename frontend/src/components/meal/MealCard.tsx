@@ -5,12 +5,16 @@ import { Meal } from '../../types/meal.ts';
 
 // ----------------------------------------------------------------------
 
+const PRICE_MULTIPLIER = 0.85;
+
 type MealItemCardProps = {
     meal: Meal;
+    isInDailyOffer?: boolean;
 }
 
 export default function MealCard({
     meal,
+    isInDailyOffer = false,
 }: MealItemCardProps) {
     return (
         <Link to={paths.meals.single(meal.id)}>
@@ -46,7 +50,7 @@ export default function MealCard({
                     }}
                 >
                     <Typography variant={'subtitle1'} fontWeight={'bold'}>
-                        {meal.price}<Typography
+                        {isInDailyOffer ? (meal.price * PRICE_MULTIPLIER).toPrecision(2) : meal.price}<Typography
                             variant={'subtitle1'}
                             component={'span'}
                             fontWeight={'inherit'}
