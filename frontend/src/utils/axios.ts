@@ -61,6 +61,7 @@ export const endpoints = {
     },
     meals: {
         all: '/api/meals',
+        single: (id: number) => `/api/meals/${id}`,
         daily:'/api/daily-offers',
     },
 };
