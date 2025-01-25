@@ -48,7 +48,6 @@ export default function AllMeals() {
         isError: false,
     });
     const [ filtersAreOpen, setFiltersAreOpen ] = useState(false);
-
     const { searchValue, setSearchValue, filteredMeals, selectedFilter, setSelectedFilter } = useFilteredMeals(allMeals);
 
     const handleCloseSnackbar = () => {
@@ -58,8 +57,22 @@ export default function AllMeals() {
         }));
     };
 
-    const handleFilterClick = () => {
+    const handleFilterCardClick = (clickedCard: number) => {
+        if (selectedFilter === clickedCard) {
+            setSelectedFilter(null);
+        } else {
+            setSelectedFilter(clickedCard);
+        }
+
+    };
+
+    const handleFilterIconClick = () => {
+        if (selectedFilter) {
+            setSelectedFilter(null);
+        }
+
         setFiltersAreOpen(!filtersAreOpen);
+
     };
 
     useEffect(() => {
@@ -113,7 +126,7 @@ export default function AllMeals() {
                     placeholder={'Search meals by name'}
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}></input>
-                <img src={filterIcon} width={38} height={38} onClick={handleFilterClick}></img>
+                <img src={filterIcon} width={38} height={38} onClick={handleFilterIconClick}></img>
             </div>
 
             {filtersAreOpen && (
@@ -123,7 +136,7 @@ export default function AllMeals() {
                             key={filterCard.name}
                             imgUrl={filterCard.imgUrl}
                             name={filterCard.name}
-                            onClick={() => setSelectedFilter(filterCard.id)}
+                            onClick={() => handleFilterCardClick(filterCard.id)}
                             isClicked={selectedFilter === filterCard.id}
                         />
                     ))}
