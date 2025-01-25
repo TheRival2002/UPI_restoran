@@ -11,7 +11,7 @@ export const useFilteredMeals = (allMeals: Meal[]) => {
             let filtered = allMeals;
 
             if (selectedFilter != null) {
-                filtered = filtered.filter((meal) => meal.mealCategoryId == selectedFilter);
+                filtered = filtered.filter((meal) => meal.meal_category_id == selectedFilter);
             }
 
             if (searchValue.trim() !== '') {
