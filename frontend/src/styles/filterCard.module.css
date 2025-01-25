@@ -1,0 +1,13 @@
+.filterCard {
+    display          : flex;
+    flex-direction   : column;
+    justify-content  : space-between;
+    padding          : 10px;
+    align-items      : center;
+    background-color : var(--orange-opacity);
+    border-radius    : 25px;
+    width            : 6rem;
+    border           : none;
+    font-family      : Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    cursor           : pointer;
+}

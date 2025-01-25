@@ -24,3 +24,15 @@
     padding-left     : 10px;
 
 }
+
+.mealsSearchBar:focus {
+    outline : none;
+}
+
+.filterCardsWrapper {
+    display         : flex;
+    margin-top      : 40px;;
+    gap             : 10px;
+    justify-content : center;
+    padding         : 10px;
+}

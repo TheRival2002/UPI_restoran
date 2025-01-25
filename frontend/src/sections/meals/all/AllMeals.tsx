@@ -8,10 +8,38 @@ import { useEffect, useState } from 'react';
 import { FetchState } from '../../../types/common.ts';
 import { Meal } from '../../../types/meal.ts';
 import c from './../../../styles/allMeals.module.css';
-import searchIcon from './../../../assets/images/meals/search-icon.svg';
+import filterIcon from './../../../assets/images/meals/filter-icon.png';
 import { useFilteredMeals } from '@hooks/useFilteredMeals.ts';
+import FilterCard from '@components/filterCard/FilterCard.tsx';
+import soupIcon from './../../../assets/images/meals/soup.png';
+import meatIcon from './../../../assets/images/meals/meat.png';
+import dessertIcon from './../../../assets/images/meals/dessert.png';
+import drinksIcon from './../../../assets/images/meals/drinks.png';
 
 // ----------------------------------------------------------------------
+
+const filterCards = [
+    {
+        id: 1,
+        imgUrl: soupIcon,
+        name: 'Appetizers',
+    },
+    {
+        id: 2,
+        imgUrl: meatIcon,
+        name: 'Main',
+    },
+    {
+        id: 3,
+        imgUrl: dessertIcon,
+        name: 'Desserts',
+    },
+    {
+        id: 4,
+        imgUrl: drinksIcon,
+        name: 'Drinks',
+    }
+];
 
 export default function AllMeals() {
     const [ allMeals, setAllMeals ] = useState<Meal[]>([]);
@@ -81,7 +109,17 @@ export default function AllMeals() {
                     placeholder={'Search meals by name'}
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}></input>
-                <img src={searchIcon} width={28} height={28}></img>
+                <img src={filterIcon} width={38} height={38}></img>
+            </div>
+
+            <div className={c.filterCardsWrapper}>
+                {filterCards.map((filterCard) => (
+                    <FilterCard
+                        key={filterCard.name}
+                        imgUrl={filterCard.imgUrl}
+                        name={filterCard.name}
+                    />
+                ))}
             </div>
             <Grid
                 container

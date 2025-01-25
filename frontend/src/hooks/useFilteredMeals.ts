@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 export const useFilteredMeals = (allMeals: Meal[]) => {
     const [ searchValue, setSearchValue ] = useState('');
+    const [ selectedFilter, setSelectedFilter ] = useState('');
     const [ filteredMeals, setFilteredMeals ] = useState<Meal[]>([]);
 
     useEffect(() => {
