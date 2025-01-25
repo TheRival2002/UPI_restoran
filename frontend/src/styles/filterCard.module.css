@@ -11,3 +11,8 @@
     font-family      : Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     cursor           : pointer;
 }
+
+.activeFilterCard {
+    background-color : var(--primary-orange);
+    color            : white;
+}

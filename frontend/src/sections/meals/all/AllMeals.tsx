@@ -10,11 +10,11 @@ import { Meal } from '../../../types/meal.ts';
 import c from './../../../styles/allMeals.module.css';
 import filterIcon from './../../../assets/images/meals/filter-icon.png';
 import { useFilteredMeals } from '@hooks/useFilteredMeals.ts';
-import FilterCard from '@components/filterCard/FilterCard.tsx';
 import soupIcon from './../../../assets/images/meals/soup.png';
 import meatIcon from './../../../assets/images/meals/meat.png';
 import dessertIcon from './../../../assets/images/meals/dessert.png';
 import drinksIcon from './../../../assets/images/meals/drinks.png';
+import FilterCard from '@components/filterCard/FilterCard.tsx';
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ export default function AllMeals() {
         isError: false,
     });
 
-    const { searchValue, setSearchValue, filteredMeals } = useFilteredMeals(allMeals);
+    const { searchValue, setSearchValue, filteredMeals, selectedFilter, setSelectedFilter } = useFilteredMeals(allMeals);
 
     const handleCloseSnackbar = () => {
         setMealsFetchingState((prevState) => ({
@@ -118,6 +118,8 @@ export default function AllMeals() {
                         key={filterCard.name}
                         imgUrl={filterCard.imgUrl}
                         name={filterCard.name}
+                        isClicked={selectedFilter === filterCard.id}
+                        onClick={() => setSelectedFilter(filterCard.id)}
                     />
                 ))}
             </div>
@@ -134,7 +136,8 @@ export default function AllMeals() {
                         />
                     </Grid>
                 ))}
-            </Grid>
+            </Grid>;
         </Box>
-    );
+    )
+    ;
 }

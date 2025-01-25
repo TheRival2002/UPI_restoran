@@ -3,24 +3,28 @@ import { useEffect, useState } from 'react';
 
 export const useFilteredMeals = (allMeals: Meal[]) => {
     const [ searchValue, setSearchValue ] = useState('');
-    const [ selectedFilter, setSelectedFilter ] = useState('');
+    const [ selectedFilter, setSelectedFilter ] = useState<number | null>(null);
     const [ filteredMeals, setFilteredMeals ] = useState<Meal[]>([]);
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            if (searchValue.trim() === '') {
-                setFilteredMeals(allMeals);
-            } else {
-                setFilteredMeals(
-                    allMeals.filter((meal) =>
-                        meal.name.toLowerCase().includes(searchValue.toLowerCase())
-                    )
+            let filtered = allMeals;
+
+            if (selectedFilter != null) {
+                filtered = filtered.filter((meal) => meal.mealCategoryId == selectedFilter);
+            }
+
+            if (searchValue.trim() !== '') {
+                filtered = filtered.filter((meal) =>
+                    meal.name.toLowerCase().includes(searchValue.toLowerCase())
                 );
             }
+
+            setFilteredMeals(filtered);
         }, 200);
 
         return () => clearTimeout(timeoutId);
-    }, [ searchValue, allMeals ]);
+    }, [ searchValue, selectedFilter, allMeals ]);
 
-    return { searchValue, setSearchValue, filteredMeals };
+    return { searchValue, setSearchValue, filteredMeals, selectedFilter, setSelectedFilter };
 };
