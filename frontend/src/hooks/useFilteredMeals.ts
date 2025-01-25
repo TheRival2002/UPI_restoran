@@ -10,7 +10,7 @@ export const useFilteredMeals = (allMeals: Meal[]) => {
         const timeoutId = setTimeout(() => {
             let filtered = allMeals;
 
-            if (selectedFilter != null) {
+            if (selectedFilter) {
                 filtered = filtered.filter((meal) => meal.meal_category_id == selectedFilter);
             }
 

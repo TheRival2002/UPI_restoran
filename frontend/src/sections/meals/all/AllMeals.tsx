@@ -136,7 +136,7 @@ export default function AllMeals() {
                         />
                     </Grid>
                 ))}
-            </Grid>;
+            </Grid>
         </Box>
     )
     ;
