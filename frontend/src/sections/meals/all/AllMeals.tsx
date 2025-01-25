@@ -9,6 +9,7 @@ import { FetchState } from '../../../types/common.ts';
 import { Meal } from '../../../types/meal.ts';
 import c from './../../../styles/allMeals.module.css';
 import searchIcon from './../../../assets/images/meals/search-icon.svg';
+import { useFilteredMeals } from '@hooks/useFilteredMeals.ts';
 
 // ----------------------------------------------------------------------
 
@@ -18,8 +19,8 @@ export default function AllMeals() {
         isLoading: false,
         isError: false,
     });
-    const [ filteredMeals, setFilteredMeals ] = useState<Meal[]>([]);
-    const [ searchValue, setSearchValue ] = useState('');
+
+    const { searchValue, setSearchValue, filteredMeals } = useFilteredMeals(allMeals);
 
     const handleCloseSnackbar = () => {
         setMealsFetchingState((prevState) => ({
@@ -61,22 +62,6 @@ export default function AllMeals() {
         })();
 
     }, []);
-
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if (searchValue.trim() === '') {
-                setFilteredMeals(allMeals);
-            } else {
-                setFilteredMeals(
-                    allMeals.filter((meal) =>
-                        meal.name.toLowerCase().includes(searchValue.toLowerCase())
-                    )
-                );
-            }
-        }, 200);
-
-        return () => clearTimeout(timeoutId);
-    }, [ searchValue, allMeals ]);
 
     return (
         <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
