@@ -7,6 +7,8 @@ import api, { endpoints } from '@utils/axios.ts';
 import { useEffect, useState } from 'react';
 import { FetchState } from '../../../types/common.ts';
 import { Meal } from '../../../types/meal.ts';
+import c from './../../../styles/allMeals.module.css';
+import searchIcon from './../../../assets/images/meals/search-icon.svg';
 
 // ----------------------------------------------------------------------
 
@@ -69,8 +71,12 @@ export default function AllMeals() {
                 }}
             />
 
-            <MealsHeader />
+            <MealsHeader/>
 
+            <div className={c.searchBarWrapper}>
+                <input type={'text'} className={c.mealsSearchBar}></input>
+                <img src={searchIcon} width={28} height={28}></img>
+            </div>
             <Grid
                 container
                 columnSpacing={{ xs: 2, sm: 3, lg: 4 }}
