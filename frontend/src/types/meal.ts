@@ -4,5 +4,5 @@ export type Meal = {
     description?: string;
     price: number;
     image?: string;
-    mealCategoryId: number;
+    meal_category_id: number;
 }

@@ -6,7 +6,7 @@ import { Meal } from '../../types/meal.ts';
 
 // ----------------------------------------------------------
 
-export default function SingleMealPage(){
+export default function SingleMealPage() {
     const { id } = useParams();
 
     // TODO maknit hardkodirano i fetchati meal sa mealId kad bude napravljen API
@@ -16,17 +16,17 @@ export default function SingleMealPage(){
         description: 'Crispy rolls filled with vegetables and served with sweet chili sauce.',
         price: 10.99,
         image: 'spring_rolls.jpeg',
-        mealCategoryId: 1,
+        meal_category_id: 1,
     };
 
-    return(
+    return (
         <>
             <Helmet>
                 <title>Meal - {id}</title>
             </Helmet>
 
             <Box className={'container'}>
-                <SingleMeal meal={meal} />
+                <SingleMeal meal={meal}/>
             </Box>
         </>
     );
