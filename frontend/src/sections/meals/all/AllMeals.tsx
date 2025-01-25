@@ -13,11 +13,13 @@ import searchIcon from './../../../assets/images/meals/search-icon.svg';
 // ----------------------------------------------------------------------
 
 export default function AllMeals() {
-    const [ meals, setMeals ] = useState<Meal[]>([]);
+    const [ allMeals, setAllMeals ] = useState<Meal[]>([]);
     const [ mealsFetchingState, setMealsFetchingState ] = useState<FetchState>({
         isLoading: false,
         isError: false,
     });
+    const [ filteredMeals, setFilteredMeals ] = useState<Meal[]>([]);
+    const [ searchValue, setSearchValue ] = useState('');
 
     const handleCloseSnackbar = () => {
         setMealsFetchingState((prevState) => ({
@@ -39,7 +41,7 @@ export default function AllMeals() {
 
                 const response = await api.get(endpoints.meals.all);
 
-                setMeals(response.data);
+                setAllMeals(response.data);
                 setMealsFetchingState((prevState) => ({
                     ...prevState,
                     isLoading: false,
@@ -60,6 +62,22 @@ export default function AllMeals() {
 
     }, []);
 
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (searchValue.trim() === '') {
+                setFilteredMeals(allMeals);
+            } else {
+                setFilteredMeals(
+                    allMeals.filter((meal) =>
+                        meal.name.toLowerCase().includes(searchValue.toLowerCase())
+                    )
+                );
+            }
+        }, 200);
+
+        return () => clearTimeout(timeoutId);
+    }, [ searchValue, allMeals ]);
+
     return (
         <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
             <CustomSnackbarAlert
@@ -74,7 +92,10 @@ export default function AllMeals() {
             <MealsHeader/>
 
             <div className={c.searchBarWrapper}>
-                <input type={'text'} className={c.mealsSearchBar}></input>
+                <input type={'text'} className={c.mealsSearchBar}
+                    placeholder={'Search meals by name'}
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}></input>
                 <img src={searchIcon} width={28} height={28}></img>
             </div>
             <Grid
@@ -83,7 +104,7 @@ export default function AllMeals() {
                 rowSpacing={{ xs: 2, sm: 3, lg: 4 }}
                 mt={{ xs: 4, sm: 6 }}
             >
-                {meals.map((meal) => (
+                {filteredMeals.map((meal) => (
                     <Grid key={meal.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                         <MealCard
                             meal={meal}
