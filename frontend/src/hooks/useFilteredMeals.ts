@@ -7,23 +7,19 @@ export const useFilteredMeals = (allMeals: Meal[]) => {
     const [ filteredMeals, setFilteredMeals ] = useState<Meal[]>([]);
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            let filtered = allMeals;
+        let filtered = allMeals;
 
-            if (selectedFilter) {
-                filtered = filtered.filter((meal) => meal.meal_category_id == selectedFilter);
-            }
+        if (selectedFilter) {
+            filtered = filtered.filter((meal) => meal.meal_category_id == selectedFilter);
+        }
 
-            if (searchValue.trim() !== '') {
-                filtered = filtered.filter((meal) =>
-                    meal.name.toLowerCase().includes(searchValue.toLowerCase())
-                );
-            }
+        if (searchValue.trim() !== '') {
+            filtered = filtered.filter((meal) =>
+                meal.name.toLowerCase().includes(searchValue.toLowerCase())
+            );
+        }
 
-            setFilteredMeals(filtered);
-        }, 200);
-
-        return () => clearTimeout(timeoutId);
+        setFilteredMeals(filtered);
     }, [ searchValue, selectedFilter, allMeals ]);
 
     return { searchValue, setSearchValue, filteredMeals, selectedFilter, setSelectedFilter };
