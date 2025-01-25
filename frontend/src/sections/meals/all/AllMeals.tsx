@@ -47,6 +47,7 @@ export default function AllMeals() {
         isLoading: false,
         isError: false,
     });
+    const [ filtersAreOpen, setFiltersAreOpen ] = useState(false);
 
     const { searchValue, setSearchValue, filteredMeals, selectedFilter, setSelectedFilter } = useFilteredMeals(allMeals);
 
@@ -55,6 +56,10 @@ export default function AllMeals() {
             ...prevState,
             isError: false,
         }));
+    };
+
+    const handleFilterClick = () => {
+        setFiltersAreOpen(!filtersAreOpen);
     };
 
     useEffect(() => {
@@ -90,7 +95,6 @@ export default function AllMeals() {
         })();
 
     }, []);
-
     return (
         <Box mt={{ xs: 2, sm: 4 }} mb={{ xs: 6, sm: 8 }}>
             <CustomSnackbarAlert
@@ -109,21 +113,23 @@ export default function AllMeals() {
                     placeholder={'Search meals by name'}
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}></input>
-                <img src={filterIcon} width={38} height={38}></img>
+                <img src={filterIcon} width={38} height={38} onClick={handleFilterClick}></img>
             </div>
 
-            <div className={c.filterCardsWrapper}>
-                {filterCards.map((filterCard) => (
-                    <FilterCard
-                        key={filterCard.name}
-                        imgUrl={filterCard.imgUrl}
-                        name={filterCard.name}
-                        onClick={() => setSelectedFilter(filterCard.id)}
-                        isClicked={selectedFilter === filterCard.id}
-                    />
-                ))}
+            {filtersAreOpen && (
+                <div className={c.filterCardsWrapper}>
+                    {filterCards.map((filterCard) => (
+                        <FilterCard
+                            key={filterCard.name}
+                            imgUrl={filterCard.imgUrl}
+                            name={filterCard.name}
+                            onClick={() => setSelectedFilter(filterCard.id)}
+                            isClicked={selectedFilter === filterCard.id}
+                        />
+                    ))}
 
-            </div>
+                </div>
+            )}
             <Grid
                 container
                 columnSpacing={{ xs: 2, sm: 3, lg: 4 }}
