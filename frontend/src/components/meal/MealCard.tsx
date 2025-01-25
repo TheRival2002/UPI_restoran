@@ -18,6 +18,9 @@ export default function MealCard({
                 position: 'relative',
                 borderRadius: '1em',
                 boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)',
+                '&:hover': {
+                    boxShadow: '0px 8px 20px 8px rgba(0, 0, 0, 0.25)',
+                },
             }}>
                 <CardMedia
                     component={'img'}
