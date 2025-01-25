@@ -118,10 +118,11 @@ export default function AllMeals() {
                         key={filterCard.name}
                         imgUrl={filterCard.imgUrl}
                         name={filterCard.name}
-                        isClicked={selectedFilter === filterCard.id}
                         onClick={() => setSelectedFilter(filterCard.id)}
+                        isClicked={selectedFilter === filterCard.id}
                     />
                 ))}
+
             </div>
             <Grid
                 container
