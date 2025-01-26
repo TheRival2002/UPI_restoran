@@ -8,17 +8,12 @@ import { useState } from 'react';
 import { useLocation } from 'react-router';
 import { Meal } from '../../../types/meal.ts';
 import { useCartContext } from '@hooks/useCartContext.ts';
+import { CartItem } from '../../../types/cart.dto.ts';
 
 // ----------------------------------------------------------------------
 
 type SingleMealProps = {
     meal: Meal;
-}
-
-type CartItem = {
-    meal: Meal;
-    quantity: number;
-    totalPrice: number;
 }
 
 export default function SingleMeal({

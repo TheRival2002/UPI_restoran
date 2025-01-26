@@ -1,11 +1,5 @@
 import { createContext, useMemo, useState } from 'react';
-import { Meal } from '../types/meal.ts';
-
-type CartItem = {
-    meal: Meal;
-    quantity: number;
-    totalPrice: number;
-}
+import { CartItem } from '../types/cart.dto.ts';
 
 type CartContext = {
     cart: CartItem[];
