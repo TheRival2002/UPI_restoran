@@ -151,7 +151,7 @@ export default function Navbar(){
                                         <ListItem
                                             disablePadding
                                             sx={{
-                                                mb: parentIndex === menuOptions.length - 1 ? 2 : 0,
+                                                mb: parentIndex === (menuOptions.length - 1) ? 2 : 0,
                                             }}
                                         >
                                             <ListItemButton onClick={() => handleNavigate(item.path, item.targetId)}>
