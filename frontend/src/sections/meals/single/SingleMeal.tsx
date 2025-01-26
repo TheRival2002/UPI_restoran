@@ -3,7 +3,7 @@ import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
 import SingleMealCardImg from '@components/meal/SingleMealCardImg.tsx';
 import { Box, Typography } from '@mui/material';
 import SingleMealInfo from '@sections/meals/single/SingleMealInfo.tsx';
-import { PRICE_MULTIPLIER } from '@utils/constants.ts';
+import { getDiscountedPrice } from '@utils/general-functions.ts';
 import { useState } from 'react';
 import { useLocation } from 'react-router';
 import { Meal } from '../../../types/meal.ts';
@@ -24,7 +24,7 @@ export default function SingleMeal({
     const { isInDailyOffer } = state || {};
 
     const mealPrice = isInDailyOffer
-        ? (meal.price * PRICE_MULTIPLIER).toPrecision(3)
+        ? getDiscountedPrice(meal.price)
         : meal.price;
     const mealTotalPrice = (Number(mealPrice) * mealQuantity).toPrecision(3);
 

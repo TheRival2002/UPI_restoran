@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { paths } from '@routes/paths.ts';
-import { PRICE_MULTIPLIER } from '@utils/constants.ts';
+import { getDiscountedPrice } from '@utils/general-functions.ts';
 import { Link } from 'react-router';
 import { Meal } from '../../types/meal.ts';
 
@@ -52,7 +52,7 @@ export default function MealCard({
                     }}
                 >
                     <Typography variant={'subtitle1'} fontWeight={'bold'}>
-                        {isInDailyOffer ? (meal.price * PRICE_MULTIPLIER).toPrecision(3) : meal.price}<Typography
+                        {isInDailyOffer ? getDiscountedPrice(meal.price) : meal.price}<Typography
                             variant={'subtitle1'}
                             component={'span'}
                             fontWeight={'inherit'}
