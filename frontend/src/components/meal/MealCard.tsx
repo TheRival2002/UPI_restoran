@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { paths } from '@routes/paths.ts';
+import { getDiscountedPrice } from '@utils/general-functions.ts';
 import { Link } from 'react-router';
 import { Meal } from '../../types/meal.ts';
 
@@ -7,17 +8,22 @@ import { Meal } from '../../types/meal.ts';
 
 type MealItemCardProps = {
     meal: Meal;
+    isInDailyOffer?: boolean;
 }
 
 export default function MealCard({
     meal,
+    isInDailyOffer = false,
 }: MealItemCardProps) {
     return (
-        <Link to={paths.meals.single(meal.id)}>
+        <Link to={paths.meals.single(meal.id)} state={{ isInDailyOffer }}>
             <Card sx={{
                 position: 'relative',
                 borderRadius: '1em',
                 boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)',
+                '&:hover': {
+                    boxShadow: '0px 8px 20px 8px rgba(0, 0, 0, 0.25)',
+                },
             }}>
                 <CardMedia
                     component={'img'}
@@ -46,7 +52,7 @@ export default function MealCard({
                     }}
                 >
                     <Typography variant={'subtitle1'} fontWeight={'bold'}>
-                        {meal.price}<Typography
+                        {isInDailyOffer ? getDiscountedPrice(meal.price) : meal.price}<Typography
                             variant={'subtitle1'}
                             component={'span'}
                             fontWeight={'inherit'}

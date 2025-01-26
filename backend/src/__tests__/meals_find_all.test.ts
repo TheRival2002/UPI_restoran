@@ -30,7 +30,7 @@ describe('MealsController - findAll', () => {
                 description: 'Cheesy and delicious',
                 price: 10.99,
                 image: 'pizza.jpg',
-                mealCategoryId: 1,
+                meal_category_id: 1,
             },
             {
                 id: 2,
@@ -38,7 +38,7 @@ describe('MealsController - findAll', () => {
                 description: 'Juicy beef burger',
                 price: 8.99,
                 image: 'burger.jpg',
-                mealCategoryId: 2,
+                meal_category_id: 2,
             },
         ];
 

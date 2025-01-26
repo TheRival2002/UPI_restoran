@@ -1,12 +1,8 @@
-import { Meal } from "../entities/Meal";
-import {
-    ConflictError,
-    NotFoundError,
-    ValidationError,
-} from "../errors/HttpError";
-import { MealCategoriesRepository } from "../repositories/MealCategoriesRepository";
-import { MealsRepository } from "../repositories/MealsRepository";
-import { validateCreateMeal } from "../validation_schema/Meal";
+import { Meal } from '../entities/Meal';
+import { ConflictError, NotFoundError, ValidationError, } from '../errors/HttpError';
+import { MealCategoriesRepository } from '../repositories/MealCategoriesRepository';
+import { MealsRepository } from '../repositories/MealsRepository';
+import { validateCreateMeal } from '../validation_schema/Meal';
 
 // --------------------------------------------------------------------------------
 
@@ -40,22 +36,23 @@ export class MealsService {
         const mealNameIsUnique = await this.mealsRepository.mealNameIsUnique(
             validatedMeal.name
         );
-        if (!mealNameIsUnique) throw new ConflictError("Meal already exists!");
+        if (!mealNameIsUnique) throw new ConflictError('Meal already exists!');
 
         const mealCategoryExists =
             await this.mealCategoriesRepository.mealCategoryExists(
-                validatedMeal.mealCategoryId
+                validatedMeal.meal_category_id
             );
         if (!mealCategoryExists)
-            throw new ValidationError("Meal category does not exist!");
+            throw new ValidationError('Meal category does not exist!');
 
         return validatedMeal;
     }
+
     public async findById(mealId: number): Promise<Meal> {
         const meal = await this.mealsRepository.findById(mealId);
 
         if (!meal) {
-            throw new NotFoundError("Meal is not found!");
+            throw new NotFoundError('Meal is not found!');
         }
         return meal;
     }

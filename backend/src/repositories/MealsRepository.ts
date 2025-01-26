@@ -20,7 +20,7 @@ export class MealsRepository {
             meal.description,
             meal.price,
             meal.image,
-            meal.mealCategoryId,
+            meal.meal_category_id,
         ];
         const response = await this.database.query(query, values);
 
