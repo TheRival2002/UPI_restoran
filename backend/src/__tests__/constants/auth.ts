@@ -8,7 +8,7 @@ export const loginCredentials: LoginCredentialsDto = {
     password: 'password123',
 };
 
-export const jwtTokens: LoginResponseDto = {
+export const jwtTokens: Omit<LoginResponseDto, 'user'> = {
     accessToken: 'accessToken',
     refreshToken: 'refreshToken',
 };
