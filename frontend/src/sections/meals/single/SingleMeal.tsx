@@ -7,11 +7,18 @@ import { getDiscountedPrice } from '@utils/general-functions.ts';
 import { useState } from 'react';
 import { useLocation } from 'react-router';
 import { Meal } from '../../../types/meal.ts';
+import { useCartContext } from '@hooks/useCartContext.ts';
 
 // ----------------------------------------------------------------------
 
 type SingleMealProps = {
     meal: Meal;
+}
+
+type CartItem = {
+    meal: Meal;
+    quantity: number;
+    totalPrice: number;
 }
 
 export default function SingleMeal({
@@ -28,6 +35,18 @@ export default function SingleMeal({
         : meal.price;
     const mealTotalPrice = (Number(mealPrice) * mealQuantity).toPrecision(3);
 
+    const { cart, setCart } = useCartContext();
+
+    const handleAddToCart = () => {
+        const currentCartItem: CartItem = {
+            meal,
+            quantity: mealQuantity,
+            totalPrice: +(mealTotalPrice),
+        };
+        setCart([ ...cart, currentCartItem ]);
+
+    };
+    console.log(cart);
     return (
         <Box
             pt={{ xs: 3, sm: 4 }}
@@ -43,7 +62,7 @@ export default function SingleMeal({
                 flexDirection={{ xs: 'column', sm: 'row' }}
                 alignItems={{ xs: 'stretch', sm: 'center' }}
             >
-                <SingleMealCardImg meal={meal} />
+                <SingleMealCardImg meal={meal}/>
 
                 <SingleMealInfo meal={meal}>
                     <Typography variant={'h5'} fontWeight={'bold'} color={'primary.main'}>
@@ -53,7 +72,7 @@ export default function SingleMeal({
                             fontWeight={'inherit'}
                             ml={0.25}
                         >
-                            €
+                        €
                         </Typography>
                     </Typography>
 
@@ -69,7 +88,7 @@ export default function SingleMeal({
                 display={'flex'}
                 justifyContent={'center'}
             >
-                <AddToCartButton />
+                <AddToCartButton onClick={handleAddToCart}/>
             </Box>
         </Box>
     );
