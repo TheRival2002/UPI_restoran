@@ -30,7 +30,7 @@ export default function DailyOffer() {
 
             try {
                 const response = await api.get(endpoints.meals.daily);
-                setMeals(response.data.offers); 
+                setMeals(response.data.offers);
                 setMealsFetchingState((prevState) => ({
                     ...prevState,
                     isLoading: false,
@@ -44,7 +44,7 @@ export default function DailyOffer() {
                 }));
             }
         })();
-    }, []);   
+    }, []);
 
     return (
         <div className="container">
@@ -68,6 +68,7 @@ export default function DailyOffer() {
                         <Grid key={meal.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <MealCard
                                 meal={meal}
+                                isInDailyOffer
                             />
                         </Grid>
                     ))}
