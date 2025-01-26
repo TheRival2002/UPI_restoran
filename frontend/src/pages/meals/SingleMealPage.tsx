@@ -68,7 +68,7 @@ export default function SingleMealPage(){
         );
     }
 
-    return(
+    return (
         <>
             <Helmet>
                 <title>Meal - {id}</title>

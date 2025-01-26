@@ -4,7 +4,7 @@ export class Meal {
     description?: string;
     price: number;
     image?: string;
-    mealCategoryId: number;
+    meal_category_id: number;
 
     constructor(id: number, name: string, price: number, mealCategoryId: number, description?: string, image?: string) {
         this.id = id;
@@ -12,6 +12,6 @@ export class Meal {
         this.description = description;
         this.price = price;
         this.image = image;
-        this.mealCategoryId = mealCategoryId;
+        this.meal_category_id = mealCategoryId;
     }
 }
