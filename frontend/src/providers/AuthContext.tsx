@@ -104,7 +104,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const logout = useCallback(async () => {
-        await api.get(endpoints.auth.logout);
+        await api.post(endpoints.auth.logout);
 
         localStorage.removeItem('accessToken');
 

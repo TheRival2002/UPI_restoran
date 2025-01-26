@@ -6,7 +6,7 @@ import EmptyProfileImg from '../../assets/images/empty_profile.jpg';
 
 // ---------------------------------------------------------------
 
-const OPTIONS = [
+const MENU_OPTIONS = [
     { label: 'Dashboard', linkTo: '/dashboard' }, // FIXME
 ];
 
@@ -60,7 +60,7 @@ export default function AccountDisplay({
             </AccordionSummary>
             <AccordionDetails>
                 <Stack spacing={2}>
-                    {OPTIONS && OPTIONS.map((option, index) => (
+                    {MENU_OPTIONS && MENU_OPTIONS.map((option, index) => (
                         <Button
                             key={index}
                             fullWidth
