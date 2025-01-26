@@ -3,9 +3,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // ----------------------------------------------------------------------
 
-export default function AddToCartButton() {
+export default function AddToCartButton({ onClick }: {onClick: () => void}) {
     return (
         <Button
+            onClick={onClick}
             variant={'contained'}
             color={'primary'}
             fullWidth
