@@ -31,6 +31,7 @@ describe('POST /login', () => {
         mockAuthService.prototype.login.mockResolvedValue({
             accessToken: jwtTokens.accessToken,
             refreshToken: jwtTokens.refreshToken,
+            user: mockUser,
         });
 
         const response = await request(app)
@@ -40,6 +41,7 @@ describe('POST /login', () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
             accessToken: jwtTokens.accessToken,
+            user: mockUser,
         });
         expect(mockUser.email).toBe(loginCredentials.email);
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
@@ -53,6 +55,7 @@ describe('POST /login', () => {
         mockAuthService.prototype.login.mockResolvedValue({
             accessToken: jwtTokens.accessToken,
             refreshToken: jwtTokens.refreshToken,
+            user: mockUser,
         });
 
         const response = await request(app)
@@ -62,6 +65,7 @@ describe('POST /login', () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
             accessToken: jwtTokens.accessToken,
+            user: mockUser,
         });
         expect(mockUser.username).toBe(loginCredentials.username);
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
@@ -81,6 +85,7 @@ describe('POST /login', () => {
         mockAuthService.prototype.login.mockResolvedValue({
             accessToken: jwtTokens.accessToken,
             refreshToken: jwtTokens.refreshToken,
+            user: mockUser,
         });
 
         const response = await request(app)
@@ -95,6 +100,7 @@ describe('POST /login', () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
             accessToken: jwtTokens.accessToken,
+            user: mockUser,
         });
         expect(mockUser.password).toBe(hashedPassword);
         expect(mockAuthService.prototype.login).toHaveBeenCalledTimes(1);
@@ -108,6 +114,7 @@ describe('POST /login', () => {
         mockAuthService.prototype.login.mockResolvedValue({
             accessToken: jwtTokens.accessToken,
             refreshToken: jwtTokens.refreshToken,
+            user: mockUser,
         });
 
         const response = await request(app)

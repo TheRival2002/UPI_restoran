@@ -22,17 +22,17 @@ describe('GET /refresh-token', () => {
         process.env.ACCESS_TOKEN_SECRET = 'test-access-secret';
     });
 
-    it('should return 401 if no refresh token cookie exists', async () => {
+    it('should return 403 if no refresh token cookie exists', async () => {
         await request(app)
             .get('/refresh-token')
-            .expect(401);
+            .expect(403);
     });
 
-    it('should return 401 if empty jwt cookie', async () => {
+    it('should return 403 if empty jwt cookie', async () => {
         await request(app)
             .get('/refresh-token')
             .set('Cookie', ['jwt='])
-            .expect(401);
+            .expect(403);
     });
 
     it('should return 403 if refresh token is invalid', async () => {

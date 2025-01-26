@@ -14,6 +14,7 @@ type AuthContextType = {
     isAuthenticated: boolean;
     register: (userData: UserRegisterDataDTO) => Promise<void>;
     login: (userData: UserLoginDataDTO) => Promise<void>;
+    logout: () => Promise<void>;
 }
 
 enum Types {
@@ -102,7 +103,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         dispatch({ type: Types.LOGIN, payload: { user }});
     }, []);
 
-    const logout = useCallback(() => {
+    const logout = useCallback(async () => {
+        await api.post(endpoints.auth.logout);
+
         localStorage.removeItem('accessToken');
 
         dispatch({ type: Types.LOGOUT, payload: { user: null }});
@@ -114,7 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             isAuthenticated: !!state.user,
             register,
             login,
-            logout
+            logout,
         }),
         [ state.user, register, login, logout ]);
 

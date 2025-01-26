@@ -27,6 +27,7 @@ describe('POST /register', () => {
         mockAuthService.prototype.login.mockResolvedValue({
             accessToken: jwtTokens.accessToken,
             refreshToken: jwtTokens.refreshToken,
+            user: mockUser,
         });
 
         const response = await request(app)
@@ -56,6 +57,7 @@ describe('POST /register', () => {
         mockAuthService.prototype.login.mockResolvedValue({
             accessToken: jwtTokens.accessToken,
             refreshToken: jwtTokens.refreshToken,
+            user: mockUser,
         });
 
         const response = await request(app)
@@ -136,6 +138,7 @@ describe('POST /register', () => {
         mockAuthService.prototype.login.mockResolvedValue({
             accessToken: jwtTokens.accessToken,
             refreshToken: jwtTokens.refreshToken,
+            user: mockUser,
         });
 
         await request(app)

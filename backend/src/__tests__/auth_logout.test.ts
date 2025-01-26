@@ -8,7 +8,7 @@ jest.mock('../middleware/authMiddleware', () => {
     return jest.fn((_, __, next) => next());
 });
 
-describe('GET /logout', () => {
+describe('POST /logout', () => {
     let app: express.Express;
 
     beforeEach(() => {
@@ -19,7 +19,7 @@ describe('GET /logout', () => {
 
     it('should log out a user', async () => {
         const response = await request(app)
-            .get('/logout')
+            .post('/logout')
             .set('Cookie', [ 'jwt=refreshToken' ]);
 
         expect(response.status).toBe(204);
@@ -29,7 +29,7 @@ describe('GET /logout', () => {
 
     it('should return 204 if user is already logged out', async () => {
         const response = await request(app)
-            .get('/logout');
+            .post('/logout');
 
         expect(response.status).toBe(204);
         expect(response.headers['set-cookie']).toBeUndefined();
@@ -37,7 +37,7 @@ describe('GET /logout', () => {
 
     it('should return 204 if cookies exist but no JWT cookie', async () => {
         const response = await request(app)
-            .get('/logout')
+            .post('/logout')
             .set('Cookie', ['otherCookie=someValue'])
             .expect(204);
 
@@ -46,7 +46,7 @@ describe('GET /logout', () => {
 
     it('should handle multiple cookies correctly', async () => {
         const response = await request(app)
-            .get('/logout')
+            .post('/logout')
             .set('Cookie', ['jwt=validToken', 'otherCookie=someValue'])
             .expect(204);
 
@@ -55,7 +55,7 @@ describe('GET /logout', () => {
 
     it('should clear cookie with correct attributes', async () => {
         const response = await request(app)
-            .get('/logout')
+            .post('/logout')
             .set('Cookie', ['jwt=validToken'])
             .expect(204);
 
@@ -68,7 +68,7 @@ describe('GET /logout', () => {
 
     it('should handle empty jwt cookie value', async () => {
         const response = await request(app)
-            .get('/logout')
+            .post('/logout')
             .set('Cookie', ['jwt=']);
 
         expect(response.status).toBe(204);
