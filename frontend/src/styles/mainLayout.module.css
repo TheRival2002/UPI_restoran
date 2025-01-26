@@ -57,17 +57,3 @@
     margin-right : 10px;
     width        : 28px;
 }
-
-.cart {
-    display          : flex;
-    justify-content  : flex-end;
-    background-color : transparent;
-}
-
-.cart img {
-    position : relative;
-    left     : 5px;
-    bottom   : 5px;
-
-    cursor   : pointer;
-}

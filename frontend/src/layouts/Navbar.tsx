@@ -15,7 +15,7 @@ import { Fragment, ReactElement, useEffect, useState } from 'react';
 import c from '@styles/mainLayout.module.css';
 import { useLocation, useNavigate } from 'react-router';
 import { paths } from '@routes/paths';
-import cartIcon from './../assets/images/cart/cart-icon.svg';
+import { Cart } from '@components/cart/Cart.tsx';
 
 // ----------------------------------------------------------
 
@@ -195,9 +195,8 @@ export default function Navbar() {
                         </Box>
                     </Drawer>
                 </nav>
-                <div className={c.cart}>
-                    <img src={cartIcon} alt={'cart icon'} width={44} height={44}></img>
-                </div>
+
+                <Cart/>
 
             </div>
 
