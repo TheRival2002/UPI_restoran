@@ -1,59 +1,73 @@
 .navBar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
 }
 
 .signInWrapper {
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 20px;
+    margin     : 0 auto;
+    text-align : center;
+    margin-top : 20px;
 }
 
 .navWrapper {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-    transition: background-color 0.3s ease;
+    width      : 100%;
+    position   : fixed;
+    top        : 0;
+    z-index    : 100;
+    transition : background-color 0.3s ease;
 }
 
 .navWrapper.scrolled {
-    background-color: var(--background-body);
-    border-bottom: 1px solid var(--orange-opacity);
+    background-color : var(--background-body);
+    border-bottom    : 1px solid var(--orange-opacity);
 }
 
 .menuBtn {
-    padding: 16px 32px;
+    padding : 16px 32px;
 }
 
 .navBarMenu {
-    background-color: var(--primary-orange);
-    border-radius: 50px;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+    background-color : var(--primary-orange);
+    border-radius    : 50px;
+    padding          : 4px;
+    display          : flex;
+    align-items      : center;
+    cursor           : pointer;
 }
 
 .menuIcon {
-    color: white;
+    color : white;
 }
 
 .footerWrapper {
-    display: grid;
-    text-align: center;
-    grid-template-columns: 1fr 1fr;
-    border-top: 1px solid var(--orange-opacity);
-    padding: 10px 0;
+    display               : grid;
+    text-align            : center;
+    grid-template-columns : 1fr 1fr;
+    border-top            : 1px solid var(--orange-opacity);
+    padding               : 10px 0;
 }
 
 .contactFooter {
-    display: flex;
-    flex-direction: column;
+    display        : flex;
+    flex-direction : column;
 }
 
 .socialMedia img {
-    margin-right: 10px;
-    width: 28px;
+    margin-right : 10px;
+    width        : 28px;
+}
+
+.cart {
+    display          : flex;
+    justify-content  : flex-end;
+    background-color : transparent;
+}
+
+.cart img {
+    position : relative;
+    left     : 5px;
+    bottom   : 5px;
+
+    cursor   : pointer;
 }
