@@ -9,22 +9,13 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import DailyOfferIcon from '@mui/icons-material/Restaurant';
-import {
-    Box,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemText,
-    ListItemIcon,
-    Drawer,
-    IconButton,
-    Collapse
-} from '@mui/material';
+import { Box, Collapse, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import AccountDisplay from '@sections/auth/AccountDisplay.tsx';
 import { Fragment, ReactElement, useEffect, useState } from 'react';
 import c from '@styles/mainLayout.module.css';
 import { useLocation, useNavigate } from 'react-router';
 import { paths } from '@routes/paths';
+import { Cart } from '@components/cart/Cart.tsx';
 
 // ----------------------------------------------------------
 
@@ -44,7 +35,7 @@ type MenuOptionChild = MenuOption & {
     targetId: string;
 }
 
-export default function Navbar(){
+export default function Navbar() {
     const [ openMenu, setOpenMenu ] = useState(false);
     const [ scrolled, setScrolled ] = useState(false);
     const [ selectedMenuOptionId, setSelectedMenuOptionId ] = useState<number | null>(null);
@@ -112,7 +103,7 @@ export default function Navbar(){
         setCollapseOpen(false);
     };
 
-    const handleNavScroll = () =>{
+    const handleNavScroll = () => {
         setScrolled(window.scrollY > 70);
     };
 
@@ -124,7 +115,7 @@ export default function Navbar(){
         };
     }, []);
 
-    return(
+    return (
         <div className={`${c.navWrapper} ${scrolled ? c.scrolled : ''}`}>
             <div className="container">
                 <nav className={c.navBar}>
@@ -133,15 +124,24 @@ export default function Navbar(){
                         onClick={() => handleNavigate(paths.home.root)}
                         sx={{ cursor: 'pointer' }}
                     >
-                        <img src={Logo} alt="logo" />
+                        <img src={Logo} alt="logo"/>
                     </Box>
 
-                    <div className={c.navBarMenu}>
-                        <MenuIcon className={c.menuIcon} onClick={() => setOpenMenu(true)} />
-                    </div>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.5,
+                        }}
+                    >
+                        <Cart />
+                        <div className={c.navBarMenu}>
+                            <MenuIcon className={c.menuIcon} onClick={() => setOpenMenu(true)}/>
+                        </div>
+                    </Box>
 
                     <Drawer open={openMenu} onClose={() => setOpenMenu(false)}
-                        anchor='right'>
+                        anchor="right">
                         <Box sx={{ width: 250 }}
                             role="presentation"
                         >
@@ -156,7 +156,7 @@ export default function Navbar(){
                                         >
                                             <ListItemButton onClick={() => handleNavigate(item.path, item.targetId)}>
                                                 <ListItemIcon>{item.icon}</ListItemIcon>
-                                                <ListItemText primary={item.text} />
+                                                <ListItemText primary={item.text}/>
                                                 {
                                                     !!item.children?.length && <IconButton onClick={(e) => {
                                                         e.stopPropagation();
@@ -184,7 +184,7 @@ export default function Navbar(){
                                                                 sx={{ pl: 4 }}
                                                             >
                                                                 <ListItemIcon>{child.icon}</ListItemIcon>
-                                                                <ListItemText primary={child.text} />
+                                                                <ListItemText primary={child.text}/>
                                                             </ListItemButton>
                                                         ))
                                                     }
@@ -198,13 +198,15 @@ export default function Navbar(){
                                         ? <div className={c.signInWrapper}>
                                             <button className={`button ${c.menuBtn}`} onClick={() => (navigate(paths.auth.login))}>Sign In</button>
                                         </div>
-                                        : <AccountDisplay handleNavigate={handleNavigate} />
+                                        : <AccountDisplay handleNavigate={handleNavigate}/>
                                 }
                             </List>
                         </Box>
                     </Drawer>
                 </nav>
+
             </div>
+
         </div>
     );
 }
