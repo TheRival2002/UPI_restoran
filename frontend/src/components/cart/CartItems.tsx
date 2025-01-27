@@ -37,6 +37,7 @@ export default function CartItems() {
                             alignItems: 'center',
                             width: '100%',
                             position: 'relative',
+                            gap: 1,
                         }}
                     >
                         <Box
