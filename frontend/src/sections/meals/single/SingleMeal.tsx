@@ -7,8 +7,6 @@ import { getDiscountedPrice } from '@utils/general-functions.ts';
 import { useState } from 'react';
 import { useLocation } from 'react-router';
 import { Meal } from '../../../types/meal.ts';
-import { useCartContext } from '@hooks/useCartContext.ts';
-import { CartItem } from '../../../types/cart.dto.ts';
 
 // ----------------------------------------------------------------------
 
@@ -29,39 +27,6 @@ export default function SingleMeal({
         ? getDiscountedPrice(meal.price)
         : meal.price;
     const mealTotalPrice = (Number(mealPrice) * mealQuantity).toPrecision(3);
-
-    const { cart, setCart } = useCartContext();
-
-    const handleAddToCart = () => {
-
-        const existingCartItemIndex = cart.findIndex(
-            (item) => item.meal.name === meal.name
-        );
-
-        const mealIsAlreayInCart = existingCartItemIndex !== -1;
-
-        if (!mealIsAlreayInCart) {
-            const currentCartItem: CartItem = {
-                meal,
-                quantity: mealQuantity,
-                totalPrice: +mealTotalPrice,
-            };
-
-            setCart([ ...cart, currentCartItem ]);
-            return;
-        }
-        const updatedCart = [ ...cart ];
-        const existingCartItem = updatedCart[existingCartItemIndex];
-
-        updatedCart[existingCartItemIndex] = {
-            ...existingCartItem,
-            quantity: existingCartItem.quantity + mealQuantity,
-            totalPrice: Math.round(existingCartItem.totalPrice + +mealTotalPrice),
-        };
-
-        setCart(updatedCart);
-
-    };
 
     return (
         <Box
@@ -104,7 +69,11 @@ export default function SingleMeal({
                 display={'flex'}
                 justifyContent={'center'}
             >
-                <AddToCartButton onClick={handleAddToCart}/>
+                <AddToCartButton
+                    meal={meal}
+                    mealQuantity={mealQuantity}
+                    mealTotalPrice={mealTotalPrice}
+                />
             </Box>
         </Box>
     );

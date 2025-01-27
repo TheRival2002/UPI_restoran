@@ -2,7 +2,7 @@ import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
 import { useCartContext } from '@hooks/useCartContext.ts';
 import { Box, Button, Card, CardContent, CardHeader, Divider, IconButton, Popover, Stack, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 export const Cart = () => {
     const [ anchorEl, setAnchorEl ] = useState<null | HTMLElement>(null);
@@ -119,9 +119,8 @@ function CartItemsContent() {
     return (
         <Stack spacing={2}>
             {cart.map((cartItem, index) => (
-                <>
+                <Fragment key={cartItem.meal.id}>
                     <Box
-                        key={cartItem.meal.id}
                         sx={{
                             display: 'flex',
                             justifyContent: 'space-between',
@@ -163,7 +162,7 @@ function CartItemsContent() {
                         />
                     </Box>
                     {index < cart.length - 1 && <Divider/>}
-                </>
+                </Fragment>
             ))}
         </Stack>
     );
