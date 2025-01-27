@@ -126,7 +126,13 @@ export default function AllMeals() {
                     placeholder={'Search meals by name'}
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}></input>
-                <img src={filterIcon} width={38} height={38} onClick={handleFilterIconClick}></img>
+                <img
+                    src={filterIcon}
+                    alt={'filter icon'}
+                    width={38}
+                    height={38}
+                    onClick={handleFilterIconClick}
+                />
             </div>
 
             {filtersAreOpen && (
