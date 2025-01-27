@@ -43,7 +43,7 @@ export default function SingleMeal({
                 flexDirection={{ xs: 'column', sm: 'row' }}
                 alignItems={{ xs: 'stretch', sm: 'center' }}
             >
-                <SingleMealCardImg meal={meal} />
+                <SingleMealCardImg meal={meal}/>
 
                 <SingleMealInfo meal={meal}>
                     <Typography variant={'h5'} fontWeight={'bold'} color={'primary.main'}>
@@ -53,7 +53,7 @@ export default function SingleMeal({
                             fontWeight={'inherit'}
                             ml={0.25}
                         >
-                            €
+                        €
                         </Typography>
                     </Typography>
 
@@ -69,7 +69,11 @@ export default function SingleMeal({
                 display={'flex'}
                 justifyContent={'center'}
             >
-                <AddToCartButton />
+                <AddToCartButton
+                    meal={meal}
+                    mealQuantity={mealQuantity}
+                    mealTotalPrice={mealTotalPrice}
+                />
             </Box>
         </Box>
     );

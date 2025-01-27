@@ -46,6 +46,9 @@ export default function QuantityButtonGroup({
                     width: 30,
                     bgcolor: 'primary.main',
                     color: 'common.white',
+                    '&:hover': {
+                        bgcolor: 'primary.dark',
+                    },
                 }}
             >
                 <AddIcon sx={{ width: 20 }} />

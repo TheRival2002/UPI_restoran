@@ -4,20 +4,23 @@ import { BrowserRouter } from 'react-router';
 import Router from './router.tsx';
 import { AuthProvider } from './providers/AuthContext.tsx';
 import customTheme from './theme/customTheme.ts';
+import { CartProvider } from '@providers/CartContext.tsx';
 
 // ----------------------------------------------------------------------
 
 const App = () => {
     return (
         <AuthProvider>
-            <HelmetProvider>
-                <ThemeProvider theme={customTheme}>
-                    <CssBaseline />
-                    <BrowserRouter>
-                        <Router/>
-                    </BrowserRouter>
-                </ThemeProvider>
-            </HelmetProvider>
+            <CartProvider>
+                <HelmetProvider>
+                    <ThemeProvider theme={customTheme}>
+                        <CssBaseline/>
+                        <BrowserRouter>
+                            <Router/>
+                        </BrowserRouter>
+                    </ThemeProvider>
+                </HelmetProvider>
+            </CartProvider>
         </AuthProvider>
     );
 };
