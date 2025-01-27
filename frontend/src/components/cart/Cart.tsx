@@ -1,16 +1,6 @@
 import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
 import { useCartContext } from '@hooks/useCartContext.ts';
-import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    CardHeader, Divider,
-    IconButton,
-    Popover,
-    Stack,
-    Typography
-} from '@mui/material';
+import { Box, Button, Card, CardContent, CardHeader, Divider, IconButton, Popover, Stack, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import React, { useState } from 'react';
 
@@ -25,7 +15,7 @@ export const Cart = () => {
     }, 0);
     const cartTotalPrice = cart.reduce((acc, curr) => {
         return acc + curr.totalPrice;
-    }, 0);
+    }, 0).toFixed(2);
 
     const handleOpenCart = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -47,7 +37,7 @@ export const Cart = () => {
                     color: 'primary.light'
                 }}
             >
-                <ShoppingCartIcon />
+                <ShoppingCartIcon/>
             </IconButton>
             <Popover
                 id={cartId}
@@ -82,12 +72,12 @@ export const Cart = () => {
                     <CardContent sx={{ paddingTop: 1 }}>
                         {
                             isCartEmpty
-                                ? <EmptyCartContent />
-                                : <CartItemsContent />
+                                ? <EmptyCartContent/>
+                                : <CartItemsContent/>
                         }
                         <CartFooter
                             isCartEmpty={isCartEmpty}
-                            cartTotalPrice={cartTotalPrice}
+                            cartTotalPrice={parseFloat(cartTotalPrice)}
                         />
                     </CardContent>
                 </Card>
@@ -157,7 +147,7 @@ function CartItemsContent() {
                             setQuantity={() => console.log('set quantity')} // ovde napravi logiku za kolicinu jela, i ako dode na nula da se makne jelo
                         />
                     </Box>
-                    {index < cart.length - 1 && <Divider />}
+                    {index < cart.length - 1 && <Divider/>}
                 </>
             ))}
         </Stack>

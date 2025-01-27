@@ -33,15 +33,36 @@ export default function SingleMeal({
     const { cart, setCart } = useCartContext();
 
     const handleAddToCart = () => {
-        const currentCartItem: CartItem = {
-            meal,
-            quantity: mealQuantity,
-            totalPrice: +(mealTotalPrice),
+
+        const existingCartItemIndex = cart.findIndex(
+            (item) => item.meal.name === meal.name
+        );
+
+        const mealIsAlreayInCart = existingCartItemIndex !== -1;
+
+        if (!mealIsAlreayInCart) {
+            const currentCartItem: CartItem = {
+                meal,
+                quantity: mealQuantity,
+                totalPrice: +mealTotalPrice,
+            };
+
+            setCart([ ...cart, currentCartItem ]);
+            return;
+        }
+        const updatedCart = [ ...cart ];
+        const existingCartItem = updatedCart[existingCartItemIndex];
+
+        updatedCart[existingCartItemIndex] = {
+            ...existingCartItem,
+            quantity: existingCartItem.quantity + mealQuantity,
+            totalPrice: Math.round(existingCartItem.totalPrice + +mealTotalPrice),
         };
-        setCart([ ...cart, currentCartItem ]);
+
+        setCart(updatedCart);
 
     };
-    console.log(cart);
+
     return (
         <Box
             pt={{ xs: 3, sm: 4 }}
