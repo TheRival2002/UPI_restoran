@@ -5,7 +5,7 @@ import {
     Button,
     Card,
     CardContent,
-    CardHeader,
+    CardHeader, Divider,
     IconButton,
     Popover,
     Stack,
@@ -112,50 +112,53 @@ function CartItemsContent() {
     const { cart } = useCartContext();
 
     return (
-        <Stack spacing={1}>
-            {cart.map((cartItem) => (
-                <Box
-                    key={cartItem.meal.id}
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        width: '100%',
-                    }}
-                >
+        <Stack spacing={2}>
+            {cart.map((cartItem, index) => (
+                <>
                     <Box
+                        key={cartItem.meal.id}
                         sx={{
                             display: 'flex',
+                            justifyContent: 'space-between',
                             alignItems: 'center',
-                            gap: 1.5,
+                            width: '100%',
                         }}
                     >
-                        <img
-                            src={`/images/meals/${cartItem.meal.image}`}
-                            alt={cartItem.meal.name}
-                            style={{
-                                width: 75,
-                                height: 75,
-                                borderRadius: '0.5em',
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1.5,
                             }}
-                        />
-                        <Box>
-                            <Typography variant={'h6'} fontWeight={700}>
-                                {cartItem.meal.name}
-                            </Typography>
-                            <Typography
-                                variant={'body1'}
-                                color={'text.secondary'}
-                            >
-                                {cartItem.meal.price}€
-                            </Typography>
+                        >
+                            <img
+                                src={`/images/meals/${cartItem.meal.image}`}
+                                alt={cartItem.meal.name}
+                                style={{
+                                    width: 75,
+                                    height: 75,
+                                    borderRadius: '0.5em',
+                                }}
+                            />
+                            <Box>
+                                <Typography variant={'h6'} fontWeight={700}>
+                                    {cartItem.meal.name}
+                                </Typography>
+                                <Typography
+                                    variant={'body1'}
+                                    color={'text.secondary'}
+                                >
+                                    {cartItem.meal.price}€
+                                </Typography>
+                            </Box>
                         </Box>
+                        <QuantityButtonGroup
+                            quantity={cartItem.quantity}
+                            setQuantity={() => console.log('set quantity')} // ovde napravi logiku za kolicinu jela, i ako dode na nula da se makne jelo
+                        />
                     </Box>
-                    <QuantityButtonGroup
-                        quantity={cartItem.quantity}
-                        setQuantity={() => console.log('set quantity')} // ovde napravi logiku za kolicinu jela, i ako dode na nula da se makne jelo
-                    />
-                </Box>
+                    {index < cart.length - 1 && <Divider />}
+                </>
             ))}
         </Stack>
     );
