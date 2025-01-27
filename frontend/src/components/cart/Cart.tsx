@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 export const Cart = () => {
     const [ anchorEl, setAnchorEl ] = useState<null | HTMLElement>(null);
 
-    const { cart } = useCartContext();
+    const { cart, setCart } = useCartContext();
 
     const isCartEmpty = cart.length === 0;
     const cartItemsCount = cart.reduce((acc, curr) => {
@@ -60,7 +60,7 @@ export const Cart = () => {
                     <CardHeader
                         title={`Cart (${cartItemsCount})`}
                         action={<Button
-                            // onClick={handleRemoveAllFromCart} // OVDJE TI IDE FUNKCIJA ZA UKLONIT SVE IZ CART-a
+                            onClick={() => setCart([])} // OVDJE TI IDE FUNKCIJA ZA UKLONIT SVE IZ CART-a
                             disabled={isCartEmpty}
                             sx={{
                                 textTransform: 'none',
