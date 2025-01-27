@@ -99,7 +99,22 @@ function EmptyCartContent() {
 // ------------------------------------------------------------
 
 function CartItemsContent() {
-    const { cart } = useCartContext();
+    const { cart, setCart } = useCartContext();
+
+    const handleSetQuantity = (mealId: number, newQuantity: number) => {
+        const updatedCart = cart.map((item) => {
+            if (item.meal.id === mealId) {
+                return {
+                    ...item,
+                    quantity: newQuantity,
+                    totalPrice: item.meal.price * newQuantity,
+                };
+            }
+            return item;
+        }).filter(item => item.quantity > 0);
+
+        setCart(updatedCart);
+    };
 
     return (
         <Stack spacing={2}>
@@ -144,7 +159,7 @@ function CartItemsContent() {
                         </Box>
                         <QuantityButtonGroup
                             quantity={cartItem.quantity}
-                            setQuantity={() => console.log('set quantity')} // ovde napravi logiku za kolicinu jela, i ako dode na nula da se makne jelo
+                            setQuantity={(newQuantity) => handleSetQuantity(cartItem.meal.id, newQuantity)}
                         />
                     </Box>
                     {index < cart.length - 1 && <Divider/>}
