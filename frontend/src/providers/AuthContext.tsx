@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useEffect, useMemo, useReducer } from 'react';
 import api, { endpoints } from '@utils/axios.ts';
-import { UserLoginDataDTO, UserRegisterDataDTO } from '../types/user.dto.ts';
+import { UserLoginDataDTO, UserProfileInfoDTO, UserRegisterDataDTO } from '../types/user.dto.ts';
 
 type AuthenticatedUser = {
     id: number;
@@ -18,7 +18,7 @@ type AuthContextType = {
     register: (userData: UserRegisterDataDTO) => Promise<void>;
     login: (userData: UserLoginDataDTO) => Promise<void>;
     logout: () => Promise<void>;
-    update: (userData: AuthenticatedUser) => Promise<void>;
+    update: (userData: UserProfileInfoDTO) => Promise<void>;
 }
 
 enum Types {
@@ -119,7 +119,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         dispatch({ type: Types.LOGOUT, payload: { user: null }});
     }, []);
 
-    const update = useCallback(async (userData: AuthenticatedUser) => {
+    const update = useCallback(async (userData: UserProfileInfoDTO) => {
         if (!userData) return;
 
         const response = await api.put(endpoints.users.single(userData.id), userData);
