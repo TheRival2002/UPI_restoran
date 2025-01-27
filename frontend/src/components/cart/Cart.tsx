@@ -29,6 +29,12 @@ export const Cart = () => {
     const isCartOpen = Boolean(anchorEl);
     const cartId = isCartOpen ? 'cart-popover' : undefined;
 
+    const handleResetCart = () => {
+        setCart([]);
+
+        sessionStorage.removeItem('cart');
+    };
+
     return (
         <>
             <IconButton
@@ -61,7 +67,7 @@ export const Cart = () => {
                     <CardHeader
                         title={`Cart (${cartItemsCount})`}
                         action={<Button
-                            onClick={() => setCart([])}
+                            onClick={handleResetCart}
                             disabled={isCartEmpty}
                             sx={{
                                 textTransform: 'none',

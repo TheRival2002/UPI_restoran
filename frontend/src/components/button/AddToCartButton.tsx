@@ -36,6 +36,8 @@ export default function AddToCartButton({
             };
 
             setCart([ ...cart, currentCartItem ]);
+
+            sessionStorage.setItem('cart', JSON.stringify([ ...cart, currentCartItem ]));
             return;
         }
         const updatedCart = [ ...cart ];
@@ -48,6 +50,8 @@ export default function AddToCartButton({
         };
 
         setCart(updatedCart);
+
+        sessionStorage.setItem('cart', JSON.stringify(updatedCart));
 
     };
 

@@ -21,6 +21,8 @@ export default function CartItems() {
         }).filter(item => item.quantity > 0);
 
         setCart(updatedCart);
+
+        sessionStorage.setItem('cart', JSON.stringify(updatedCart));
     };
 
     return (
