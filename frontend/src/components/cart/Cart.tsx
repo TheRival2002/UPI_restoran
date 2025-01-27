@@ -60,7 +60,7 @@ export const Cart = () => {
                     <CardHeader
                         title={`Cart (${cartItemsCount})`}
                         action={<Button
-                            onClick={() => setCart([])} // OVDJE TI IDE FUNKCIJA ZA UKLONIT SVE IZ CART-a
+                            onClick={() => setCart([])}
                             disabled={isCartEmpty}
                             sx={{
                                 textTransform: 'none',
