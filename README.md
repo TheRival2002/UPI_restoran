@@ -62,3 +62,8 @@ menu, add items to their cart, and place an order. The restaurant owner can mana
       ```
     - The application will now be running locally. Check your terminal or console for the URL to access it in your browser.
 
+## Technologies Used
+- **Frontend:** React/TypeScript
+- **Backend:** Node.js/TypeScript
+- **Database:** PostgreSQL
+
