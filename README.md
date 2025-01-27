@@ -1,48 +1,68 @@
-# UPI_restoran
+# UPI - Restaurant
 
-Kod kloniranja projekta, napravite ```.env``` u root-u projekta po uzoru na ```.env.example```.
-Isto tako, napravite ```.env.local``` u ```fronted``` folder-u po uzoru na ```.env.local.example```.
+## Description
+"Restaurant" is a web application that serves as a platform for customers to view and order food from a restaurant. The application allows customers to view the
+menu, add items to their cart, and place an order. The restaurant owner can manage the menu, view orders, and update the order status.
 
-## Instalacija i pokretanje aplikacije iz root-a projekta
-- ```npm run install-all``` -> instalacija svih paketa
-- ```npm run dev``` -> pokretanje aplikacije (klijent i server)
+## Installation
 
-### Ili pojedinačna instalacija i pokretanje aplikacije
-#### Root:
-- ```npm install```
+### Prerequisites
+- Node.js (version >= 20)
+- PostgreSQL (version >= 15)
 
-#### Backend:
-- ```cd backend```
-- ```npm install```
-- ```npm run dev```
+### Steps to Set Up the Project
 
-#### Frontend:
-- ```cd frontend```
-- ```npm install```
-- ```npm run dev```
+1. **Environment Configuration:**
+    - Locate the `.env.example` files in the root and `frontend` directories.
+    - Create new `.env` files in both locations by copying the contents of the `.env.example` files.
+    - Fill in the following fields with your own data:
+      ```markdown
+      DB_NAME=yourDatabaseName
+      DB_USER=yourDatabaseUser
+      DB_PASSWORD=yourDatabasePassword
+ 
+      ACCESS_TOKEN_SECRET=yourRandomAccessTokenSecret
+      REFRESH_TOKEN_SECRET=yourRandomRefreshTokenSecret
+      ```
+    - Ensure the secrets are strong and secure. Optionally you can follow the instructions inside the example file.
 
-## Izrada baze podataka
-- instalirat postgresql s njihove stranice, verzija 16.6
-- koristeći pgAdmin(verzija 8.14) ručno kreirati bazu podataka s nazivom ```upi_restaurant``` te pokrenuti query s naredbama iz database_schema.sql datoteke od linije 10 do kraja
+2. **Database Setup:**
+    - Open PgAdmin or your preferred PostgreSQL management tool.
+    - Create an empty database with the name specified in your `.env` file (`DB_NAME`).
+    - Execute the `database_schema.sql` script located at:
+      ```markdown
+      backend/src/database/
+      ```
+    - Then, execute the `database_seed.sql` script from the same directory to populate the database with initial data.
 
-ILI
+3. **Install Dependencies:**
+    - Navigate to the `backend` folder and install dependencies:
+      ```bash
+      cd backend
+      npm install
+      ```
+    - Return to the root directory:
+      ```bash
+      cd ..
+      ```
+    - Navigate to the `frontend` folder and install dependencies:
+      ```bash
+      cd frontend
+      npm install
+      ```
+    - Return to the root directory:
+      ```bash
+      cd ..
+      ```
 
-- unutar terminala pokrenuti postgresql
-  - Linux: ```sudo service postgresql start```
-  - Mac: ```brew services start postgresql```
-  - Windows: ```pg_ctl -D "C:\Program Files\PostgreSQL\16\data" start``` ili ```net start postgresql-<version>``` (nisam siguran, to triba provjerit)
-- spojiti se na postgresql
-  - ```psql -U postgres```
-  - kreirati svog korisnika ili možete nastaviti kao superuser
-    - ```CREATE USER your_new_username WITH PASSWORD 'your_password';``` ili ako želite da ima superuser dopuštenja ```CREATE USER your_new_username WITH PASSWORD 'your_password' SUPERUSER;```
-    - omogućiti privilegije korisniku ```GRANT ALL PRIVILEGES ON DATABASE your_database_name TO your_new_username;```
-    - izaći iz postgresql-a i spojiti se kao novi korisnik ```psql postgres```
-    - izvršiti naredbe iz ```database_schema.sql``` datoteke
+4. **Run the Application:**
+    - Start the development server:
+      ```bash
+      npm run dev
+      ```
+    - The application will now be running locally. Check your terminal or console for the URL to access it in your browser.
 
-NAPOMENA: morate u .env datoteci postavit točne podatke za bazu podataka, također morate izraditi sve .env datokeke po uzore na njihove .example datoteke (npr. u frontend folder-u postoji .env.local.example, morate napravit .env.local datoteku)
-
-## Error handling
-- kod bacanja errora u backendu, koristiti custom error klase iz ```errors/HttpError.ts``` datoteke koje sadržavaju status kod i poruku
-- u controller-u koristiti ```next()``` funkciju kako bi se error prebacio u ```errorHandler.ts``` datoteku
-- one će biti uhvaćene u ```errorHandler.ts``` datoteci i poslane korisniku
-- ukoliko se error ne uhvati, korisnik će dobiti ```Internal Server Error``` status kod
+## Technologies Used
+- **Frontend:** React/TypeScript
+- **Backend:** Node.js/TypeScript
+- **Database:** PostgreSQL
