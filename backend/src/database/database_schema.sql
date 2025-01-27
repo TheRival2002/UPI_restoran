@@ -1,13 +1,3 @@
-CREATE
-DATABASE UPI_restaurant;
-
--- Connect to the created database with command below and run the following commands to create the schema
--- \c upi_restaurant;
--- Or you can run the following commands in pgAdmin in query window of created database
-
-/*DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;*/ -- Drop the schema if you want to recreate the schema
-
 CREATE TYPE order_status_type AS ENUM ('in-progress', 'delivered', 'canceled');
 
 CREATE TABLE roles (
