@@ -73,7 +73,6 @@ export default function EditUser() {
                     message: err.errors[0].message,
                 });
             } else {
-                console.log(err);
                 setError(err?.response?.data?.error || 'An error occurred');
             }
         } finally {
