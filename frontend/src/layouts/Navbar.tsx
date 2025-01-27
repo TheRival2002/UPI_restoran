@@ -127,9 +127,18 @@ export default function Navbar() {
                         <img src={Logo} alt="logo"/>
                     </Box>
 
-                    <div className={c.navBarMenu}>
-                        <MenuIcon className={c.menuIcon} onClick={() => setOpenMenu(true)}/>
-                    </div>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.5,
+                        }}
+                    >
+                        <Cart />
+                        <div className={c.navBarMenu}>
+                            <MenuIcon className={c.menuIcon} onClick={() => setOpenMenu(true)}/>
+                        </div>
+                    </Box>
 
                     <Drawer open={openMenu} onClose={() => setOpenMenu(false)}
                         anchor="right">
@@ -195,8 +204,6 @@ export default function Navbar() {
                         </Box>
                     </Drawer>
                 </nav>
-
-                <Cart/>
 
             </div>
 

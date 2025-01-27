@@ -8,7 +8,7 @@ const COMMON = {
 };
 
 const PRIMARY = {
-    light: '#f89d82',
+    light: '#ff845a',
     main: '#fe724c',
     dark: '#bd5431',
 };
