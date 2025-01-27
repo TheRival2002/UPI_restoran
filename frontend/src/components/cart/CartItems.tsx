@@ -1,7 +1,8 @@
 import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
 import { useCartContext } from '@hooks/useCartContext.ts';
-import { Box, Divider, Stack, Typography } from '@mui/material';
+import { Box, Divider, IconButton, Stack, Typography } from '@mui/material';
 import { Fragment } from 'react';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,7 @@ export default function CartItems() {
                             justifyContent: 'space-between',
                             alignItems: 'center',
                             width: '100%',
+                            position: 'relative',
                         }}
                     >
                         <Box
@@ -48,8 +50,8 @@ export default function CartItems() {
                                 src={`/images/meals/${cartItem.meal.image}`}
                                 alt={cartItem.meal.name}
                                 style={{
-                                    width: 75,
-                                    height: 75,
+                                    width: 85,
+                                    height: 85,
                                     borderRadius: '0.5em',
                                 }}
                             />
@@ -69,10 +71,43 @@ export default function CartItems() {
                             quantity={cartItem.quantity}
                             setQuantity={(newQuantity) => handleSetQuantity(cartItem.meal.id, newQuantity)}
                         />
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                top: -15,
+                                right: -5,
+                            }}
+                        >
+                            <RemoveCartItemButton mealId={cartItem.meal.id} />
+                        </Box>
                     </Box>
                     {index < cart.length - 1 && <Divider/>}
                 </Fragment>
             ))}
         </Stack>
+    );
+}
+
+// ----------------------------------------------------------------------
+
+function RemoveCartItemButton({ mealId }: { mealId: number }) {
+    const { cart, setCart } = useCartContext();
+
+    const handleRemoveCartItem = () => {
+        const updatedCart = cart.filter((item) => item.meal.id !== mealId);
+
+        setCart(updatedCart);
+
+        sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+    };
+
+    return (
+        <IconButton
+            onClick={handleRemoveCartItem}
+            color={'primary'}
+            size={'small'}
+        >
+            <RemoveIcon />
+        </IconButton>
     );
 }

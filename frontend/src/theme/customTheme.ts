@@ -10,7 +10,7 @@ const COMMON = {
 const PRIMARY = {
     light: '#ff845a',
     main: '#fe724c',
-    dark: '#bd5431',
+    dark: '#ce411a',
 };
 
 const SECONDARY = {
