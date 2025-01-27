@@ -73,7 +73,8 @@ export default function EditUser() {
                     message: err.errors[0].message,
                 });
             } else {
-                setError(err.message || 'An error occurred');
+                console.log(err);
+                setError(err?.response?.data?.error || 'An error occurred');
             }
         } finally {
             setIsLoading(false);
@@ -127,7 +128,7 @@ export default function EditUser() {
                         variant={'contained'}
                         type={'submit'}
                         loading={isLoading}
-                        sx={{ color: 'common.white', textTransform: 'none' }}
+                        sx={{ color: 'common.white', textTransform: 'none', mt: 1 }}
                     >
                         Save changes
                     </Button>
