@@ -64,4 +64,7 @@ export const endpoints = {
         single: (id: number) => `/api/meals/${id}`,
         daily:'/api/daily-offers',
     },
+    users: {
+        single: (id: number) => `/api/users/${id}`,
+    }
 };

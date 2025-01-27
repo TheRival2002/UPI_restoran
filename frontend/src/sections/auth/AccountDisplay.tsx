@@ -1,13 +1,14 @@
 import { useAuthContext } from '@hooks/useAuthContext.ts';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Button, Stack, Typography } from '@mui/material';
+import { paths } from '@routes/paths.ts';
 import { useLocation } from 'react-router';
 import EmptyProfileImg from '../../assets/images/empty_profile.jpg';
 
 // ---------------------------------------------------------------
 
 const MENU_OPTIONS = [
-    { label: 'Dashboard', linkTo: '/dashboard' }, // FIXME
+    { label: 'Edit profile', linkTo: paths.users.edit },
 ];
 
 type AccountDisplayProps = {
@@ -64,7 +65,7 @@ export default function AccountDisplay({
                         <Button
                             key={index}
                             fullWidth
-                            // onClick={() => handleClick(option.linkTo)}
+                            onClick={() => handleNavigate(option.linkTo)}
                             sx={{
                                 justifyContent: 'flex-start',
                                 color: 'text.secondary',

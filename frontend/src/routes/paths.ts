@@ -1,6 +1,7 @@
 enum Roots {
     HOME = '/',
     AUTH = '/auth',
+    MEALS = '/meals',
 }
 
 // ----------------------------------------------------------------------
@@ -14,8 +15,11 @@ export const paths = {
         register: `${Roots.AUTH}/register`,
     },
     meals: {
-        root: '/meals',
-        single: (id: number) => `/meals/${id}`,
+        root: Roots.MEALS,
+        single: (id: number) => `/${Roots.MEALS}/${id}`,
         daily: '/daily-offers',
     },
+    users: {
+        edit: '/edit-user',
+    }
 };

@@ -10,3 +10,11 @@ export type UserLoginDataDTO = {
     emailOrUsernameValue: string;
     password: string;
 }
+
+export type UserProfileInfoDTO = {
+    id: number;
+    name: string;
+    surname: string;
+    username: string;
+    email: string;
+}
