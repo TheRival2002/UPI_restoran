@@ -1,7 +1,7 @@
 import CartFooter from '@components/cart/CartFooter.tsx';
 import CartItems from '@components/cart/CartItems.tsx';
 import { useCartContext } from '@hooks/useCartContext.ts';
-import { Button, Card, CardContent, CardHeader, IconButton, Popover } from '@mui/material';
+import { Badge, Button, Card, CardContent, CardHeader, IconButton, Popover } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import React, { useState } from 'react';
 
@@ -37,15 +37,28 @@ export const Cart = () => {
 
     return (
         <>
-            <IconButton
-                onClick={handleOpenCart}
-                aria-describedby={cartId}
+            <Badge
+                badgeContent={cartItemsCount}
+                color={'secondary'}
                 sx={{
-                    color: 'primary.light'
+                    '& .MuiBadge-badge': {
+                        backgroundColor: 'primary.light',
+                        color: 'common.white',
+                        top: 5,
+                        right: 5,
+                    },
                 }}
             >
-                <ShoppingCartIcon/>
-            </IconButton>
+                <IconButton
+                    onClick={handleOpenCart}
+                    aria-describedby={cartId}
+                    sx={{
+                        color: 'primary.light'
+                    }}
+                >
+                    <ShoppingCartIcon/>
+                </IconButton>
+            </Badge>
             <Popover
                 id={cartId}
                 open={isCartOpen}
