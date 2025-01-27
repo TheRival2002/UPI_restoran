@@ -1,8 +1,9 @@
-import QuantityButtonGroup from '@components/button/QuantityButtonGroup.tsx';
+import CartFooter from '@components/cart/CartFooter.tsx';
+import CartItems from '@components/cart/CartItems.tsx';
 import { useCartContext } from '@hooks/useCartContext.ts';
-import { Box, Button, Card, CardContent, CardHeader, Divider, IconButton, Popover, Stack, Typography } from '@mui/material';
+import { Button, Card, CardContent, CardHeader, IconButton, Popover } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 
 export const Cart = () => {
     const [ anchorEl, setAnchorEl ] = useState<null | HTMLElement>(null);
@@ -73,7 +74,7 @@ export const Cart = () => {
                         {
                             isCartEmpty
                                 ? <EmptyCartContent/>
-                                : <CartItemsContent/>
+                                : <CartItems />
                         }
                         <CartFooter
                             isCartEmpty={isCartEmpty}
@@ -93,114 +94,5 @@ function EmptyCartContent() {
         <div>
             <p>Your cart is empty.</p>
         </div>
-    );
-}
-
-// ------------------------------------------------------------
-
-function CartItemsContent() {
-    const { cart, setCart } = useCartContext();
-
-    const handleSetQuantity = (mealId: number, newQuantity: number) => {
-        const updatedCart = cart.map((item) => {
-            if (item.meal.id === mealId) {
-                return {
-                    ...item,
-                    quantity: newQuantity,
-                    totalPrice: item.meal.price * newQuantity,
-                };
-            }
-            return item;
-        }).filter(item => item.quantity > 0);
-
-        setCart(updatedCart);
-    };
-
-    return (
-        <Stack spacing={2}>
-            {cart.map((cartItem, index) => (
-                <Fragment key={cartItem.meal.id}>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            width: '100%',
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 1.5,
-                            }}
-                        >
-                            <img
-                                src={`/images/meals/${cartItem.meal.image}`}
-                                alt={cartItem.meal.name}
-                                style={{
-                                    width: 75,
-                                    height: 75,
-                                    borderRadius: '0.5em',
-                                }}
-                            />
-                            <Box>
-                                <Typography variant={'h6'} fontWeight={700}>
-                                    {cartItem.meal.name}
-                                </Typography>
-                                <Typography
-                                    variant={'body1'}
-                                    color={'text.secondary'}
-                                >
-                                    {cartItem.meal.price}€
-                                </Typography>
-                            </Box>
-                        </Box>
-                        <QuantityButtonGroup
-                            quantity={cartItem.quantity}
-                            setQuantity={(newQuantity) => handleSetQuantity(cartItem.meal.id, newQuantity)}
-                        />
-                    </Box>
-                    {index < cart.length - 1 && <Divider/>}
-                </Fragment>
-            ))}
-        </Stack>
-    );
-}
-
-// ------------------------------------------------------------
-
-function CartFooter({
-    isCartEmpty,
-    cartTotalPrice,
-}: { isCartEmpty: boolean, cartTotalPrice: number }) {
-    return (
-        <Stack spacing={1.5} mt={3}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}
-            >
-                <Typography variant={'subtitle1'} color={'text.disabled'}>
-                    TOTAL:
-                </Typography>
-                <Typography variant={'h5'} color={'primary.main'}>
-                    {cartTotalPrice}€
-                </Typography>
-            </Box>
-            <Button
-                variant={'contained'}
-                fullWidth
-                disabled={isCartEmpty}
-                // onClick={} // OVDE TI IDE FUNKCIJA ZA CHECKOUT
-                sx={{
-                    color: 'common.white',
-                }}
-            >
-                Checkout
-            </Button>
-        </Stack>
     );
 }
