@@ -4,11 +4,13 @@ import { Link } from 'react-router';
 
 // ----------------------------------------------------------------------
 
-export default function LoginActions() {
+export default function LoginActions({
+    checkoutCart,
+}: { checkoutCart: boolean }) {
     return (
         <div className={c.loginFooter}>
             <p>
-                Don’t have an account? <Link to={paths.auth.register}>Register</Link>
+                Don’t have an account? <Link to={paths.auth.register} state={{ checkoutCart }}>Register</Link>
             </p>
             <p>
                 <Link to={paths.home.root}>Go to Home</Link>

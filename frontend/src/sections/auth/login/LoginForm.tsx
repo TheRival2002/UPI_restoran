@@ -10,7 +10,9 @@ import { useAuthContext } from '@hooks/useAuthContext.ts';
 
 // ----------------------------------------------------------------------
 
-export default function LoginForm() {
+export default function LoginForm({
+    checkoutCart,
+}: { checkoutCart: boolean }) {
     const [ credentials, setCredentials ] = useState<UserLoginDataDTO>({
         emailOrUsernameValue: '',
         password: '',
@@ -50,7 +52,12 @@ export default function LoginForm() {
             loginValidationSchema.parse(credentials);
             await login(credentials);
 
-            navigate(paths.home.root);
+            if (checkoutCart) {
+                // navigate(paths.cart.root);
+                console.log('Navigate to cart');
+            } else {
+                navigate(paths.home.root, { state: { checkoutCart }});
+            }
         } catch (err: any) {
             if (err instanceof z.ZodError) {
                 setValidationError({
