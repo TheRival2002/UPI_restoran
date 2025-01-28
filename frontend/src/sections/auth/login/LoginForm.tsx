@@ -53,8 +53,7 @@ export default function LoginForm({
             await login(credentials);
 
             if (checkoutCart) {
-                // navigate(paths.cart.root);
-                console.log('Navigate to cart');
+                navigate(paths.payment.root);
             } else {
                 navigate(paths.home.root, { state: { checkoutCart }});
             }

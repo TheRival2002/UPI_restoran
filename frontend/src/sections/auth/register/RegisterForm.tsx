@@ -61,8 +61,7 @@ export default function RegisterForm({
             await register(userData);
 
             if (checkoutCart) {
-                // navigate(paths.cart.root);
-                console.log('Navigate to cart');
+                navigate(paths.payment.root);
             } else {
                 navigate(paths.home.root);
             }

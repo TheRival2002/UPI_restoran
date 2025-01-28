@@ -16,10 +16,13 @@ export const paths = {
     },
     meals: {
         root: Roots.MEALS,
-        single: (id: number) => `/${Roots.MEALS}/${id}`,
+        single: (id: number) => `${Roots.MEALS}/${id}`,
         daily: '/daily-offers',
     },
     users: {
         edit: '/edit-user',
-    }
+    },
+    payment: {
+        root: '/payment',
+    },
 };

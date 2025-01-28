@@ -20,9 +20,7 @@ export default function CartFooter({
             return;
         }
 
-        console.log('Checkout');
-
-        // OVDE TI IDE FUNKCIJA ZA CHECKOUT
+        navigate(paths.payment.root);
     };
 
     return (
