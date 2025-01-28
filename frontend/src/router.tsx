@@ -7,7 +7,7 @@ import {
     AllMealsPage,
     SingleMealPage,
     DailyOffers,
-    EditUserPage,
+    PaymentPage,
 } from '@routes/elements.tsx';
 import { Navigate, useRoutes } from 'react-router';
 import { AuthLayout, CompactLayout, MainLayout } from './layouts';
@@ -48,13 +48,9 @@ export default function Router() {
                 },
                 {
                     path: 'daily-offers',
-                    element: <DailyOffers />
+                    element: <DailyOffers />,
                 },
-                {
-                    path: 'edit-user',
-                    element: <EditUserPage />,
-                }
-            ]
+            ],
         },
         {
             element: <CompactLayout />,
@@ -63,6 +59,10 @@ export default function Router() {
                 { path: '403', element: <Page403 /> },
             ],
         },
-        { path: '*', element: <Navigate to='/404' replace /> }, // guard all non-existing routes with 404 page
+        {
+            path: 'payment',
+            element: <PaymentPage />,
+        },
+        { path: '*', element: <Navigate to="/404" replace /> }, // guard all non-existing routes with 404 page
     ]);
 }
