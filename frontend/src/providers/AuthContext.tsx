@@ -1,11 +1,14 @@
 import React, { createContext, useCallback, useEffect, useMemo, useReducer } from 'react';
 import api, { endpoints } from '@utils/axios.ts';
-import { UserLoginDataDTO, UserRegisterDataDTO } from '../types/user.dto.ts';
+import { UserLoginDataDTO, UserProfileInfoDTO, UserRegisterDataDTO } from '../types/user.dto.ts';
 
 type AuthenticatedUser = {
+    id: number;
     name: string;
     surname: string;
-    role: string;
+    role_id: string;
+    username: string;
+    email: string;
     accessToken: string;
 } | null;
 
@@ -15,6 +18,7 @@ type AuthContextType = {
     register: (userData: UserRegisterDataDTO) => Promise<void>;
     login: (userData: UserLoginDataDTO) => Promise<void>;
     logout: () => Promise<void>;
+    update: (userData: UserProfileInfoDTO) => Promise<void>;
 }
 
 enum Types {
@@ -22,6 +26,7 @@ enum Types {
     REGISTER = 'REGISTER',
     LOGIN = 'LOGIN',
     LOGOUT = 'LOGOUT',
+    UPDATE = 'UPDATE',
 }
 
 type Payload = {
@@ -29,6 +34,7 @@ type Payload = {
     [Types.LOGIN]: { user: AuthenticatedUser };
     [Types.REGISTER]: { user: AuthenticatedUser };
     [Types.LOGOUT]: { user: null };
+    [Types.UPDATE]: { user: AuthenticatedUser };
 }
 
 type ActionsType = {
@@ -52,6 +58,8 @@ const reducer = (state: AuthState, action: ActionsType) => {
             return { user: action.payload.user };
         case Types.LOGOUT:
             return { user: null };
+        case Types.UPDATE:
+            return { user: action.payload.user };
         default:
             return state;
     }
@@ -111,6 +119,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         dispatch({ type: Types.LOGOUT, payload: { user: null }});
     }, []);
 
+    const update = useCallback(async (userData: UserProfileInfoDTO) => {
+        if (!userData) return;
+
+        const response = await api.put(endpoints.users.single(userData.id), userData);
+
+        const { user } = response.data;
+
+        dispatch({ type: Types.UPDATE, payload: { user }});
+    }, []);
+
     const memoizedValue = useMemo(
         () => ({
             user: state.user,
@@ -118,8 +136,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             register,
             login,
             logout,
+            update,
         }),
-        [ state.user, register, login, logout ]);
+        [ state.user, register, login, logout, update ]);
 
     return (
         <AuthContext.Provider value={memoizedValue}>
