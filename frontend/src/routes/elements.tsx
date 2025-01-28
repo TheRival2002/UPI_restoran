@@ -35,6 +35,7 @@ export const DailyOffers = Loadable(
 export const PaymentPage = Loadable(
     lazy(() => import('@pages/payment/PaymentPage.tsx')),
 );
+export const EditUserPage = Loadable(lazy(() => import('@pages/auth/EditUserPage.tsx')));
 
 // ERROR
 export const Page403 = Loadable(lazy(() => import('@pages/error/Page403.tsx')));

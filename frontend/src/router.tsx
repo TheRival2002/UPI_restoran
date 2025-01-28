@@ -8,6 +8,7 @@ import {
     SingleMealPage,
     DailyOffers,
     PaymentPage,
+    EditUserPage,
 } from '@routes/elements.tsx';
 import { Navigate, useRoutes } from 'react-router';
 import { AuthLayout, CompactLayout, MainLayout } from './layouts';
@@ -49,6 +50,10 @@ export default function Router() {
                 {
                     path: 'daily-offers',
                     element: <DailyOffers />,
+                },
+                {
+                    path: 'edit-user',
+                    element: <EditUserPage />,
                 },
             ],
         },
