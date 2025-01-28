@@ -1,4 +1,7 @@
+import { useAuthContext } from '@hooks/useAuthContext.ts';
 import { Box, Button, Stack, Typography } from '@mui/material';
+import { paths } from '@routes/paths.ts';
+import { useNavigate } from 'react-router';
 
 // ------------------------------------------------------------
 
@@ -6,6 +9,22 @@ export default function CartFooter({
     isCartEmpty,
     cartTotalPrice,
 }: { isCartEmpty: boolean, cartTotalPrice: number }) {
+    const { user } = useAuthContext();
+
+    const navigate = useNavigate();
+
+    const handleCheckout = () => {
+        if (!user) {
+            navigate(paths.auth.login, { state: { checkoutCart: true }});
+
+            return;
+        }
+
+        console.log('Checkout');
+
+        // OVDE TI IDE FUNKCIJA ZA CHECKOUT
+    };
+
     return (
         <Stack spacing={1.5} mt={3}>
             <Box
@@ -26,7 +45,7 @@ export default function CartFooter({
                 variant={'contained'}
                 fullWidth
                 disabled={isCartEmpty}
-                // onClick={} // OVDE TI IDE FUNKCIJA ZA CHECKOUT
+                onClick={handleCheckout}
                 sx={{
                     color: 'common.white',
                 }}

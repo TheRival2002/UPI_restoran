@@ -10,7 +10,9 @@ import { useAuthContext } from '@hooks/useAuthContext.ts';
 
 // ----------------------------------------------------------------------
 
-export default function RegisterForm() {
+export default function RegisterForm({
+    checkoutCart,
+}: { checkoutCart: boolean }) {
     const [ userData, setUserData ] = useState<UserRegisterDataDTO>({
         name: '',
         surname: '',
@@ -57,7 +59,13 @@ export default function RegisterForm() {
         try {
             registerValidationSchema.parse(userData);
             await register(userData);
-            navigate(paths.home.root);
+
+            if (checkoutCart) {
+                // navigate(paths.cart.root);
+                console.log('Navigate to cart');
+            } else {
+                navigate(paths.home.root);
+            }
         } catch (err: any) {
             if (err instanceof z.ZodError) {
                 setValidationError({
